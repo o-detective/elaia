@@ -1,0 +1,39 @@
+/* style.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #f6fdf8; /* απαλό πράσινο φόντο */
+  color: #333;
+}
+
+header {
+  background-color: #d0e8e0; /* ανοιχτό πράσινο */
+  padding: 2rem;
+  text-align: center;
+  color: #003049; /* μπλε του Αιγαίου */
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+section {
+  padding: 2rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+button {
+  background-color: #003049;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005377;
+}
