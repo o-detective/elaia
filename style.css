@@ -1,81 +1,22 @@
-* {
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: "Arial", sans-serif;
-}
-
-body {
-  background-color: #fdfcf9;
-}
-
-.container {
+  font-family: Arial, sans-serif;
   display: flex;
-  min-height: 100vh;
 }
 
+/* Sidebar */
 .sidebar {
-  background-color: #6d7d5e; /* λαδί */
+  background-color: #6E7548; /* ελαιοπράσινο */
   color: white;
-  width: 260px;
-  padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  width: 250px;
+  height: 100vh;
+  padding: 20px;
 }
 
-.logo {
-  font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 40px;
-  text-transform: uppercase;
-}
-
-.menu a {
-  display: block;
-  margin-bottom: 20px;
-  text-decoration: none;
-  color: white;
-  font-size: 18px;
-  transition: all 0.3s ease;
-}
-
-.menu a:hover {
-  color: #ffe9b1;
-}
-
+/* Main content */
 .main-content {
-  flex: 1;
-  padding: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #fdfcf9;
-}
-
-.main-content h2 {
-  font-size: 36px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.main-content p {
-  font-size: 18px;
-  color: #555;
-  margin-bottom: 40px;
-}
-
-.cta-button {
-  background-color: #6d7d5e;
-  color: white;
-  border: none;
-  padding: 15px 30px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: background-color 0.3s ease;
-}
-
-.cta-button:hover {
-  background-color: #5b6b4e;
+  background-color: #F4F1E8; /* κουφετί-υπόλευκο */
+  flex-grow: 1;
+  padding: 40px;
 }
