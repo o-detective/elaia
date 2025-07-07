@@ -1,22 +1,78 @@
 body {
   margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f7f4ef;
+  color: #333;
+}
+
+.container {
   display: flex;
-}
-
-/* Sidebar */
-.sidebar {
-  background-color: #6E7548; /* ελαιοπράσινο */
-  color: white;
-  width: 250px;
   height: 100vh;
-  padding: 20px;
 }
 
-/* Main content */
-.main-content {
-  background-color: #F4F1E8; /* κουφετί-υπόλευκο */
+.sidebar {
+  width: 280px;
+  background-color: #3b4c45; /* κυπαρισσί */
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  color: white;
+}
+
+.sidebar h2 {
+  font-size: 20px;
+  color: #b58e52; /* μπρονζέ */
+  margin-bottom: 20px;
+}
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu > li {
+  margin-bottom: 15px;
+}
+
+.menu-btn {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #b58e52;
+  padding: 10px 15px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.menu-btn:hover {
+  background-color: #b58e52;
+  color: #fff;
+}
+
+.submenu {
+  list-style: none;
+  margin: 10px 0 10px 15px;
+  padding-left: 0;
+  display: none;
+}
+
+.menu > li:hover .submenu {
+  display: block;
+}
+
+.submenu li {
+  padding: 6px 0;
+  font-size: 14px;
+  cursor: pointer;
+  color: #eee;
+}
+
+.submenu li:hover {
+  color: #b58e52;
+}
+
+.content {
   flex-grow: 1;
   padding: 40px;
 }
