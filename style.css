@@ -1,61 +1,81 @@
-/* Βασικό στιλ για ELAIA */
-
-body {
+* {
   margin: 0;
   padding: 0;
-  font-family: "Helvetica Neue", sans-serif;
-  background-color: #475d4b;
-  color: #ffffff;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
 }
 
-header {
-  padding: 30px;
+body {
+  background-color: #fdfcf9;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background-color: #6d7d5e; /* λαδί */
+  color: white;
+  width: 260px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .logo {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: bold;
-  color: #ffffff;
+  margin-bottom: 40px;
+  text-transform: uppercase;
 }
 
-main {
+.menu a {
+  display: block;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.menu a:hover {
+  color: #ffe9b1;
+}
+
+.main-content {
   flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.button-group {
+  padding: 60px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  justify-content: center;
+  background-color: #fdfcf9;
 }
 
-.main-button {
-  text-decoration: none;
-  background-color: #ffffff;
-  color: #475d4b;
+.main-content h2 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.main-content p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+.cta-button {
+  background-color: #6d7d5e;
+  color: white;
+  border: none;
   padding: 15px 30px;
-  border-radius: 6px;
   font-size: 16px;
-  text-align: center;
-  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
   transition: background-color 0.3s ease;
 }
 
-.main-button:hover {
-  background-color: #e0e0e0;
-}
-
-.secondary {
-  background-color: transparent;
-  border: 2px solid #ffffff;
-  color: #ffffff;
-}
-
-.secondary:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.cta-button:hover {
+  background-color: #5b6b4e;
 }
