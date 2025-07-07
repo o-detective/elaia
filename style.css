@@ -1,155 +1,61 @@
-/* Βασικά Χρώματα */
-:root {
-  --olive-green: #787f50;
-  --beige: #f5f0e6;
-  --white: #ffffff;
-  --text-dark: #2d2d2d;
-  --text-light: #eee;
-  --accent-green: #5f6b39;
-}
-
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* Βασικό στιλ για ELAIA */
 
 body {
-  font-family: 'Georgia', serif;
-  background-color: var(--olive-green);
-  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", sans-serif;
+  background-color: #475d4b;
+  color: #ffffff;
+  height: 100vh;
   display: flex;
-  min-height: 100vh;
+  flex-direction: column;
 }
 
-/* Sidebar */
-.sidebar {
-  width: 200px;
-  background-color: var(--olive-green);
-  color: var(--white);
-  padding: 40px 20px;
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
+header {
+  padding: 30px;
 }
 
-.sidebar h1 {
+.logo {
   font-size: 28px;
-  margin-bottom: 40px;
+  font-weight: bold;
+  color: #ffffff;
 }
 
-.sidebar nav a {
-  display: block;
-  color: var(--white);
-  text-decoration: none;
-  margin-bottom: 20px;
-  font-size: 18px;
-}
-
-.sidebar nav a:hover {
-  text-decoration: underline;
-}
-
-/* Main content */
-.main-content {
-  margin-left: 200px;
-  background-color: var(--beige);
+main {
   flex: 1;
-  padding: 40px;
-}
-
-/* Header with map */
-.header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.header h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.map-image {
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto 20px;
-  opacity: 0.8;
-}
-
-/* Search filters */
-.search-box {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
+  align-items: center;
 }
 
-select, .search-button, input {
-  padding: 10px 15px;
-  border: 1px solid var(--olive-green);
-  border-radius: 20px;
-  font-size: 16px;
-  background-color: var(--white);
-}
-
-.search-button {
-  background-color: var(--olive-green);
-  color: var(--white);
-  border: none;
-  cursor: pointer;
-}
-
-/* Sections */
-.section {
-  margin-bottom: 50px;
-}
-
-.section h3 {
-  font-size: 22px;
-  margin-bottom: 15px;
-}
-
-/* Cards */
-.cards {
+.button-group {
   display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.card {
-  width: 150px;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: var(--white);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.card img {
-  width: 100%;
-  display: block;
-}
-
-/* Top right login/register */
-.top-nav {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  display: flex;
-  gap: 15px;
-}
-
-.top-nav a {
-  color: var(--white);
+.main-button {
   text-decoration: none;
-  font-size: 14px;
-  background-color: var(--accent-green);
-  padding: 6px 12px;
-  border-radius: 20px;
+  background-color: #ffffff;
+  color: #475d4b;
+  padding: 15px 30px;
+  border-radius: 6px;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
-.top-nav a:hover {
-  background-color: #4a5230;
+.main-button:hover {
+  background-color: #e0e0e0;
+}
+
+.secondary {
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+}
+
+.secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
