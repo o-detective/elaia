@@ -1,10 +1,38 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Elaia - Εκδηλώσεις</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .map-container {
+      flex: 1;
+      padding: 30px;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    svg {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+    }
+
+    .map path, .map circle {
+      fill: #c7d2b5; /* ήπιο πράσινο-ουδέτερο */
+      stroke: #fff;
+      stroke-width: 1;
+      transition: fill 0.3s;
+    }
+
+    .map path:hover, .map circle:hover {
+      fill: #a5b88d;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -20,32 +48,14 @@
             <li>Αττική</li>
             <li>Θεσσαλονίκη</li>
             <li>Κρήτη</li>
-            <li>Πάτρα</li>
           </ul>
         </li>
         <li>
           <button class="menu-btn">Βάφτιση</button>
           <ul class="submenu">
             <li>Αττική</li>
-            <li>Θεσσαλονίκη</li>
-            <li>Κέρκυρα</li>
             <li>Λάρισα</li>
-          </ul>
-        </li>
-        <li>
-          <button class="menu-btn">Πάρτι</button>
-          <ul class="submenu">
-            <li>Αθήνα</li>
-            <li>Θεσσαλονίκη</li>
-            <li>Ηράκλειο</li>
-          </ul>
-        </li>
-        <li>
-          <button class="menu-btn">Συνέδρια</button>
-          <ul class="submenu">
-            <li>Αθήνα</li>
-            <li>Θεσσαλονίκη</li>
-            <li>Πάτρα</li>
+            <li>Κέρκυρα</li>
           </ul>
         </li>
       </ul>
@@ -56,30 +66,28 @@
       <p>Επιλέξτε είδος εκδήλωσης και περιοχή για να δείτε διαθέσιμους χώρους & επαγγελματίες.</p>
 
       <div class="map-container">
-        <!-- Ενδεικτικός SVG Χάρτης -->
-        <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
-          <!-- Απλά παραδείγματα -->
-          <path d="M100,100 L200,100 L200,200 L100,200 Z" fill="#ddd" stroke="#fff" data-name="Αττική"/>
-          <path d="M220,100 L320,100 L320,200 L220,200 Z" fill="#ccc" stroke="#fff" data-name="Θεσσαλονίκη"/>
-          <path d="M150,250 L250,250 L250,350 L150,350 Z" fill="#bbb" stroke="#fff" data-name="Κρήτη"/>
-          <path d="M950,950 A10,10 0 1,1 949,950" fill="#aaa" stroke="#fff" data-name="Καστελλόριζο" />
+        <svg class="map" viewBox="0 0 1000 900" xmlns="http://www.w3.org/2000/svg">
+          <!-- Δείγμα νομού (Αττική) -->
+          <path data-name="Αττική" d="M300,400 L350,410 L360,450 L310,460 Z" />
+          <!-- Θεσσαλονίκη -->
+          <path data-name="Θεσσαλονίκη" d="M450,300 L490,310 L500,340 L460,350 Z" />
+          <!-- Κρήτη -->
+          <path data-name="Κρήτη" d="M200,800 L800,800 L800,820 L200,820 Z" />
+          <!-- Καστελλόριζο -->
+          <circle data-name="Καστελλόριζο" cx="950" cy="850" r="8" />
         </svg>
       </div>
     </main>
   </div>
 
-  <!-- Διαδραστικότητα -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const regions = document.querySelectorAll(".map-container svg [data-name]");
-
+      const regions = document.querySelectorAll(".map [data-name]");
       regions.forEach(region => {
         region.addEventListener("click", function () {
           const name = this.getAttribute("data-name");
           alert("Επέλεξες: " + name);
         });
-
-        region.style.cursor = "pointer";
       });
     });
   </script>
