@@ -9,135 +9,137 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   justify-content: center;
-  background-color: #f9f4f1; /* Ροζ γκολντ απαλό */
+  background-color: #f9f4f1;
 }
 
-/* Container split */
 .container {
   display: flex;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   min-height: 100vh;
 }
 
-/* Sidebar styling */
+/* Sidebar */
 .sidebar {
   width: 280px;
-  background-color: #7d8053; /* το νέο λαδί */
+  background-color: #7c7f59;
   padding: 30px 20px;
   color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Logo styling */
-.logo {
-  padding-top: 0;
-  margin-top: -10px;
-  margin-bottom: 20px;
-  width: 100%;
 }
 
 .logo img {
-  width: auto;
-  height: 80px; /* προσαρμόσιμο ύψος για ευθυγράμμηση */
-  display: block;
-  margin: 0 auto 20px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
 }
 
-/* Sidebar titles */
 .sidebar h2 {
-  color: #e8c27a; /* χρυσομπρονζέ */
   font-size: 24px;
   margin-bottom: 20px;
+  color: #e8c27a;
   text-align: center;
 }
 
-/* Menu buttons */
 .menu-btn {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
   background-color: white;
-  color: #b19777;
+  color: #7c7f59;
   font-weight: bold;
   border: none;
   cursor: pointer;
   border-radius: 6px;
-  transition: background-color 0.3s;
 }
 
 .menu-btn:hover {
   background-color: #e6ded6;
 }
 
-/* Submenu styling */
-.submenu {
-  list-style-type: none;
-  margin: 10px 0 20px 10px;
-  padding-left: 10px;
-}
-
-.submenu li {
-  padding: 5px 0;
-  color: white;
-  font-size: 15px;
-}
-
-/* Content styling */
+/* Content */
 .content {
   flex: 1;
-  padding: 50px;
+  padding: 40px;
   background-color: #f9f4f1;
   color: #333;
 }
 
 .content h1 {
-  font-size: 32px;
   margin-bottom: 20px;
 }
 
-.content p {
-  font-size: 18px;
-  line-height: 1.6;
+/* Search Bar */
+.search-bar {
+  margin-bottom: 30px;
 }
-
-/* Responsive (προαιρετικά) */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    text-align: center;
-  }
-
-  .menu-btn {
-    width: 90%;
-    margin: 10px auto;
-  }
-}
-
-.map-container {
+.search-bar input {
   width: 100%;
-  max-width: 800px;
-  margin: 40px auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
-svg {
+/* Map */
+.map-container {
+  margin-bottom: 40px;
+  background-color: #e8e6e1;
+  padding: 20px;
+  border-radius: 10px;
+}
+.map-container svg {
   width: 100%;
   height: auto;
 }
 
-svg path,
-svg circle {
-  cursor: pointer;
-  transition: fill 0.3s;
+/* Carousel */
+.carousel {
+  margin-bottom: 40px;
+}
+.carousel h2 {
+  margin-bottom: 10px;
+}
+.carousel-track {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+.carousel-item {
+  min-width: 180px;
+  background-color: #dedbd4;
+  padding: 20px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  text-align: center;
 }
 
-svg path:hover,
-svg circle:hover {
-  fill: #b19777; /* χρυσό-μπρονζέ του site */
+/* AI Bar */
+.ai-bar {
+  background-color: #eae6dc;
+  padding: 20px;
+  border-radius: 10px;
+}
+.ai-bar textarea {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  resize: none;
+  margin-bottom: 10px;
+}
+.ai-bar button {
+  padding: 10px 20px;
+  background-color: #7c7f59;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.ai-bar button:hover {
+  background-color: #65684a;
+}
+#aiResponse {
+  margin-top: 10px;
+  font-style: italic;
+  color: #444;
 }
