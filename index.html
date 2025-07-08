@@ -63,7 +63,25 @@
     <main class="content">
       <h1>Καλωσήρθατε στην Elaia</h1>
       <p>Επιλέξτε είδος εκδήλωσης και περιοχή για να δείτε διαθέσιμους χώρους & επαγγελματίες.</p>
+
+      <div class="map-container">
+  <!-- Ο χάρτης θα πάει εδώ -->
+</div>
     </main>
   </div>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const mapRegions = document.querySelectorAll(".map-container svg [data-name]");
+
+    mapRegions.forEach(region => {
+      region.addEventListener("click", function () {
+        const name = this.getAttribute("data-name");
+        alert("Επέλεξες: " + name);
+      });
+
+      region.style.cursor = "pointer"; // Για να δείχνει ότι πατιέται
+    });
+  });
+</script>
 </body>
 </html>
