@@ -1,95 +1,114 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Elaia - Εκδηλώσεις</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .map-container {
-      flex: 1;
-      padding: 30px;
-      background-color: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    svg {
-      width: 100%;
-      max-width: 800px;
-      height: auto;
-    }
-
-    .map path, .map circle {
-      fill: #c7d2b5; /* ήπιο πράσινο-ουδέτερο */
-      stroke: #fff;
-      stroke-width: 1;
-      transition: fill 0.3s;
-    }
-
-    .map path:hover, .map circle:hover {
-      fill: #a5b88d;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <div class="container">
+    <!-- Sidebar -->
     <aside class="sidebar">
       <div class="logo">
         <img src="https://raw.githubusercontent.com/o-detective/elaia/main/2ECB64C0-85F0-4F73-96D8-C34E7E91208F.png" alt="Logo" />
       </div>
       <h2>Κατηγορίες</h2>
       <ul class="menu">
-        <li>
-          <button class="menu-btn">Γάμος</button>
-          <ul class="submenu">
-            <li>Αττική</li>
-            <li>Θεσσαλονίκη</li>
-            <li>Κρήτη</li>
-          </ul>
-        </li>
-        <li>
-          <button class="menu-btn">Βάφτιση</button>
-          <ul class="submenu">
-            <li>Αττική</li>
-            <li>Λάρισα</li>
-            <li>Κέρκυρα</li>
-          </ul>
-        </li>
+        <li><button class="menu-btn">Γάμος</button></li>
+        <li><button class="menu-btn">Βάφτιση</button></li>
+        <li><button class="menu-btn">Πάρτι</button></li>
+        <li><button class="menu-btn">Συνέδρια</button></li>
       </ul>
     </aside>
 
+    <!-- Main Content -->
     <main class="content">
       <h1>Καλωσήρθατε στην Elaia</h1>
-      <p>Επιλέξτε είδος εκδήλωσης και περιοχή για να δείτε διαθέσιμους χώρους & επαγγελματίες.</p>
 
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input type="text" placeholder="Αναζήτηση..." />
+      </div>
+
+      <!-- Χάρτης Ελλάδας -->
       <div class="map-container">
-        <svg class="map" viewBox="0 0 1000 900" xmlns="http://www.w3.org/2000/svg">
-          <!-- Δείγμα νομού (Αττική) -->
-          <path data-name="Αττική" d="M300,400 L350,410 L360,450 L310,460 Z" />
-          <!-- Θεσσαλονίκη -->
-          <path data-name="Θεσσαλονίκη" d="M450,300 L490,310 L500,340 L460,350 Z" />
-          <!-- Κρήτη -->
-          <path data-name="Κρήτη" d="M200,800 L800,800 L800,820 L200,820 Z" />
-          <!-- Καστελλόριζο -->
-          <circle data-name="Καστελλόριζο" cx="950" cy="850" r="8" />
+        <svg viewBox="0 0 1000 900">
+          <!-- Προσωρινή απλή γεωμετρία -->
+          <path data-name="Αττική" d="M100,100 L150,120 L130,160 Z" fill="#d3cfc8" stroke="#7c7f59"/>
+          <circle data-name="Καστελλόριζο" cx="950" cy="850" r="10" fill="#b0ac9a"/>
         </svg>
       </div>
+
+      <!-- Καρουζέλ διαφημιζόμενων -->
+      <section class="carousel">
+        <h2>Διαφημιζόμενοι</h2>
+        <div class="carousel-track">
+          <div class="carousel-item">Brand 1</div>
+          <div class="carousel-item">Brand 2</div>
+          <div class="carousel-item">Brand 3</div>
+        </div>
+      </section>
+
+      <!-- Εμπνευστείτε -->
+      <section class="carousel">
+        <h2>Εμπνευστείτε</h2>
+        <div class="carousel-track">
+          <div class="carousel-item">Ιδέα 1</div>
+          <div class="carousel-item">Ιδέα 2</div>
+          <div class="carousel-item">Ιδέα 3</div>
+        </div>
+      </section>
+
+      <!-- AI Bar -->
+      <section class="ai-bar">
+        <h2>Ρώτα την Elaia</h2>
+        <textarea id="aiInput" placeholder="Π.χ. Πού μπορώ να παντρευτώ σε παραλία στη Νάξο;"></textarea>
+        <button onclick="askAI()">Αποστολή</button>
+        <div id="aiResponse"></div>
+      </section>
     </main>
   </div>
 
+  <!-- JavaScript -->
   <script>
+    // Clickable map
     document.addEventListener("DOMContentLoaded", function () {
-      const regions = document.querySelectorAll(".map [data-name]");
+      const regions = document.querySelectorAll(".map-container svg [data-name]");
       regions.forEach(region => {
-        region.addEventListener("click", function () {
-          const name = this.getAttribute("data-name");
+        region.addEventListener("click", () => {
+          const name = region.getAttribute("data-name");
           alert("Επέλεξες: " + name);
         });
+        region.style.cursor = "pointer";
       });
     });
+
+    // AI Bar functionality
+    async function askAI() {
+      const input = document.getElementById("aiInput").value;
+      const responseBox = document.getElementById("aiResponse");
+      responseBox.innerHTML = "⏳ Περιμένετε...";
+
+      try {
+        const res = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer ΤΟ_ΚΛΕΙΔΙ_ΣΟΥ"
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: input }]
+          })
+        });
+
+        const data = await res.json();
+        responseBox.innerHTML = data.choices[0].message.content;
+      } catch (error) {
+        responseBox.innerHTML = "❌ Σφάλμα: Δοκιμάστε ξανά.";
+      }
+    }
   </script>
 </body>
 </html>
