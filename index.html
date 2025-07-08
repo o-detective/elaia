@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Elaia - Εκδηλώσεις</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <div class="map-container">
-  <!-- Inline SVG – μερικό από demo δομή -->
-  <svg viewBox="0 0 1000 900">
-    <!-- Παράδειγμα: Νομός Αττικής -->
-    <path id="pref-Attica" d="...γεωμετρία..." fill="#ddd" stroke="#fff" />
-    <!-- άλλοι νομοί... -->
-    <!-- Καστελλόριζο -->
-    <circle id="pref-Kastellorizo" cx="950" cy="850" r="10" fill="#ccc"/>
-  </svg>
-</div>
     <aside class="sidebar">
       <div class="logo">
         <img src="https://raw.githubusercontent.com/o-detective/elaia/main/2ECB64C0-85F0-4F73-96D8-C34E7E91208F.png" alt="Logo" />
@@ -60,28 +50,38 @@
         </li>
       </ul>
     </aside>
+
     <main class="content">
       <h1>Καλωσήρθατε στην Elaia</h1>
       <p>Επιλέξτε είδος εκδήλωσης και περιοχή για να δείτε διαθέσιμους χώρους & επαγγελματίες.</p>
 
       <div class="map-container">
-  <!-- Ο χάρτης θα πάει εδώ -->
-</div>
+        <!-- Ενδεικτικός SVG Χάρτης -->
+        <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+          <!-- Απλά παραδείγματα -->
+          <path d="M100,100 L200,100 L200,200 L100,200 Z" fill="#ddd" stroke="#fff" data-name="Αττική"/>
+          <path d="M220,100 L320,100 L320,200 L220,200 Z" fill="#ccc" stroke="#fff" data-name="Θεσσαλονίκη"/>
+          <path d="M150,250 L250,250 L250,350 L150,350 Z" fill="#bbb" stroke="#fff" data-name="Κρήτη"/>
+          <path d="M950,950 A10,10 0 1,1 949,950" fill="#aaa" stroke="#fff" data-name="Καστελλόριζο" />
+        </svg>
+      </div>
     </main>
   </div>
+
+  <!-- Διαδραστικότητα -->
   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const mapRegions = document.querySelectorAll(".map-container svg [data-name]");
+    document.addEventListener("DOMContentLoaded", function () {
+      const regions = document.querySelectorAll(".map-container svg [data-name]");
 
-    mapRegions.forEach(region => {
-      region.addEventListener("click", function () {
-        const name = this.getAttribute("data-name");
-        alert("Επέλεξες: " + name);
+      regions.forEach(region => {
+        region.addEventListener("click", function () {
+          const name = this.getAttribute("data-name");
+          alert("Επέλεξες: " + name);
+        });
+
+        region.style.cursor = "pointer";
       });
-
-      region.style.cursor = "pointer"; // Για να δείχνει ότι πατιέται
     });
-  });
-</script>
+  </script>
 </body>
 </html>
