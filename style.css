@@ -40,9 +40,10 @@ body {
 }
 
 .logo img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
+  width: auto;
+  height: 80px; /* προσαρμόσιμο ύψος για ευθυγράμμηση */
+  display: block;
+  margin: 0 auto 20px;
 }
 
 /* Sidebar titles */
