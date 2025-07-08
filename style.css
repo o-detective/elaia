@@ -119,3 +119,25 @@ body {
     margin: 10px auto;
   }
 }
+
+.map-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto;
+}
+
+svg {
+  width: 100%;
+  height: auto;
+}
+
+svg path,
+svg circle {
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+svg path:hover,
+svg circle:hover {
+  fill: #b19777; /* χρυσό-μπρονζέ του site */
+}
