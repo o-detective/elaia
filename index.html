@@ -32,27 +32,32 @@
       </div>
 
       <!-- Χάρτης Ελλάδας -->
-      <div class="map-container">
-  <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+     <div class="map-container">
+  <svg viewBox="0 0 800 700" xmlns="http://www.w3.org/2000/svg">
     <style>
       .region {
-        fill: #d0d0d0;
-        stroke: #ffffff;
+        fill: #ddd;
+        stroke: #fff;
         stroke-width: 1;
         cursor: pointer;
         transition: fill 0.3s;
       }
       .region:hover {
-        fill: #7c7f59;
+        fill: #b19777; /* χρυσο-μπρονζε hover */
+      }
+      .region.selected {
+        fill: #7c7f59; /* λαδί για επιλεγμένο */
       }
     </style>
 
-    <!-- Παράδειγμα Νομοί (ενδεικτικά μόνο) -->
-    <path id="attica" class="region" d="M300,300 L320,320 L310,340 L290,330 Z" data-name="Αττική"/>
-    <path id="thessaloniki" class="region" d="M500,200 L520,220 L510,240 L490,230 Z" data-name="Θεσσαλονίκη"/>
-    <path id="crete" class="region" d="M200,500 L600,500 L600,520 L200,520 Z" data-name="Κρήτη"/>
-    <circle id="kastellorizo" class="region" cx="750" cy="550" r="8" data-name="Καστελλόριζο"/>
-
+    <path class="region" data-name="Αττική"
+      d="M400,300 L450,320 L430,360 L380,340 Z" />
+    <path class="region" data-name="Θεσσαλονίκη"
+      d="M450,200 L500,220 L480,260 L430,240 Z" />
+    <path class="region" data-name="Κρήτη"
+      d="M300,500 L500,500 L500,540 L300,540 Z" />
+    <circle class="region" data-name="Καστελλόριζο"
+      cx="770" cy="650" r="8" />
   </svg>
 </div>
 
