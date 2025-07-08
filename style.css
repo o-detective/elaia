@@ -23,7 +23,7 @@ body {
 /* Sidebar styling */
 .sidebar {
   width: 280px;
-  background-color: #b19777; /* Χρυσό-μπρονζέ */
+  background-color: #8a9a5b; /* λαδί (ελιά) για συνοχή με το logo */
   padding: 30px 20px;
   color: white;
 }
@@ -31,12 +31,16 @@ body {
 .logo img {
   width: 100%;
   height: auto;
-  margin-bottom: 30px;
+}
+.logo {
+  padding-top: 10px;
+  margin-bottom: 20px;
 }
 
 /* Sidebar titles */
 .sidebar h2 {
-  font-size: 22px;
+  color: #e8c27a; /* χρυσομπρονζέ */
+  font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
 }
