@@ -3,97 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ελαία</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Elaia - Εκδηλώσεις</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-
   <div class="container">
-
-    <!-- Πλευρική Στήλη -->
+    <!-- Sidebar -->
     <aside class="sidebar">
       <div class="logo">
-        <img src="logo.png" alt="Λογότυπο Ελαία" />
+        <img src="https://raw.githubusercontent.com/o-detective/elaia/main/2ECB64C0-85F0-4F73-96D8-C34E7E91208F.png" alt="Logo" />
       </div>
-
-      <div class="top-buttons">
-        <button>Σύνδεση</button>
-        <button>Εγγραφή</button>
-        <button class="launch-btn">Λανσάρισμα</button>
-      </div>
-
       <h2>Κατηγορίες</h2>
       <ul class="menu">
-        <li><button class="menu-btn">Χώροι</button></li>
-        <li><button class="menu-btn">Επαγγελματίες</button></li>
-        <li><button class="menu-btn">Εκδηλώσεις</button></li>
-        <li><button class="menu-btn">Inspiration</button></li>
+        <li><button class="menu-btn">Γάμος</button></li>
+        <li><button class="menu-btn">Βάφτιση</button></li>
+        <li><button class="menu-btn">Πάρτι</button></li>
+        <li><button class="menu-btn">Συνέδρια</button></li>
       </ul>
     </aside>
 
-    <!-- Κύριο Περιεχόμενο -->
+    <!-- Main Content -->
     <main class="content">
-      
-      <!-- Φίλτρα -->
-      <div class="filter-bar">
-        <select>
-          <option>Όλες οι περιοχές</option>
-          <option>Αθήνα</option>
-          <option>Θεσσαλονίκη</option>
-          <option>Πάτρα</option>
-        </select>
 
-        <select>
-          <option>Όλοι οι χώροι</option>
-          <option>Αίθουσες</option>
-          <option>Υπαίθριοι</option>
-        </select>
-
-        <select>
-          <option>Όλοι οι επαγγελματίες</option>
-          <option>Φωτογράφοι</option>
-          <option>Μουσικοί</option>
-        </select>
-
-        <button class="search-btn">Αναζήτηση</button>
-      </div>
-
-      <!-- Χάρτης -->
+      <!-- Χάρτης Ελλάδας -->
       <div class="map-container">
-        <img src="greece-map-placeholder.jpg" alt="Χάρτης Ελλάδας" class="map-svg">
+        <object type="image/svg+xml" data="greece.svg" class="map-svg"></object>
       </div>
 
-      <!-- Διπλό Καρουζέλ -->
-      <div class="carousel-row">
-        <div class="carousel">
-          <h2>Top Χώροι</h2>
-          <div class="carousel-track">
-            <div class="carousel-item">Χώρος 1</div>
-            <div class="carousel-item">Χώρος 2</div>
-            <div class="carousel-item">Χώρος 3</div>
-          </div>
-        </div>
-
-        <div class="carousel">
-          <h2>Top Συνεργάτες</h2>
-          <div class="carousel-track">
-            <div class="carousel-item">DJ</div>
-            <div class="carousel-item">Catering</div>
-            <div class="carousel-item">Διακόσμηση</div>
-          </div>
-        </div>
+      <!-- Οδηγία επιλογής -->
+      <div style="text-align: center; margin-top: 20px; font-weight: bold;">
+        Επιλέξτε απ’ τον χάρτη
       </div>
 
-      <!-- Inspiration -->
-      <div class="inspiration">
-        <h2>Εμπνευστείτε</h2>
+      <!-- AI Bar -->
+      <section class="ai-bar" style="margin-top: 20px;">
+        <textarea id="aiInput" placeholder="Π.χ. Πού μπορώ να παντρευτώ σε παραλία στη Νάξο;"></textarea>
+        <button onclick="askAI()">Αποστολή</button>
+        <div id="aiResponse" style="margin-top: 10px;"></div>
+      </section>
+
+      <!-- Καρουζέλ διαφημιζόμενων -->
+      <section class="carousel">
+        <h2>Top χώροι του μήνα</h2>
         <div class="carousel-track">
-          <div class="carousel-item">Γάμος σε νησί</div>
-          <div class="carousel-item">Βάπτιση σε κτήμα</div>
-          <div class="carousel-item">Πάρτι rooftop</div>
+          <div class="carousel-item">Brand 1</div>
+          <div class="carousel-item">Brand 2</div>
+          <div class="carousel-item">Brand 3</div>
         </div>
-      </div>
+      </section>
 
+      <!-- Εμπνευστείτε -->
+      <section class="carousel">
+        <h2>Εμπνευστείτε από την Elaia</h2>
+        <div class="carousel-track">
+          <div class="carousel-item">Ιδέα 1</div>
+          <div class="carousel-item">Ιδέα 2</div>
+          <div class="carousel-item">Ιδέα 3</div>
+        </div>
+      </section>
     </main>
   </div>
 
