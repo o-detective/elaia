@@ -32,47 +32,18 @@
       </div>
 
       <!-- Χάρτης Ελλάδας -->
-     <div class="map-container">
-  <svg viewBox="0 0 1000 900" xmlns="http://www.w3.org/2000/svg">
-    <style>
-      .region {
-        fill: #ddd;
-        stroke: #fff;
-        stroke-width: 1;
-        cursor: pointer;
-        transition: fill 0.3s;
-      }
-      .region:hover {
-        fill: #e8c27a;
-      }
-      .region.selected {
-        fill: #7c7f59;
-      }
-    </style>
-    <path class="region" data-name="Αττική" d="M480,500 L540,500 L540,560 L480,560 Z"/>
-    <path class="region" data-name="Κρήτη" d="M300,650 L700,650 L700,720 L300,720 Z"/>
-    <path class="region" data-name="Κεντρική Μακεδονία"
-          d="M480,200 L580,200 L580,300 L480,300 Z"/>
-    <path class="region" data-name="Ανατολική Μακεδονία & Θράκη"
-          d="M600,200 L700,200 L700,300 L600,300 Z"/>
-    <path class="region" data-name="Δυτική Μακεδονία"
-          d="M400,200 L480,200 L480,300 L400,300 Z"/>
-    <path class="region" data-name="Ήπειρος"
-          d="M300,200 L380,200 L380,300 L300,300 Z"/>
-    <path class="region" data-name="Θεσσαλία"
-          d="M480,300 L580,300 L580,400 L480,400 Z"/>
-    <path class="region" data-name="Δυτική Ελλάδα"
-          d="M200,400 L300,400 L300,500 L200,500 Z"/>
-    <path class="region" data-name="Στερεά Ελλάδα"
-          d="M380,400 L480,400 L480,500 L380,500 Z"/>
-    <path class="region" data-name="Πελοπόννησος"
-          d="M300,500 L400,500 L400,600 L300,600 Z"/>
-    <path class="region" data-name="Ιόνια Νησιά"
-          d="M200,550 L300,550 L300,620 L200,620 Z"/>
-    <path class="region" data-name="Βόρειο Αιγαίο"
-          d="M700,300 L800,300 L800,400 L700,400 Z"/>
-    <path class="region" data-name="Νότιο Αιγαίο"
-          d="M700,400 L800,400 L800,500 L700,500 Z"/>
+ <div class="map-container">
+  <!-- === Χάρτης Ελλάδας === -->
+  <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
+    <!-- Παράδειγμα νομού: Αττική -->
+    <path data-name="Αττική" d="M500,600 l50,-100 l-50,-40 ..." fill="#dcdcdc" stroke="#fff"/>
+
+    <!-- Άλλοι νομοί εδώ -->
+    <path data-name="Θεσσαλονίκη" d="M500,400 ..." fill="#dcdcdc" stroke="#fff"/>
+    <!-- ... -->
+
+    <!-- Καστελλόριζο -->
+    <circle data-name="Καστελλόριζο" cx="950" cy="750" r="8" fill="#dcdcdc" stroke="#fff"/>
   </svg>
 </div>
 
