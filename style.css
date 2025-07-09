@@ -1,4 +1,4 @@
-/* Reset */
+/* === Reset & Βασικό Στυλ === */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,173 +6,58 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  justify-content: center;
-  background-color: #f9f4f1;
+  font-family: Arial, sans-serif;
+  background-color: #fdfdfd;
 }
 
 .container {
   display: flex;
-  width: 100%;
-  max-width: 1400px;
   min-height: 100vh;
 }
 
-/* Sidebar */
+/* === Sidebar === */
 .sidebar {
-  width: 280px;
-  background-color: #7c7f59;
-  padding: 30px 20px;
+  width: 220px;
+  background-color: #2c3e50;
   color: white;
+  padding: 20px;
+  flex-shrink: 0;
 }
 
 .logo img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
+  display: block;
   margin-bottom: 20px;
 }
 
 .sidebar h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #e8c27a;
-  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
 }
 
 .menu-btn {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: white;
-  color: #7c7f59;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.menu-btn:hover {
-  background-color: #e6ded6;
-}
-
-/* Content */
-.content {
-  flex: 1;
-  padding: 40px;
-  background-color: #f9f4f1;
-  color: #333;
-}
-
-.content h1 {
-  margin-bottom: 20px;
-}
-
-/* Map */
-.map-container {
-  flex: 1;
-  padding: 20px;
-  max-width: 800px;
-  margin-bottom: 10px;
-}
-
-.map-container svg {
-  width: 100%;
-  height: auto;
-}
-
-.map-container svg [data-name] {
-  transition: fill 0.3s;
-}
-
-.map-container svg [data-name]:hover {
-  fill: #b19777; /* bronze highlight όταν περνάει το ποντίκι */
-}
-
-/* Map Instruction */
-.map-instruction {
-  text-align: center;
-  background-color: #f0f0f0;
-  padding: 12px;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-/* Carousel */
-.carousel {
-  margin-bottom: 40px;
-}
-
-.carousel h2 {
-  margin-bottom: 10px;
-}
-
-.carousel-track {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-}
-
-.carousel-item {
-  min-width: 180px;
-  background-color: #dedbd4;
-  padding: 20px;
-  border-radius: 8px;
-  flex-shrink: 0;
-  text-align: center;
-}
-
-/* AI Bar */
-.ai-bar {
-  background-color: #eae6dc;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.ai-bar textarea {
-  width: 100%;
-  height: 80px;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #bbb;
-  resize: vertical;
-  margin-bottom: 10px;
-  font-size: 15px;
-}
-
-.ai-bar button {
-  padding: 10px 20px;
-  background-color: #7c7f59;
+  background-color: #34495e;
   color: white;
+  padding: 10px;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
+  margin-bottom: 10px;
   cursor: pointer;
-  font-size: 15px;
 }
 
-.ai-bar button:hover {
-  background-color: #65684a;
-}
-
-#aiResponse {
-  margin-top: 10px;
-  font-style: italic;
-  color: #444;
-}
-
-/* Όταν επιλέγεται μια περιοχή στον χάρτη */
-.region.selected {
-  fill: #7c7f59 !important; /* Σκούρο ελαιόχρωμο, μπορείς να το αλλάξεις */
-}
-
-/* Πάνω κουμπιά στο sidebar */
+/* === Top κουμπιά στο sidebar === */
 .top-buttons {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  margin: 10px;
+  margin-bottom: 20px;
 }
 
 .top-buttons button {
@@ -182,33 +67,83 @@ body {
   color: white;
   cursor: pointer;
   border-radius: 4px;
+  font-size: 0.9em;
 }
 
 .launch-btn {
   background-color: #28a745;
 }
 
-/* Μπάρα φίλτρων */
+/* === Main Content === */
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* === Χάρτης Ελλάδας === */
+.map-container {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.map-svg {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+}
+
+/* === AI Bar === */
+.ai-bar {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ai-bar textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: vertical;
+}
+
+.ai-bar button {
+  align-self: flex-start;
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* === Μπάρα φίλτρων === */
 .filter-bar {
   display: flex;
   gap: 10px;
-  margin: 20px 0;
+  margin: 30px 0;
   flex-wrap: wrap;
 }
 
-.filter-bar select, .filter-bar button {
+.filter-bar select,
+.filter-bar button {
   padding: 8px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  min-width: 150px;
 }
 
 .search-btn {
   background-color: #007bff;
   color: white;
+  border: none;
   cursor: pointer;
 }
 
-/* Διπλό καρουζέλ */
+/* === Καρουζέλ === */
 .carousel-row {
   display: flex;
   gap: 20px;
@@ -219,6 +154,10 @@ body {
 .carousel {
   flex: 1;
   min-width: 280px;
+}
+
+.carousel h2 {
+  margin-bottom: 10px;
 }
 
 .carousel-track {
@@ -236,9 +175,14 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 6px;
+  font-weight: bold;
 }
 
-/* Εμπνευστείτε styling */
+/* === Εμπνευστείτε === */
+.inspiration {
+  margin-top: 50px;
+}
+
 .inspiration .carousel-track {
   background-color: #f0f0f0;
   padding: 20px;
