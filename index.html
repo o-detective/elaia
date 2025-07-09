@@ -33,7 +33,7 @@
 
       <!-- Χάρτης Ελλάδας -->
      <div class="map-container">
-  <svg viewBox="0 0 800 700" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 1000 900" xmlns="http://www.w3.org/2000/svg">
     <style>
       .region {
         fill: #ddd;
@@ -43,21 +43,36 @@
         transition: fill 0.3s;
       }
       .region:hover {
-        fill: #b19777; /* χρυσο-μπρονζε hover */
+        fill: #e8c27a;
       }
       .region.selected {
-        fill: #7c7f59; /* λαδί για επιλεγμένο */
+        fill: #7c7f59;
       }
     </style>
-
-    <path class="region" data-name="Αττική"
-      d="M400,300 L450,320 L430,360 L380,340 Z" />
-    <path class="region" data-name="Θεσσαλονίκη"
-      d="M450,200 L500,220 L480,260 L430,240 Z" />
-    <path class="region" data-name="Κρήτη"
-      d="M300,500 L500,500 L500,540 L300,540 Z" />
-    <circle class="region" data-name="Καστελλόριζο"
-      cx="770" cy="650" r="8" />
+    <path class="region" data-name="Αττική" d="M480,500 L540,500 L540,560 L480,560 Z"/>
+    <path class="region" data-name="Κρήτη" d="M300,650 L700,650 L700,720 L300,720 Z"/>
+    <path class="region" data-name="Κεντρική Μακεδονία"
+          d="M480,200 L580,200 L580,300 L480,300 Z"/>
+    <path class="region" data-name="Ανατολική Μακεδονία & Θράκη"
+          d="M600,200 L700,200 L700,300 L600,300 Z"/>
+    <path class="region" data-name="Δυτική Μακεδονία"
+          d="M400,200 L480,200 L480,300 L400,300 Z"/>
+    <path class="region" data-name="Ήπειρος"
+          d="M300,200 L380,200 L380,300 L300,300 Z"/>
+    <path class="region" data-name="Θεσσαλία"
+          d="M480,300 L580,300 L580,400 L480,400 Z"/>
+    <path class="region" data-name="Δυτική Ελλάδα"
+          d="M200,400 L300,400 L300,500 L200,500 Z"/>
+    <path class="region" data-name="Στερεά Ελλάδα"
+          d="M380,400 L480,400 L480,500 L380,500 Z"/>
+    <path class="region" data-name="Πελοπόννησος"
+          d="M300,500 L400,500 L400,600 L300,600 Z"/>
+    <path class="region" data-name="Ιόνια Νησιά"
+          d="M200,550 L300,550 L300,620 L200,620 Z"/>
+    <path class="region" data-name="Βόρειο Αιγαίο"
+          d="M700,300 L800,300 L800,400 L700,400 Z"/>
+    <path class="region" data-name="Νότιο Αιγαίο"
+          d="M700,400 L800,400 L800,500 L700,500 Z"/>
   </svg>
 </div>
 
@@ -92,44 +107,48 @@
   </div>
 
   <!-- JavaScript -->
-  <script>
-    // Clickable map
-    document.addEventListener("DOMContentLoaded", function () {
-      const regions = document.querySelectorAll(".map-container svg [data-name]");
-      regions.forEach(region => {
-        region.addEventListener("click", () => {
-          const name = region.getAttribute("data-name");
-          alert("Επέλεξες: " + name);
-        });
-        region.style.cursor = "pointer";
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Clickable map with highlight effect
+    const regions = document.querySelectorAll(".map-container svg [data-name]");
+    regions.forEach(region => {
+      region.addEventListener("click", () => {
+        // Αφαίρεσε το selected class από όλες
+        regions.forEach(r => r.classList.remove("selected"));
+        // Πρόσθεσε το selected class στη συγκεκριμένη
+        region.classList.add("selected");
+        // Δείξε την επιλογή
+        alert("Επέλεξες: " + region.getAttribute("data-name"));
       });
+      region.style.cursor = "pointer";
     });
+  });
 
-    // AI Bar functionality
-    async function askAI() {
-      const input = document.getElementById("aiInput").value;
-      const responseBox = document.getElementById("aiResponse");
-      responseBox.innerHTML = "⏳ Περιμένετε...";
+  // AI Bar functionality
+  async function askAI() {
+    const input = document.getElementById("aiInput").value;
+    const responseBox = document.getElementById("aiResponse");
+    responseBox.innerHTML = "⏳ Περιμένετε...";
 
-      try {
-        const res = await fetch("https://api.openai.com/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer ΤΟ_ΚΛΕΙΔΙ_ΣΟΥ"
-          },
-          body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: input }]
-          })
-        });
+    try {
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ΤΟ_ΚΛΕΙΔΙ_ΣΟΥ" // ➤ Βάλε το πραγματικό σου API key εδώ
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: input }]
+        })
+      });
 
-        const data = await res.json();
-        responseBox.innerHTML = data.choices[0].message.content;
-      } catch (error) {
-        responseBox.innerHTML = "❌ Σφάλμα: Δοκιμάστε ξανά.";
-      }
+      const data = await res.json();
+      responseBox.innerHTML = data.choices[0].message.content;
+    } catch (error) {
+      responseBox.innerHTML = "❌ Σφάλμα: Δοκιμάστε ξανά.";
     }
-  </script>
+  }
+</script>
 </body>
 </html>
