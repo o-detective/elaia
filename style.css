@@ -188,3 +188,32 @@ body {
 .carousel:last-of-type .carousel-item img {
   height: 180px; /* λίγο πιο μεγάλο αν θέλεις πιο “hero” στυλ */
 }
+
+.search-filters {
+  margin-top: 30px;
+  background-color: #f2ede7;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-group label {
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #7c7f59;
+}
+
+.filter-group input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
