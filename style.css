@@ -223,6 +223,7 @@ body {
   top: 20px;
   right: 20px;
   display: flex;
+  flex-direction: row; /* εξασφαλίζει οριζόντια στοίχιση */
   gap: 10px;
   z-index: 1000;
 }
