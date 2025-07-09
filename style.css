@@ -166,3 +166,87 @@ body {
 .region.selected {
   fill: #7c7f59 !important; /* Σκούρο ελαιόχρωμο, μπορείς να το αλλάξεις */
 }
+
+/* Πάνω κουμπιά στο sidebar */
+.top-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 10px;
+}
+
+.top-buttons button {
+  padding: 6px;
+  border: none;
+  background-color: #444;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.launch-btn {
+  background-color: #28a745;
+}
+
+/* Μπάρα φίλτρων */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.filter-bar select, .filter-bar button {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.search-btn {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+/* Διπλό καρουζέλ */
+.carousel-row {
+  display: flex;
+  gap: 20px;
+  margin: 40px 0;
+  flex-wrap: wrap;
+}
+
+.carousel {
+  flex: 1;
+  min-width: 280px;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.carousel-item {
+  min-width: 180px;
+  height: 100px;
+  background-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+}
+
+/* Εμπνευστείτε styling */
+.inspiration .carousel-track {
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.inspiration .carousel-item {
+  min-width: 200px;
+  height: 120px;
+  font-weight: bold;
+  background-color: #ffe;
+}
