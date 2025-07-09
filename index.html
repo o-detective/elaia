@@ -24,23 +24,27 @@
 
     <!-- Main Content -->
     <main class="content">
-      <h1>Καλωσήρθατε στην Elaia</h1>
-
-      <!-- Search Bar -->
-      <div class="search-bar">
-        <input type="text" placeholder="Αναζήτηση..." />
-      </div>
 
       <!-- Χάρτης Ελλάδας -->
-<div class="map-container">
-  <object type="image/svg+xml" data="greece.svg" class="map-svg">
-    <!-- Εναλλακτικά κενό αν δεν στηρίζεται το object -->
-  </object>
-</div>
+      <div class="map-container">
+        <object type="image/svg+xml" data="greece.svg" class="map-svg"></object>
+      </div>
+
+      <!-- Οδηγία επιλογής -->
+      <div style="text-align: center; margin-top: 20px; font-weight: bold;">
+        Επιλέξτε απ’ τον χάρτη
+      </div>
+
+      <!-- AI Bar -->
+      <section class="ai-bar" style="margin-top: 20px;">
+        <textarea id="aiInput" placeholder="Π.χ. Πού μπορώ να παντρευτώ σε παραλία στη Νάξο;"></textarea>
+        <button onclick="askAI()">Αποστολή</button>
+        <div id="aiResponse" style="margin-top: 10px;"></div>
+      </section>
 
       <!-- Καρουζέλ διαφημιζόμενων -->
       <section class="carousel">
-        <h2>Top χώροι του μήνα</h2></h2>
+        <h2>Top χώροι του μήνα</h2>
         <div class="carousel-track">
           <div class="carousel-item">Brand 1</div>
           <div class="carousel-item">Brand 2</div>
@@ -57,70 +61,57 @@
           <div class="carousel-item">Ιδέα 3</div>
         </div>
       </section>
-
-               <!-- AI Bar -->
-      <section class="ai-bar">
-        <h2>Ρώτα την Elaia</h2>
-        <textarea id="aiInput" placeholder="Π.χ. Πού μπορώ να παντρευτώ σε παραλία στη Νάξο;"></textarea>
-        <button onclick="askAI()">Αποστολή</button>
-        <div id="aiResponse"></div>
-      </section>
     </main>
   </div>
 
   <!-- JavaScript -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Περιμένει να φορτωθεί το embedded SVG
-    const svgObjects = document.querySelectorAll('.map-container object');
-    svgObjects.forEach(obj => {
-      obj.addEventListener("load", () => {
-        const svgDoc = obj.contentDocument;
-        if (!svgDoc) return;
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Περιμένει να φορτωθεί το embedded SVG
+      const svgObjects = document.querySelectorAll('.map-container object');
+      svgObjects.forEach(obj => {
+        obj.addEventListener("load", () => {
+          const svgDoc = obj.contentDocument;
+          if (!svgDoc) return;
 
-        const regions = svgDoc.querySelectorAll("[data-name]");
-
-        regions.forEach(region => {
-          region.style.cursor = "pointer";
-
-          region.addEventListener("click", () => {
-            // Αφαίρεση επιλεγμένων
-            regions.forEach(r => r.classList.remove("selected"));
-            region.classList.add("selected");
-
-            // Δείξε alert με την επιλογή
-            alert("Επέλεξες: " + region.getAttribute("data-name"));
+          const regions = svgDoc.querySelectorAll("[data-name]");
+          regions.forEach(region => {
+            region.style.cursor = "pointer";
+            region.addEventListener("click", () => {
+              regions.forEach(r => r.classList.remove("selected"));
+              region.classList.add("selected");
+              alert("Επέλεξες: " + region.getAttribute("data-name"));
+            });
           });
         });
       });
     });
-  });
 
-  // AI Bar functionality
-  async function askAI() {
-    const input = document.getElementById("aiInput").value;
-    const responseBox = document.getElementById("aiResponse");
-    responseBox.innerHTML = "⏳ Περιμένετε...";
+    // AI Bar functionality
+    async function askAI() {
+      const input = document.getElementById("aiInput").value;
+      const responseBox = document.getElementById("aiResponse");
+      responseBox.innerHTML = "⏳ Περιμένετε...";
 
-    try {
-      const res = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer ΤΟ_ΚΛΕΙΔΙ_ΣΟΥ" // ➤ Βάλε το πραγματικό σου API key εδώ
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: input }]
-        })
-      });
+      try {
+        const res = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer ΤΟ_ΚΛΕΙΔΙ_ΣΟΥ" // ➤ Βάλε το πραγματικό σου API key εδώ
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: input }]
+          })
+        });
 
-      const data = await res.json();
-      responseBox.innerHTML = data.choices[0].message.content;
-    } catch (error) {
-      responseBox.innerHTML = "❌ Σφάλμα: Δοκιμάστε ξανά.";
+        const data = await res.json();
+        responseBox.innerHTML = data.choices[0].message.content;
+      } catch (error) {
+        responseBox.innerHTML = "❌ Σφάλμα: Δοκιμάστε ξανά.";
+      }
     }
-  }
-</script>
+  </script>
 </body>
 </html>
