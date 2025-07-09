@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="el">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Elaia - Εκδηλώσεις</title>
-  <link rel="stylesheet" href="style.css"/>
-</head>
+<!-- ...το ίδιο μέχρι το <body> -->
 <body>
   <div class="container">
     <!-- Sidebar -->
     <aside class="sidebar">
+      <div class="top-buttons">
+        <button>Σύνδεση</button>
+        <button>Εγγραφή</button>
+        <button class="launch-btn">Launch your space</button>
+      </div>
       <div class="logo">
         <img src="https://raw.githubusercontent.com/o-detective/elaia/main/2ECB64C0-85F0-4F73-96D8-C34E7E91208F.png" alt="Logo" />
       </div>
@@ -30,7 +28,6 @@
         <object type="image/svg+xml" data="greece.svg" class="map-svg"></object>
       </div>
 
-      <!-- Οδηγία επιλογής -->
       <div style="text-align: center; margin-top: 20px; font-weight: bold;">
         Επιλέξτε απ’ τον χάρτη
       </div>
@@ -42,18 +39,51 @@
         <div id="aiResponse" style="margin-top: 10px;"></div>
       </section>
 
-      <!-- Καρουζέλ διαφημιζόμενων -->
-      <section class="carousel">
-        <h2>Top χώροι του μήνα</h2>
-        <div class="carousel-track">
-          <div class="carousel-item">Brand 1</div>
-          <div class="carousel-item">Brand 2</div>
-          <div class="carousel-item">Brand 3</div>
+      <!-- Search Filters -->
+      <section class="filter-bar">
+        <select>
+          <option>Περιοχή</option>
+          <option>Αθήνα</option>
+          <option>Θεσσαλονίκη</option>
+          <option>Κρήτη</option>
+        </select>
+        <select>
+          <option>Είδος</option>
+          <option>Γάμος</option>
+          <option>Βάφτιση</option>
+          <option>Συνέδριο</option>
+        </select>
+        <select>
+          <option>Είδος επαγγελματία</option>
+          <option>Φωτογράφος</option>
+          <option>Χώρος</option>
+          <option>DJ</option>
+        </select>
+        <button class="search-btn">Αναζήτηση</button>
+      </section>
+
+      <!-- Διπλό Καρουζέλ -->
+      <section class="carousel-row">
+        <div class="carousel">
+          <h2>Top χώροι του μήνα</h2>
+          <div class="carousel-track">
+            <div class="carousel-item">Χώρος 1</div>
+            <div class="carousel-item">Χώρος 2</div>
+            <div class="carousel-item">Χώρος 3</div>
+          </div>
+        </div>
+        <div class="carousel">
+          <h2>Top συνεργάτες του μήνα</h2>
+          <div class="carousel-track">
+            <div class="carousel-item">Συνεργάτης 1</div>
+            <div class="carousel-item">Συνεργάτης 2</div>
+            <div class="carousel-item">Συνεργάτης 3</div>
+          </div>
         </div>
       </section>
 
       <!-- Εμπνευστείτε -->
-      <section class="carousel">
+      <section class="carousel inspiration">
         <h2>Εμπνευστείτε από την Elaia</h2>
         <div class="carousel-track">
           <div class="carousel-item">Ιδέα 1</div>
