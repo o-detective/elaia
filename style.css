@@ -148,7 +148,23 @@ body {
   font-style: italic;
   color: #444;
 }
+
 /* Όταν επιλέγεται μια περιοχή στον χάρτη */
 .region.selected {
-  fill: #7c7f59 !important; /* Σκούρο ελαιόχρωμο, μπορείς να το αλλάξεις */
+  fill: #7c7f59 !important; /* Σκούρο ελαιόχρωμο */
+}
+
+/* Δίπλα-δίπλα τα καρουζέλ top χώρων + συνεργατών */
+.carousel-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+/* Μεγαλύτερα items στο κατώτερο καρουζέλ εμπνεύσεων */
+.carousel:last-of-type .carousel-item {
+  min-width: 250px;
+  padding: 30px;
+  font-size: 18px;
 }
