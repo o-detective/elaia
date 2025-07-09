@@ -32,19 +32,10 @@
       </div>
 
       <!-- Χάρτης Ελλάδας -->
- <div class="map-container">
-  <!-- === Χάρτης Ελλάδας === -->
-  <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
-    <!-- Παράδειγμα νομού: Αττική -->
-    <path data-name="Αττική" d="M500,600 l50,-100 l-50,-40 ..." fill="#dcdcdc" stroke="#fff"/>
-
-    <!-- Άλλοι νομοί εδώ -->
-    <path data-name="Θεσσαλονίκη" d="M500,400 ..." fill="#dcdcdc" stroke="#fff"/>
-    <!-- ... -->
-
-    <!-- Καστελλόριζο -->
-    <circle data-name="Καστελλόριζο" cx="950" cy="750" r="8" fill="#dcdcdc" stroke="#fff"/>
-  </svg>
+<div class="map-container">
+  <object type="image/svg+xml" data="greece.svg" class="map-svg">
+    <!-- Εναλλακτικά κενό αν δεν στηρίζεται το object -->
+  </object>
 </div>
 
       <!-- Καρουζέλ διαφημιζόμενων -->
@@ -80,18 +71,28 @@
   <!-- JavaScript -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Clickable map with highlight effect
-    const regions = document.querySelectorAll(".map-container svg [data-name]");
-    regions.forEach(region => {
-      region.addEventListener("click", () => {
-        // Αφαίρεσε το selected class από όλες
-        regions.forEach(r => r.classList.remove("selected"));
-        // Πρόσθεσε το selected class στη συγκεκριμένη
-        region.classList.add("selected");
-        // Δείξε την επιλογή
-        alert("Επέλεξες: " + region.getAttribute("data-name"));
+    // Περιμένει να φορτωθεί το embedded SVG
+    const svgObjects = document.querySelectorAll('.map-container object');
+    svgObjects.forEach(obj => {
+      obj.addEventListener("load", () => {
+        const svgDoc = obj.contentDocument;
+        if (!svgDoc) return;
+
+        const regions = svgDoc.querySelectorAll("[data-name]");
+
+        regions.forEach(region => {
+          region.style.cursor = "pointer";
+
+          region.addEventListener("click", () => {
+            // Αφαίρεση επιλεγμένων
+            regions.forEach(r => r.classList.remove("selected"));
+            region.classList.add("selected");
+
+            // Δείξε alert με την επιλογή
+            alert("Επέλεξες: " + region.getAttribute("data-name"));
+          });
+        });
       });
-      region.style.cursor = "pointer";
     });
   });
 
