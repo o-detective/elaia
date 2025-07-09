@@ -68,46 +68,53 @@ body {
   margin-bottom: 20px;
 }
 
-/* Search Bar */
-.search-bar {
-  margin-bottom: 30px;
-}
-.search-bar input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
 /* Map */
 .map-container {
   flex: 1;
   padding: 20px;
   max-width: 800px;
+  margin-bottom: 10px;
 }
+
 .map-container svg {
   width: 100%;
   height: auto;
 }
+
 .map-container svg [data-name] {
   transition: fill 0.3s;
 }
+
 .map-container svg [data-name]:hover {
   fill: #b19777; /* bronze highlight όταν περνάει το ποντίκι */
+}
+
+/* Map Instruction */
+.map-instruction {
+  text-align: center;
+  background-color: #f0f0f0;
+  padding: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
 /* Carousel */
 .carousel {
   margin-bottom: 40px;
 }
+
 .carousel h2 {
   margin-bottom: 10px;
 }
+
 .carousel-track {
   display: flex;
   gap: 10px;
   overflow-x: auto;
 }
+
 .carousel-item {
   min-width: 180px;
   background-color: #dedbd4;
@@ -123,15 +130,18 @@ body {
   padding: 20px;
   border-radius: 10px;
 }
+
 .ai-bar textarea {
   width: 100%;
   height: 80px;
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #bbb;
-  resize: none;
+  resize: vertical;
   margin-bottom: 10px;
+  font-size: 15px;
 }
+
 .ai-bar button {
   padding: 10px 20px;
   background-color: #7c7f59;
@@ -139,15 +149,19 @@ body {
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 15px;
 }
+
 .ai-bar button:hover {
   background-color: #65684a;
 }
+
 #aiResponse {
   margin-top: 10px;
   font-style: italic;
   color: #444;
 }
+
 /* Όταν επιλέγεται μια περιοχή στον χάρτη */
 .region.selected {
   fill: #7c7f59 !important; /* Σκούρο ελαιόχρωμο, μπορείς να το αλλάξεις */
