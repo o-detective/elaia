@@ -168,3 +168,23 @@ body {
   padding: 30px;
   font-size: 18px;
 }
+
+/* Σταθερό μέγεθος για εικόνες σε όλα τα carousel items */
+.carousel-item img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+/* Προσαρμογή του τελευταίου καρουζέλ (εμπνευσμένο από την Elaia) */
+.carousel:last-of-type .carousel-item {
+  min-width: 250px;
+  padding: 30px;
+  font-size: 18px;
+}
+
+.carousel:last-of-type .carousel-item img {
+  height: 180px; /* λίγο πιο μεγάλο αν θέλεις πιο “hero” στυλ */
+}
