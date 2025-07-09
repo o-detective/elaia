@@ -81,14 +81,19 @@ body {
 
 /* Map */
 .map-container {
-  margin-bottom: 40px;
-  background-color: #e8e6e1;
+  flex: 1;
   padding: 20px;
-  border-radius: 10px;
+  max-width: 800px;
 }
 .map-container svg {
   width: 100%;
   height: auto;
+}
+.map-container svg [data-name] {
+  transition: fill 0.3s;
+}
+.map-container svg [data-name]:hover {
+  fill: #b19777; /* bronze highlight όταν περνάει το ποντίκι */
 }
 
 /* Carousel */
