@@ -120,10 +120,22 @@
 
     // Ενεργοποίηση ενεργού κουμπιού κατηγορίας
     const categoryButtons = document.querySelectorAll(".menu-btn");
+    const venueTypeInput = document.getElementById("venue-type");
+
     categoryButtons.forEach(btn => {
       btn.addEventListener("click", () => {
         categoryButtons.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
+
+        // Γράφει το επιλεγμένο κουμπί στη μπάρα
+        venueTypeInput.value = btn.textContent.trim();
+        venueTypeInput.focus();
+
+        // Scroll στη μπάρα φίλτρων
+        const filtersSection = document.querySelector(".search-filters");
+        if (filtersSection) {
+          filtersSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       });
     });
   });
