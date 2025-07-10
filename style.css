@@ -10,6 +10,9 @@ body {
   display: flex;
   justify-content: center;
   background-color: #f9f4f1;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 .container {
@@ -290,4 +293,81 @@ body {
 .menu-btn.active {
   background: linear-gradient(135deg, #f0f4d7, #9ca763);
   color: #333;
+}
+
+/* Περιορισμός της μέγιστης διάστασης */
+.container {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Sidebar δεν πρέπει να πιέζει το πλάτος */
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+}
+
+/* Κύριο περιεχόμενο προσαρμοστικό */
+.content {
+  flex: 1;
+  min-width: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Map container μαζεμένο */
+.map-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.map-container object {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Καρουζέλ να μην απλώνουν */
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.carousel-item {
+  min-width: 200px;
+  flex-shrink: 0;
+}
+
+/* Φίλτρα πιο responsive */
+.search-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.filter-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Για tablet και κινητά */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .search-filters {
+    flex-direction: column;
+  }
 }
