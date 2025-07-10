@@ -251,3 +251,39 @@ body {
 .top-btn.launch:hover {
   background-color: #65684a;
 }
+
+/* Sidebar logo */
+.logo-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-img {
+  width: 200px;  /* μεγαλύτερο λογότυπο */
+  height: auto;
+  transition: transform 0.3s ease;
+}
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+/* Εντυπωσιακά κουμπιά */
+.menu-btn {
+  width: 100%;
+  padding: 15px 20px;
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #6b1e8d, #d81b60);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.menu-btn:hover {
+  background: linear-gradient(135deg, #8e24aa, #f06292);
+  transform: translateY(-2px) scale(1.03);
+}
