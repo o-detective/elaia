@@ -379,3 +379,18 @@ body {
     flex-direction: column;
   }
 }
+
+.map-container {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+
+.map-container svg,
+.map-container object,
+.map-container iframe {
+  min-width: 900px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
