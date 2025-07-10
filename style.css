@@ -59,6 +59,13 @@ body {
   background-color: #e6ded6;
 }
 
+.menu-btn:focus,
+.top-btn:focus,
+.ai-bar button:focus {
+  outline: 3px solid #b19777;
+  outline-offset: 2px;
+}
+
 /* Content */
 .content {
   flex: 1;
