@@ -97,53 +97,62 @@
   </div>
 
   <!-- JavaScript -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Περιμένει να φορτωθεί το embedded SVG
-      const svgObjects = document.querySelectorAll('.map-container object');
-      svgObjects.forEach(obj => {
-        obj.addEventListener("load", () => {
-          const svgDoc = obj.contentDocument;
-          if (!svgDoc) return;
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Περιμένει να φορτωθεί το embedded SVG
+    const svgObjects = document.querySelectorAll('.map-container object');
+    svgObjects.forEach(obj => {
+      obj.addEventListener("load", () => {
+        const svgDoc = obj.contentDocument;
+        if (!svgDoc) return;
 
-          const regions = svgDoc.querySelectorAll("[data-name]");
-          regions.forEach(region => {
-            region.style.cursor = "pointer";
-            region.addEventListener("click", () => {
-              regions.forEach(r => r.classList.remove("selected"));
-              region.classList.add("selected");
-              alert("Επέλεξες: " + region.getAttribute("data-name"));
-            });
+        const regions = svgDoc.querySelectorAll("[data-name]");
+        regions.forEach(region => {
+          region.style.cursor = "pointer";
+          region.addEventListener("click", () => {
+            regions.forEach(r => r.classList.remove("selected"));
+            region.classList.add("selected");
+            alert("Επέλεξες: " + region.getAttribute("data-name"));
           });
         });
       });
     });
 
-    // AI Bar functionality
-    async function askAI() {
-      const input = document.getElementById("aiInput").value;
-      const responseBox = document.getElementById("aiResponse");
-      responseBox.innerHTML = "⏳ Περιμένετε...";
+    // Ενεργοποίηση ενεργού κουμπιού κατηγορίας
+    const categoryButtons = document.querySelectorAll(".menu-btn");
+    categoryButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        categoryButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+  });
 
-      try {
-        const res = await fetch("https://api.openai.com/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer ΤΟ_ΚΛΕΙΔΙ_ΣΟΥ" // ➤ Βάλε το πραγματικό σου API key εδώ
-          },
-          body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: input }]
-          })
-        });
+  // AI Bar functionality
+  async function askAI() {
+    const input = document.getElementById("aiInput").value;
+    const responseBox = document.getElementById("aiResponse");
+    responseBox.innerHTML = "⏳ Περιμένετε...";
 
-        const data = await res.json();
-        responseBox.innerHTML = data.choices[0].message.content;
-      } catch (error) {
-        responseBox.innerHTML = "❌ Σφάλμα: Δοκιμάστε ξανά.";
-      }
+    try {
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ΤΟ_ΚΛΕΙΔΙ_ΣΟΥ" // ➤ Βάλε το πραγματικό σου API key εδώ
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: input }]
+        })
+      });
+
+      const data = await res.json();
+      responseBox.innerHTML = data.choices[0].message.content;
+    } catch (error) {
+      responseBox.innerHTML = "❌ Σφάλμα: Δοκιμάστε ξανά.";
     }
-  </script>
+  }
+</script>
 </body>
 </html>
