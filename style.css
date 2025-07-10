@@ -394,3 +394,92 @@ body {
   height: auto;
   display: block;
 }
+
+/* ======================= */
+/* RESPONSIVE ΕΠΙΔΙΟΡΘΩΣΕΙΣ */
+/* ======================= */
+
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .sidebar {
+    width: 100%;
+    order: 1;
+    padding: 20px;
+  }
+
+  .content {
+    order: 2;
+    padding: 20px;
+  }
+
+  .carousel-row {
+    flex-direction: column;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .map-container {
+    overflow-x: auto;
+  }
+
+  .map-container svg,
+  .map-container object,
+  .map-container iframe {
+    min-width: 600px; /* λιγότερο από 900px για μικρές οθόνες */
+  }
+
+  .menu-btn {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .sidebar h2 {
+    font-size: 20px;
+  }
+
+  .carousel-item {
+    min-width: 160px;
+    font-size: 14px;
+  }
+
+  .carousel:last-of-type .carousel-item {
+    min-width: 200px;
+    padding: 20px;
+    font-size: 16px;
+  }
+
+  .search-filters {
+    flex-direction: column;
+  }
+
+  .filter-group {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-img {
+    width: 150px;
+  }
+
+  .top-btn {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .map-container svg,
+  .map-container object,
+  .map-container iframe {
+    min-width: 500px;
+  }
+}
