@@ -483,3 +483,54 @@ body {
     min-width: 500px;
   }
 }
+
+/* Περιορίζουμε το πλάτος του κυρίως περιεχομένου */
+main {
+  max-width: 800px; /* ή 90% για mobile */
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Για το layout μεταξύ sidebar και περιεχομένου */
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+/* Sidebar στα αριστερά */
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background-color: #f2f2f2; /* ή όπως το έχεις */
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+}
+
+/* Κύριο περιεχόμενο */
+.content {
+  flex: 1;
+  padding: 1rem;
+}
+
+/* Responsive (για κινητά & tablets) */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .sidebar {
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+
+  .content {
+    margin-left: 200px;
+  }
+}
