@@ -269,21 +269,18 @@ body {
 
 /* Εντυπωσιακά κουμπιά */
 .menu-btn {
-  width: 100%;
+  background-color: #cdd5a1;
+  border: none;
   padding: 15px 20px;
   margin: 10px 0;
   font-size: 18px;
   font-weight: bold;
-  background: linear-gradient(135deg, #6b1e8d, #d81b60);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  color: #333;
+  transition: background-color 0.3s ease;
 }
 
 .menu-btn:hover {
-  background: linear-gradient(135deg, #8e24aa, #f06292);
-  transform: translateY(-2px) scale(1.03);
+  background-color: #b3bc8c;
 }
