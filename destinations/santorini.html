@@ -1,1 +1,72 @@
-add santorini page
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Σαντορίνη - Εμπνευστείτε από την Elaia</title>
+  <style>
+    body {
+      background-color: #f9f4f1;
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+    }
+    .frame {
+      border: 8px solid #7d8053;
+      margin: 30px;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #7d8053;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .gallery img {
+      width: 300px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    }
+    .description {
+      max-width: 900px;
+      margin: 20px auto;
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #333;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>Σαντορίνη</h1>
+    <div class="description" id="description">
+      <!-- Περιγραφή θα φορτωθεί από JSON -->
+    </div>
+    <div class="gallery" id="gallery">
+      <!-- Φωτογραφίες θα φορτωθούν από JSON -->
+    </div>
+  </div>
+
+  <script>
+    fetch('../json/santorini.json')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('description').innerText = data.description;
+        const gallery = document.getElementById('gallery');
+        data.images.forEach(img => {
+          const image = document.createElement('img');
+          image.src = `../images/${img}`;
+          image.alt = "Φωτογραφία από Σαντορίνη";
+          gallery.appendChild(image);
+        });
+      });
+  </script>
+</body>
+</html>
