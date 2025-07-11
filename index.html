@@ -268,6 +268,31 @@
       responseBox.innerHTML = "❌ Σφάλμα: Δοκιμάστε ξανά.";
     }
   }
+
+  document.querySelectorAll('.map-svg').forEach(obj => {
+  obj.addEventListener('load', () => {
+    const svgDoc = obj.contentDocument;
+    if (!svgDoc) return;
+
+    const regions = svgDoc.querySelectorAll('path, polygon, g'); // νομικοί διαχωρισμοί
+    regions.forEach(region => {
+      const name = region.getAttribute('id') || region.getAttribute('data-name');
+      if (!name) return;
+
+      region.style.cursor = 'pointer';
+      region.addEventListener('click', () => {
+        // Εδώ μπορείς να στείλεις το user σε άλλο HTML
+        window.location.href = `destinations/${name.toLowerCase()}.html`;
+      });
+      region.addEventListener('mouseover', () => {
+        region.style.fill = '#f0f4d7';
+      });
+      region.addEventListener('mouseout', () => {
+        region.style.fill = ''; // επανάφερόμενο χρώμα
+      });
+    });
+  });
+});
 </script>
 </body>
 </html>
