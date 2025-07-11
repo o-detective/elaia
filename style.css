@@ -533,3 +533,15 @@ main {
     margin-left: 200px;
   }
 }
+
+.map-container {
+  background-color: #ffffff;
+  border: 2px solid #7d8053;
+  padding: 10px;
+  border-radius: 8px;
+}
+.map-svg {
+  width: 100%;
+  height: auto;
+  max-width: 800px;
+}
