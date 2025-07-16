@@ -545,3 +545,45 @@ main {
   height: auto;
   max-width: 800px;
 }
+
+.map-container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #fdfcfb;
+  border: 2px solid #7c7f59;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.map-container h1 {
+  font-size: 1.8rem;
+  color: #7c7f59;
+  margin-bottom: 30px;
+}
+
+.regions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 15px;
+  justify-content: center;
+}
+
+.region-btn {
+  background-color: #d6d4cc;
+  color: #333;
+  border: none;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.region-btn:hover {
+  background-color: #bcb9ae;
+  transform: scale(1.05);
+}
