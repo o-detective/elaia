@@ -29,16 +29,38 @@
     <!-- Main Content -->
     <main class="content">
 
-     <!-- Χάρτης Ελλάδας -->
-<div class="map-wrapper">
-  <div class="map-container">
-    <object
-      type="image/svg+xml"
-      data="https://raw.githubusercontent.com/o-detective/elaia/main/greece.svg"
-      class="map-svg"
-    ></object>
-  </div>
+<!-- ΝΕΟΣ ΔΙΑΔΡΑΣΤΙΚΟΣ ΧΑΡΤΗΣ -->
+<div class="map-container">
+  <h2 style="text-align:center;">Επιλέξτε Περιοχή</h2>
+  <div class="regions-grid" id="regions-grid"></div>
 </div>
+
+<script>
+  const regions = [
+    "Αττικης", "Ευβοιας", "Ευρυτανιας", "Φωκιδας", "Φθιωτιδας", "Βοιωτιας", "Χαλκιδικης", "Ημαθιας",
+    "Πελλας", "Πιεριας", "Σερρων", "Θεσσαλονικης", "Χανιων", "Ηρακλειου", "Λασιθιου", "Ρεθυμνης",
+    "Δραμας", "Εβρου", "Καβαλας", "Ροδοπης", "Ξανθης", "Αρτας", "Ιωαννινων", "Πρεβεζας", "Θεσπρωτιας",
+    "Κερκυρας", "Παξοι", "Κυθηρα", "Κεφαλληνιας", "Λευκαδας", "Ζακυνθου", "Ιθακης", "Λοιπα ιονια νησια",
+    "Ικαρια", "Λημνος", "Χιου", "Λεσβου", "Σαμου", "Αρκαδιας", "Αργολιδας", "Κορινθιας", "Λακωνιας",
+    "Μεσσηνιας", "Λοιπα νηςια Κυκλαδων", "Ανδρος", "Σαντορινη", "Μηλος", "Μυκονος", "Ναξος", "Παρος",
+    "Τηνος", "Συρος", "Λοιπα νησια Δωδεκανησων", "Ροδος", "Καρπαθος", "Κως", "Αστυπαλαια", "Πατμος",
+    "Καστελλοριζο", "Καρδιτσας", "Λαρισης", "Μαγνησιας", "Τρικαλων", "Αχαιας", "Αιτωλοακαρνανιας",
+    "Ηλειας", "Φλωρινας", "Γρεβενων", "Καστοριας", "Κοζανης", "Θασος", "Σαμοθρακη", "Σκιαθος",
+    "Σκοπελος", "Αλοννησος", "Σκυρος"
+  ];
+
+  const gridContainer = document.getElementById("regions-grid");
+  regions.forEach(region => {
+    const btn = document.createElement('button');
+    btn.className = 'region-btn';
+    btn.textContent = region;
+    btn.onclick = () => {
+      const slug = region.toLowerCase().replace(/\s+/g, "-");
+      window.location.href = `destinations/${slug}.html`;
+    };
+    gridContainer.appendChild(btn);
+  });
+</script>
 
       <!-- Οδηγία επιλογής -->
       <div style="text-align: center; margin-top: 20px; font-weight: bold;">
