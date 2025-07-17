@@ -2,7 +2,7 @@
 <!-- Greece map – customised prefectures – 2025-07 -->
 <svg  xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
-      viewBox="19 34 15 13"    /* geo-viewBox: μήκος/πλάτος Ελλάδας */
+      viewBox="19 34 15 13" 
       width="100%" height="auto"
       id="gr-prefecture-map">
 
