@@ -77,15 +77,6 @@
 
     <!-- (…συνεχίζουμε με Χανίων, Ηρακλείου, Λασιθίου, …) -->
   </g>
-
-  <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="960"
-     height="1080"
-     viewBox="0 0 960 1080"
-     style="background:#f6f1ea"
-     id="greece-map">
-
   <!-- Περιοχές Ελλάδας - Μέρος 2 -->
 
   <g id="attikis" data-name="Αττικης">
