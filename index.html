@@ -8,11 +8,10 @@
 </head>
 <body>
   <div class="top-bar">
-    <button class="top-btn">Σύνδεση</button>
-    <button class="top-btn">Εγγραφή</button>
-    <button class="top-btn launch">Launch</button>
-  </div>
-
+  <button class="top-btn">Σύνδεση</button>
+  <button class="top-btn">Εγγραφή</button>
+  <button class="top-btn launch">Launch</button>
+</div>
   <div class="container">
     <!-- Sidebar -->
     <aside class="sidebar">
@@ -30,47 +29,295 @@
     <!-- Main Content -->
     <main class="content">
 
-      <!-- Χάρτης Ελλάδας ΕΝΣΩΜΑΤΩΜΕΝΟΣ -->
-      <div class="map-container">
-        <svg id="greece-map" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
-          <!-- Παράδειγμα περιοχών (θα ακολουθήσουν κι άλλες στο επόμενο μήνυμα) -->
-          <path d="M150,100 L200,100 L200,150 L150,150 Z" fill="#d9d5c4" stroke="#7c7f59" stroke-width="1" data-name="Αττικης"/>
-          <path d="M250,100 L300,100 L300,150 L250,150 Z" fill="#d9d5c4" stroke="#7c7f59" stroke-width="1" data-name="Κυκλαδες"/>
-          <path d="M350,100 L400,100 L400,150 L350,150 Z" fill="#d9d5c4" stroke="#7c7f59" stroke-width="1" data-name="Κρητη"/>
-          <!-- ...συνεχίζεται με όλα τα νησιά και νομούς... -->
-        </svg>
-      </div>
-
-      <div style="text-align: center; margin-top: 20px; font-weight: bold;">
-        Επιλέξτε περιοχή στον χάρτη
-      </div>
-
-      <div class="map-container">
-  <object id="greece-map" type="image/svg+xml" data="greece.svg"></object>
+<!-- ΝΕΟΣ ΔΙΑΔΡΑΣΤΙΚΟΣ ΧΑΡΤΗΣ -->
+<div class="map-container">
+  <h2 style="text-align:center;">Επιλέξτε Περιοχή</h2>
+  <div class="regions-grid" id="regions-grid"></div>
 </div>
-      <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const regions = document.querySelectorAll("#greece-map [data-name]");
 
+<script>
+  const regions = [
+    "Αττικης", "Ευβοιας", "Ευρυτανιας", "Φωκιδας", "Φθιωτιδας", "Βοιωτιας", "Χαλκιδικης", "Ημαθιας",
+    "Πελλας", "Πιεριας", "Σερρων", "Θεσσαλονικης", "Χανιων", "Ηρακλειου", "Λασιθιου", "Ρεθυμνης",
+    "Δραμας", "Εβρου", "Καβαλας", "Ροδοπης", "Ξανθης", "Αρτας", "Ιωαννινων", "Πρεβεζας", "Θεσπρωτιας",
+    "Κερκυρας", "Παξοι", "Κυθηρα", "Κεφαλληνιας", "Λευκαδας", "Ζακυνθου", "Ιθακης", "Λοιπα ιονια νησια",
+    "Ικαρια", "Λημνος", "Χιου", "Λεσβου", "Σαμου", "Αρκαδιας", "Αργολιδας", "Κορινθιας", "Λακωνιας",
+    "Μεσσηνιας", "Λοιπα νηςια Κυκλαδων", "Ανδρος", "Σαντορινη", "Μηλος", "Μυκονος", "Ναξος", "Παρος",
+    "Τηνος", "Συρος", "Λοιπα νησια Δωδεκανησων", "Ροδος", "Καρπαθος", "Κως", "Αστυπαλαια", "Πατμος",
+    "Καστελλοριζο", "Καρδιτσας", "Λαρισης", "Μαγνησιας", "Τρικαλων", "Αχαιας", "Αιτωλοακαρνανιας",
+    "Ηλειας", "Φλωρινας", "Γρεβενων", "Καστοριας", "Κοζανης", "Θασος", "Σαμοθρακη", "Σκιαθος",
+    "Σκοπελος", "Αλοννησος", "Σκυρος"
+  ];
+
+  const gridContainer = document.getElementById("regions-grid");
   regions.forEach(region => {
-    region.style.cursor = "pointer";
+    const btn = document.createElement('button');
+    btn.className = 'region-btn';
+    btn.textContent = region;
+    btn.onclick = () => {
+      const slug = region.toLowerCase().replace(/\s+/g, "-");
+      window.location.href = `destinations/${slug}.html`;
+    };
+    gridContainer.appendChild(btn);
+  });
+</script>
 
-    region.addEventListener("click", () => {
-      const name = region.getAttribute("data-name");
-      regions.forEach(r => r.setAttribute("fill", "#d9d5c4")); // reset
-      region.setAttribute("fill", "#7c7f59"); // highlight selected
-      window.location.href = `destinations/${name}.html`;
+      <!-- Οδηγία επιλογής -->
+      <div style="text-align: center; margin-top: 20px; font-weight: bold;">
+        Επιλέξτε απ’ τον χάρτη
+      </div>
+
+      <!-- AI Bar -->
+      <section class="ai-bar" style="margin-top: 20px;">
+        <textarea id="aiInput" placeholder="Π.χ. Πού μπορώ να παντρευτώ σε παραλία στη Νάξο;"></textarea>
+        <button onclick="askAI()">Αποστολή</button>
+        <div id="aiResponse" style="margin-top: 10px;"></div>
+      </section>
+
+      <div class="search-filters">
+  <div class="filter-group">
+    <label for="region">Περιοχή:</label>
+    <select id="region">
+      <option selected disabled>Επιλέξτε περιοχή</option>
+      <option>Αττικης</option>
+      <option>Ευβοιας</option>
+      <option>Ευρυτανιας</option>
+      <option>Φωκιδας</option>
+      <option>Φθιωτιδας</option>
+      <option>Βοιωτιας</option>
+      <option>Χαλκιδικης</option>
+      <option>Ημαθιας</option>
+      <option>Κιλκις</option>
+      <option>Πελλας</option>
+      <option>Πιεριας</option>
+      <option>Σερρων</option>
+      <option>Θεσσαλονικης</option>
+      <option>Χανιων</option>
+      <option>Ηρακλειου</option>
+      <option>Λασιθιου</option>
+      <option>Ρεθυμνης</option>
+      <option>Δραμας</option>
+      <option>Εβρου</option>
+      <option>Καβαλας</option>
+      <option>Ροδοπης</option>
+      <option>Ξανθης</option>
+      <option>Αρτας</option>
+      <option>Ιωαννινων</option>
+      <option>Πρεβεζας</option>
+      <option>Θεσπρωτιας</option>
+      <option>Κερκυρας</option>
+      <option>Παξοι</option>
+      <option>Κυθηρα</option>
+      <option>Κεφαλληνιας</option>
+      <option>Λευκαδας</option>
+      <option>Ζακυνθου</option>
+      <option>Ιθακης</option>
+      <option>Λοιπα ιονια νησια</option>
+      <option>Ικαρια</option>
+      <option>Λημνος</option>
+      <option>Χιου</option>
+      <option>Λεσβου</option>
+      <option>Σαμου</option>
+      <option>Αρκαδιας</option>
+      <option>Αργολιδας</option>
+      <option>Κορινθιας</option>
+      <option>Λακωνιας</option>
+      <option>Μεσσηνιας</option>
+      <option>Λοιπα νηςια Κυκλαδων</option>
+      <option>Ανδρος</option>
+      <option>Σαντορινη</option>
+      <option>Μηλος</option>
+      <option>Μυκονος</option>
+      <option>Ναξος</option>
+      <option>Παρος</option>
+      <option>Τηνος</option>
+      <option>Συρος</option>
+      <option>Λοιπα νησια Δωδεκανησων</option>
+      <option>Ροδος</option>
+      <option>Καρπαθος</option>
+      <option>Κως</option>
+      <option>Αστυπαλαια</option>
+      <option>Πατμος</option>
+      <option>Καστελλοριζο</option>
+      <option>Καρδιτσας</option>
+      <option>Λαρισης</option>
+      <option>Μαγνησιας</option>
+      <option>Τρικαλων</option>
+      <option>Αχαιας</option>
+      <option>Αιτωλοακαρνανιας</option>
+      <option>Ηλειας</option>
+      <option>Φλωρινας</option>
+      <option>Γρεβενων</option>
+      <option>Καστοριας</option>
+      <option>Κοζανης</option>
+      <option>Θασος</option>
+      <option>Σαμοθρακη</option>
+      <option>Σκιαθος</option>
+      <option>Σκοπελος</option>
+      <option>Αλοννησος</option>
+      <option>Σκυρος</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label for="venue-type">Είδος:</label>
+    <select id="venue-type">
+      <option selected disabled>Επιλέξτε είδος</option>
+      <option>Γαμος</option>
+      <option>Βαφτιση</option>
+      <option>Παρτι</option>
+      <option>Συνεδρια</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label for="pro-type">Είδος επαγγελματία:</label>
+    <select id="pro-type">
+      <option selected disabled>Επιλέξτε επαγγελματία</option>
+      <option>Χώρος/Κτήμα</option>
+      <option>Κομμωτήρια</option>
+      <option>Make up artists</option>
+      <option>Nail artists</option>
+      <option>Φωτογράφοι</option>
+      <option>DJs</option>
+      <option>Διακοσμητές</option>
+      <option>Catering</option>
+      <option>Βιντεογράφοι</option>
+      <option>Ζαχαροπλαστεία / Τούρτες</option>
+      <option>Ανθοπωλεία / Ανθοστολισμοί</option>
+      <option>Ενδυματολόγοι / Ράφτες</option>
+      <option>Μπαρ</option>
+      <option>Ενοικίαση εξοπλισμού</option>
+    </select>
+  </div>
+</div>
+
+<!-- Καρουζέλ τοπ χώροι + τοπ συνεργάτες -->
+<section class="carousel-row">
+  <!-- Πρώτο καρουζέλ -->
+  <div class="carousel">
+    <h2>Top χώροι του μήνα</h2>
+    <div class="carousel-track">
+      <div class="carousel-item">Χώρος 1</div>
+      <div class="carousel-item">Χώρος 2</div>
+      <div class="carousel-item">Χώρος 3</div>
+    </div>
+  </div>
+
+  <!-- Δεύτερο καρουζέλ -->
+  <div class="carousel">
+    <h2>Top συνεργάτες του μήνα</h2>
+    <div class="carousel-track">
+      <div class="carousel-item">Συνεργάτης 1</div>
+      <div class="carousel-item">Συνεργάτης 2</div>
+      <div class="carousel-item">Συνεργάτης 3</div>
+    </div>
+  </div>
+</section>
+
+      <!-- Εμπνευστείτε -->
+      <section class="carousel">
+        <h2>Εμπνευστείτε από την Elaia</h2>
+        <div class="carousel-track">
+          <div class="carousel-item">Ιδέα 1</div>
+          <div class="carousel-item">Ιδέα 2</div>
+          <div class="carousel-item">Ιδέα 3</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- JavaScript -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Περιμένει να φορτωθεί το embedded SVG
+    const svgObjects = document.querySelectorAll('.map-container object');
+    svgObjects.forEach(obj => {
+      obj.addEventListener("load", () => {
+        const svgDoc = obj.contentDocument;
+        if (!svgDoc) return;
+
+        const regions = svgDoc.querySelectorAll("[data-name]");
+        regions.forEach(region => {
+          region.style.cursor = "pointer";
+          region.addEventListener("click", () => {
+            regions.forEach(r => r.classList.remove("selected"));
+            region.classList.add("selected");
+            alert("Επέλεξες: " + region.getAttribute("data-name"));
+          });
+        });
+      });
     });
 
-    region.addEventListener("mouseover", () => {
-      region.setAttribute("fill", "#f0f4d7");
-    });
+    // Ενεργοποίηση ενεργού κουμπιού κατηγορίας
+    const categoryButtons = document.querySelectorAll(".menu-btn");
+    const venueTypeInput = document.getElementById("venue-type");
 
-    region.addEventListener("mouseout", () => {
-      const current = region.getAttribute("fill");
-      if (current !== "#7c7f59") {
-        region.setAttribute("fill", "#d9d5c4");
-      }
+    categoryButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        categoryButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // Γράφει το επιλεγμένο κουμπί στη μπάρα
+        venueTypeInput.value = btn.textContent.trim();
+        venueTypeInput.focus();
+
+        // Scroll στη μπάρα φίλτρων
+        const filtersSection = document.querySelector(".search-filters");
+        if (filtersSection) {
+          filtersSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+  });
+
+  // AI Bar functionality
+  async function askAI() {
+    const input = document.getElementById("aiInput").value;
+    const responseBox = document.getElementById("aiResponse");
+    responseBox.innerHTML = "⏳ Περιμένετε...";
+
+    try {
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ΤΟ_ΚΛΕΙΔΙ_ΣΟΥ" // ➤ Βάλε το πραγματικό σου API key εδώ
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: input }]
+        })
+      });
+
+      const data = await res.json();
+      responseBox.innerHTML = data.choices[0].message.content;
+    } catch (error) {
+      responseBox.innerHTML = "❌ Σφάλμα: Δοκιμάστε ξανά.";
+    }
+  }
+
+  document.querySelectorAll('.map-svg').forEach(obj => {
+  obj.addEventListener('load', () => {
+    const svgDoc = obj.contentDocument;
+    if (!svgDoc) return;
+
+    const regions = svgDoc.querySelectorAll('path, polygon, g'); // νομικοί διαχωρισμοί
+    regions.forEach(region => {
+      const name = region.getAttribute('id') || region.getAttribute('data-name');
+      if (!name) return;
+
+      region.style.cursor = 'pointer';
+      region.addEventListener('click', () => {
+        // Εδώ μπορείς να στείλεις το user σε άλλο HTML
+        window.location.href = `destinations/${name.toLowerCase()}.html`;
+      });
+      region.addEventListener('mouseover', () => {
+        region.style.fill = '#f0f4d7';
+      });
+      region.addEventListener('mouseout', () => {
+        region.style.fill = ''; // επανάφερόμενο χρώμα
+      });
     });
   });
 });
