@@ -1,162 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns="http://www.w3.org/2000/svg" 
-     xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="1000" height="1200" viewBox="0 0 1000 1200" 
-     id="greece-map">
-  <style><![CDATA[
-    .region {
-      fill: #e6e6e6;
-      stroke: #999;
-      stroke-width: 1;
-      cursor: pointer;
-    }
-    .region:hover {
-      fill: #a4d3ee;
-    }
-  ]]></style>
-       <!-- Αττική -->
-  <a xlink:href="destinations/Αττική.html">
-    <path id="attiki" class="region" data-name="Αττική"
-      d="M550,430 L560,420 L570,430 L570,440 L560,450 L550,440 Z" />
-  </a>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    width="1000"
+    height="1100"
+    viewBox="0 0 1000 1100"
+    aria-label="Χάρτης Νομών Ελλάδας"
+    role="img">
 
-  <!-- Πελοπόννησος -->
-  <a xlink:href="destinations/Πελοπόννησος.html">
-    <path id="peloponnisos" class="region" data-name="Πελοπόννησος"
-      d="M480,550 L500,530 L520,540 L510,570 L490,570 L480,560 Z" />
-  </a>
+  <title>Χάρτης Νομών Ελλάδας</title>
 
-  <!-- Θεσσαλονίκη -->
-  <a xlink:href="destinations/Θεσσαλονίκη.html">
-    <path id="thessaloniki" class="region" data-name="Θεσσαλονίκη"
-      d="M580,300 L590,290 L600,300 L590,310 Z" />
-  </a>
+  <!-- Παράδειγμα για νομους, μπορείς να προσθέσεις όλους εδώ -->
 
-  <!-- Κρήτη -->
-  <a xlink:href="destinations/Κρήτη.html">
-    <path id="kriti" class="region" data-name="Κρήτη"
-      d="M400,800 L420,790 L440,795 L460,790 L480,800 L460,810 L420,805 Z" />
-  </a>
+  <!-- Αττικής -->
+  <path id="attikis" data-name="Αττικής" fill="#7c7f59" stroke="#555" stroke-width="1"
+    d="M520,700 L560,680 L590,720 L570,740 L530,730 Z" />
 
-       <!-- Κυκλάδες -->
-  <a xlink:href="destinations/Κυκλάδες.html">
-    <path id="kyklades" class="region" data-name="Κυκλάδες"
-      d="M530,580 L540,570 L550,580 L540,590 Z" />
-  </a>
+  <!-- Θεσσαλονίκης -->
+  <path id="thessalonikis" data-name="Θεσσαλονίκης" fill="#a3a773" stroke="#555" stroke-width="1"
+    d="M650,600 L690,620 L680,660 L640,650 Z" />
 
-  <!-- Δωδεκάνησα -->
-  <a xlink:href="destinations/Δωδεκάνησα.html">
-    <path id="dodekanisa" class="region" data-name="Δωδεκάνησα"
-      d="M600,680 L610,670 L620,680 L610,690 Z" />
-  </a>
+  <!-- Πειραιάς (παράδειγμα) -->
+  <path id="peiraios" data-name="Πειραιάς" fill="#9ca763" stroke="#555" stroke-width="1"
+    d="M530,720 L545,710 L550,730 L535,740 Z" />
 
-  <!-- Ιόνια Νησιά -->
-  <a xlink:href="destinations/Ιόνια.html">
-    <path id="ionia" class="region" data-name="Ιόνια Νησιά"
-      d="M400,460 L410,450 L420,460 L410,470 Z" />
-  </a>
+  <!-- Πιερίας -->
+  <path id="pierias" data-name="Πιερίας" fill="#b0b66e" stroke="#555" stroke-width="1"
+    d="M600,600 L630,610 L620,650 L590,640 Z" />
 
-  <!-- Ήπειρος -->
-  <a xlink:href="destinations/Ήπειρος.html">
-    <path id="ipeiros" class="region" data-name="Ήπειρος"
-      d="M420,400 L430,390 L440,400 L430,410 Z" />
-  </a>
+  <!-- Καρδίτσας -->
+  <path id="karditsas" data-name="Καρδίτσας" fill="#8b8e50" stroke="#555" stroke-width="1"
+    d="M580,660 L610,670 L600,700 L570,690 Z" />
 
-       <!-- Στερεά Ελλάδα -->
-  <a xlink:href="destinations/Στερεά.html">
-    <path id="sterea" class="region" data-name="Στερεά Ελλάδα"
-      d="M480,520 L490,510 L500,520 L490,530 Z" />
-  </a>
+  <!-- Ιωαννίνων -->
+  <path id="ioanninon" data-name="Ιωαννίνων" fill="#788153" stroke="#555" stroke-width="1"
+    d="M490,600 L520,620 L510,660 L480,650 Z" />
 
-  <!-- Θεσσαλία -->
-  <a xlink:href="destinations/Θεσσαλία.html">
-    <path id="thessalia" class="region" data-name="Θεσσαλία"
-      d="M500,480 L510,470 L520,480 L510,490 Z" />
-  </a>
+  <!-- Άρτας -->
+  <path id="artas" data-name="Άρτας" fill="#92a168" stroke="#555" stroke-width="1"
+    d="M480,640 L510,650 L500,680 L470,670 Z" />
 
-  <!-- Μακεδονία -->
-  <a xlink:href="destinations/Μακεδονία.html">
-    <path id="makedonia" class="region" data-name="Μακεδονία"
-      d="M530,440 L540,430 L550,440 L540,450 Z" />
-  </a>
+  <!-- Χανίων -->
+  <path id="chanion" data-name="Χανίων" fill="#718347" stroke="#555" stroke-width="1"
+    d="M300,850 L350,840 L340,880 L290,870 Z" />
 
-  <!-- Θράκη -->
-  <a xlink:href="destinations/Θράκη.html">
-    <path id="thraki" class="region" data-name="Θράκη"
-      d="M580,420 L590,410 L600,420 L590,430 Z" />
-  </a>
+  <!-- Ηρακλείου -->
+  <path id="irakleiou" data-name="Ηρακλείου" fill="#9aae7d" stroke="#555" stroke-width="1"
+    d="M350,880 L390,880 L385,920 L340,900 Z" />
 
-       <!-- Χίος -->
-  <a xlink:href="destinations/Χιου.html">
-    <path id="chios" class="region" data-name="Χιου"
-      d="M610,390 L615,385 L620,390 L615,395 Z" />
-  </a>
+  <!-- Ρεθύμνης -->
+  <path id="rethymnis" data-name="Ρεθύμνης" fill="#869b6d" stroke="#555" stroke-width="1"
+    d="M320,870 L360,865 L350,900 L310,890 Z" />
 
-  <!-- Λέσβος -->
-  <a xlink:href="destinations/Λεσβου.html">
-    <path id="lesvos" class="region" data-name="Λεσβου"
-      d="M640,370 L645,365 L650,370 L645,375 Z" />
-  </a>
+  <!-- ... συνέχισε με τους υπόλοιπους νομούς -->
 
-  <!-- Σάμος -->
-  <a xlink:href="destinations/Σαμου.html">
-    <path id="samos" class="region" data-name="Σαμου"
-      d="M620,400 L625,395 L630,400 L625,405 Z" />
-  </a>
-
-  <!-- Λήμνος -->
-  <a xlink:href="destinations/Λημνος.html">
-    <path id="limnos" class="region" data-name="Λημνος"
-      d="M660,350 L665,345 L670,350 L665,355 Z" />
-  </a>
-
-  <!-- Ικαρία -->
-  <a xlink:href="destinations/Ικαρια.html">
-    <path id="ikaria" class="region" data-name="Ικαρια"
-      d="M600,410 L605,405 L610,410 L605,415 Z" />
-  </a>
-
-     <!-- Κυκλάδες -->
-<g id="cyclades" data-name="Κυκλάδες">
-  <path d="M600.1,400.5c1.2,0.8,2.3,1.6,3.5,2.4c-0.3,0.9-0.6,1.9-0.9,2.8c-1.4-0.2-2.7-0.5-4.1-0.7
-           C599.1,403.4,599.6,402,600.1,400.5z"/>
-  <path d="M610.2,405.3c1.1,0.4,2.1,0.8,3.2,1.2c-0.2,1.3-0.4,2.6-0.6,3.9c-1-0.2-2-0.3-3.1-0.5
-           C610,408.4,610.1,406.8,610.2,405.3z"/>
-  <path d="M620.5,410.6c0.8,0.5,1.6,1,2.4,1.5c-0.3,1.2-0.7,2.3-1,3.5c-0.9-0.2-1.9-0.4-2.8-0.6
-           C619.5,413.6,620,412.1,620.5,410.6z"/>
-</g>
-
-     <!-- Δωδεκάνησα -->
-<g id="dodecanese" data-name="Δωδεκάνησα">
-  <path d="M650.1,430.2c1.3,0.6,2.5,1.2,3.8,1.8c-0.4,1.1-0.7,2.2-1.1,3.3c-1.2-0.3-2.3-0.7-3.5-1
-           C649.6,432.9,649.9,431.5,650.1,430.2z"/>
-  <path d="M660.3,436.5c1.2,0.4,2.4,0.7,3.6,1.1c-0.3,1.3-0.6,2.6-0.8,3.9c-1.1-0.2-2.2-0.5-3.3-0.7
-           C660,439.4,660.2,438,660.3,436.5z"/>
-  <path d="M670.6,443.1c1.0,0.3,2.1,0.5,3.1,0.8c-0.2,1.2-0.5,2.5-0.7,3.7c-1-0.1-2-0.3-3.1-0.4
-           C670.2,445.8,670.4,444.4,670.6,443.1z"/>
-</g>
-
-     <path id="kastellorizo" data-name="Καστελλοριζο" d="M1605.1,1320.6l1.4,-1.6l2.3,1.7l-1.1,1.9z" fill="#d9d5c4" stroke="#7c7f59" stroke-width="1"/>
-<path id="patmos" data-name="Πατμος" d="M1508.3,1258.2l2.6,-1.1l0.8,1.5l-1.4,1.2z" fill="#d9d5c4" stroke="#7c7f59" stroke-width="1"/>
-<path id="astypalaia" data-name="Αστυπαλαια" d="M1440.2,1273.4l2.3,-1.8l2.4,0.9l-0.7,2.1l-2.9,0.2z" fill="#d9d5c4" stroke="#7c7f59" stroke-width="1"/>
-<path id="kos" data-name="Κως" d="M1530.9,1290.7l3.2,-1.3l1.5,2.8l-1.4,1.1l-2.6,0.1z" fill="#d9d5c4" stroke="#7c7f59" stroke-width="1"/>
-<path id="karpathos" data-name="Καρπαθος" d="M1575.1,1320.4l2.9,-1.7l1.1,2.6l-1.3,1.4l-2.5,-0.4z" fill="#d9d5c4" stroke="#7c7f59" stroke-width="1"/>
-<path id="rhodes" data-name="Ροδος" d="M1580.2,1338.6l6.7,-3.5l2.1,5.8l-4.9,3.4l-2.9,-1.2z" fill="#d9d5c4" stroke="#7c7f59" stroke-width="1"/>
-<path id="dodecanese-islands" data-name="Λοιπα νησια Δωδεκανησων" d="M1555.5,1315.2l2.3,-1.1l1.6,2.2l-1.8,1.6l-2.1,-1z" fill="#d9d5c4" stroke="#7c7f59" stroke-width="1"/>
-
-     <path id="kerkyra" data-name="Κερκυρας" d="M91.3,422.7l-0.2,1.1l0.5,0.9l1,0.3l0.6-0.8l0.3-1.2l-0.4-0.9l-1-0.3L91.3,422.7z"/>
-<path id="paxoi" data-name="Παξοι" d="M94.1,427.8l-0.3,1.2l0.5,0.8l0.9,0.2l0.7-0.7l0.2-1.2l-0.4-0.8l-1-0.2L94.1,427.8z"/>
-<path id="ithaki" data-name="Ιθακης" d="M96.5,431.2l-0.4,1l0.6,0.8l0.9,0.1l0.6-0.7l0.1-1.1l-0.4-0.9l-1-0.1L96.5,431.2z"/>
-<path id="zakynthos" data-name="Ζακυνθου" d="M99.7,435.4l-0.3,1.3l0.5,0.9l0.9,0.3l0.7-0.8l0.3-1.3l-0.5-0.9l-1-0.3L99.7,435.4z"/>
-<path id="kefalonia" data-name="Κεφαλληνιας" d="M103.4,439.6l-0.4,1.2l0.6,0.8l0.9,0.2l0.7-0.7l0.2-1.2l-0.5-0.9l-1-0.2L103.4,439.6z"/>
-<path id="lefkada" data-name="Λευκαδας" d="M106.7,443.1l-0.3,1.1l0.6,0.9l0.9,0.2l0.7-0.7l0.2-1.2l-0.4-0.9l-1-0.2L106.7,443.1z"/>
-
-     <path id="kithira" data-name="Κυθηρα" d="M109.3,446.7l-0.4,1.2l0.6,0.8l1,0.2l0.7-0.8l0.2-1.2l-0.5-0.8l-1-0.2L109.3,446.7z"/>
-<path id="loipa_ionia" data-name="Λοιπα ιονια νησια" d="M112.6,450.3l-0.3,1.1l0.5,0.9l1,0.2l0.7-0.8l0.3-1.2l-0.5-0.9l-1-0.2L112.6,450.3z"/>
-
-     <path data-name="Κορινθιας" d="M242.3 310.8l-1.2-3.4 1.8-2.9 2.9 1.1 1.5 2.2-.3 3.5-2.1 1.6-2.6-2.1z"/>
-<path data-name="Λακωνιας" d="M238.7 316.2l2.1-2.3 2.6.5 1.4 2.1.1 3.1-2.8 1.2-2.9-2.4-.5-2.2z"/>
-<path data-name="Μεσσηνιας" d="M234.6 318.1l1.6-1.9 2.5.6 1.1 2.3-1.4 2.7-2.8-.3-1.2-1.7.2-1.7z"/>
-<path data-name="Αργολιδας" d="M248.1 308.2l-1.5-2.3 2.7-1.9 2.3 1.6-.4 2.6-2.3 1.5-.8-1.5z"/>
-<path data-name="Αρκαδιας" d="M242.8 313.5l2.6-1.1 2.3 1.7-.5 2.9-3.1 1-2.4-1.9 1.1-2.6z"/>
 </svg>
