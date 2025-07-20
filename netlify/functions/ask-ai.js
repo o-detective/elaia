@@ -19,9 +19,11 @@ export async function handler(event, context) {
 
     const data = await response.json();
     return {
-      statusCode: 200,
-      body: JSON.stringify(data)
-    };
+  statusCode: 200,
+  body: JSON.stringify({
+    reply: data.choices?.[0]?.message?.content || "⚠️ Δεν υπήρξε απάντηση."
+  })
+};
   } catch (error) {
     console.error("AI error:", error);
     return {
