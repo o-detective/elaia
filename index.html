@@ -224,29 +224,8 @@
     </main>
   </div>
 
-  <!-- JavaScript -->
+ <!-- JavaScript -->
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Περιμένει να φορτωθεί το embedded SVG
-    const svgObjects = document.querySelectorAll('.map-container object');
-    svgObjects.forEach(obj => {
-      obj.addEventListener("load", () => {
-        const svgDoc = obj.contentDocument;
-        if (!svgDoc) return;
-
-        const regions = svgDoc.querySelectorAll("[data-name]");
-        regions.forEach(region => {
-          region.style.cursor = "pointer";
-          region.addEventListener("click", () => {
-            regions.forEach(r => r.classList.remove("selected"));
-            region.classList.add("selected");
-            alert("Επέλεξες: " + region.getAttribute("data-name"));
-          });
-        });
-      });
-    });
-
-    <script>
   document.addEventListener("DOMContentLoaded", function () {
     // SVG λειτουργίες
     const svgObjects = document.querySelectorAll('.map-container object');
@@ -316,9 +295,6 @@
       responseBox.innerHTML = "❌ Κάτι πήγε στραβά.";
     }
   }
-</script>
-</body>
-</html>
 </script>
 </body>
 </html>
