@@ -1,10 +1,7 @@
 export default async (req, res) => {
-  const { messages } = req.body;
+  const body = await req.json(); // <--- σημαντικό για Netlify
 
-  if (!messages || !Array.isArray(messages)) {
-    return res.status(400).json({ error: "Μη έγκυρα δεδομένα." });
-  }
-
+  const messages = body.messages;
   const apiKey = process.env.OPENAI_API_KEY;
 
   try {
@@ -21,13 +18,8 @@ export default async (req, res) => {
     });
 
     const data = await aiResponse.json();
-
-    const reply = data.choices?.[0]?.message?.content || "Δεν υπήρξε απάντηση.";
-    return res.status(200).json({
-      choices: [{ message: { content: reply } }]
-    });
-
+    return res.status(200).json(data); // <--- Στέλνουμε ΟΛΟ το response στο frontend
   } catch (error) {
-    return res.status(500).json({ reply: "❌ Παρουσιάστηκε σφάλμα στον server." });
+    return res.status(500).json({ error: "Σφάλμα OpenAI ή σύνδεσης." });
   }
 };
