@@ -1,8 +1,5 @@
-const fetch = require("node-fetch");
-
-exports.handler = async function (event, context) {
-  const { messages } = JSON.parse(event.body);
-
+export default async (req, res) => {
+  const messages = req.body.messages;
   const apiKey = process.env.OPENAI_API_KEY;
 
   try {
@@ -19,16 +16,11 @@ exports.handler = async function (event, context) {
     });
 
     const data = await aiResponse.json();
-    const reply = data.choices?.[0]?.message?.content || "Δεν βρέθηκε απάντηση.";
+    const result = data.choices?.[0]?.message?.content || "Δεν υπήρξε απάντηση.";
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ reply })
-    };
+    return res.status(200).json({ choices: [{ message: { content: result } }] });
+
   } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ reply: "❌ Παρουσιάστηκε σφάλμα." })
-    };
+    return res.status(500).json({ reply: "❌ Παρουσιάστηκε σφάλμα." });
   }
 };
