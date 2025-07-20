@@ -224,7 +224,7 @@
     </main>
   </div>
 
- <!-- JavaScript -->
+<!-- JavaScript -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     // SVG λειτουργίες
@@ -247,7 +247,7 @@
     });
   });
 
-  // ➤ ΝΕΟΣ ΚΩΔΙΚΑΣ ΓΙΑ POPUP AI
+  // AI popup λειτουργία
   let conversationHistory = [];
 
   function openPopup() {
@@ -288,13 +288,14 @@
       });
 
       const data = await res.json();
-      const reply = data.choices?.[0]?.message?.content || "⚠️ Δεν υπήρξε απάντηση.";
+
+      const reply = data?.choices?.[0]?.message?.content || "⚠️ Δεν υπήρξε απάντηση.";
       conversationHistory.push({ role: "assistant", content: reply });
       responseBox.innerHTML = reply;
+
     } catch (err) {
+      console.error("AI error:", err);
       responseBox.innerHTML = "❌ Κάτι πήγε στραβά.";
     }
   }
 </script>
-</body>
-</html>
