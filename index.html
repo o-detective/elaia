@@ -41,12 +41,35 @@
         Επιλέξτε απ’ τον χάρτη
       </div>
 
-      <!-- AI Bar -->
-      <section class="ai-bar" style="margin-top: 20px;">
-        <textarea id="aiInput" placeholder="Π.χ. Πού μπορώ να παντρευτώ σε παραλία στη Νάξο;"></textarea>
-        <button onclick="askAI()">Αποστολή</button>
-        <div id="aiResponse" style="margin-top: 10px;"></div>
-      </section>
+     <!-- AI Bar -->
+<section class="ai-bar" style="margin-top: 20px;">
+  <textarea id="aiInput" placeholder="Π.χ. Πού μπορώ να παντρευτώ σε νησί με θέα;"></textarea>
+  <button onclick="openPopup()">Αποστολή</button>
+</section>
+
+<!-- AI Popup -->
+<div id="aiPopup" style="
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #7d8053;
+  color: gold;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+">
+  <div id="aiResponse" style="min-height: 100px;"></div>
+  <textarea id="popupInput" placeholder="Συνέχισε τη συζήτηση..." style="width: 100%; margin-top: 10px;"></textarea>
+  <div style="margin-top: 10px; text-align: right;">
+    <button onclick="continueChat()">Αποστολή</button>
+    <button onclick="closePopup()">Κλείσιμο</button>
+  </div>
+</div>
 
       <div class="search-filters">
   <div class="filter-group">
@@ -202,47 +225,100 @@
   </div>
 
   <!-- JavaScript -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Περιμένει να φορτωθεί το embedded SVG
-      const svgObjects = document.querySelectorAll('.map-container object');
-      svgObjects.forEach(obj => {
-        obj.addEventListener("load", () => {
-          const svgDoc = obj.contentDocument;
-          if (!svgDoc) return;
-async function askAI() {
-  const input = document.getElementById("aiInput").value;
-  const responseBox = document.getElementById("aiResponse");
-  responseBox.innerHTML = "⏳ Περιμένετε...";
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Περιμένει να φορτωθεί το embedded SVG
+    const svgObjects = document.querySelectorAll('.map-container object');
+    svgObjects.forEach(obj => {
+      obj.addEventListener("load", () => {
+        const svgDoc = obj.contentDocument;
+        if (!svgDoc) return;
 
-  try {
-    const res = await fetch("/.netlify/functions/ask-ai", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ input })
-    });
-
-    const data = await res.json();
-    responseBox.innerHTML = data.reply;
-  } catch (error) {
-    responseBox.innerHTML = "❌ Σφάλμα: Δοκιμάστε ξανά.";
-  }
-}
-          const regions = svgDoc.querySelectorAll("[data-name]");
-          regions.forEach(region => {
-            region.style.cursor = "pointer";
-            region.addEventListener("click", () => {
-              regions.forEach(r => r.classList.remove("selected"));
-              region.classList.add("selected");
-              alert("Επέλεξες: " + region.getAttribute("data-name"));
-            });
+        const regions = svgDoc.querySelectorAll("[data-name]");
+        regions.forEach(region => {
+          region.style.cursor = "pointer";
+          region.addEventListener("click", () => {
+            regions.forEach(r => r.classList.remove("selected"));
+            region.classList.add("selected");
+            alert("Επέλεξες: " + region.getAttribute("data-name"));
           });
         });
       });
     });
 
-    // AI Bar functionality
-   
-  </script>
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // SVG λειτουργίες
+    const svgObjects = document.querySelectorAll('.map-container object');
+    svgObjects.forEach(obj => {
+      obj.addEventListener("load", () => {
+        const svgDoc = obj.contentDocument;
+        if (!svgDoc) return;
+
+        const regions = svgDoc.querySelectorAll("[data-name]");
+        regions.forEach(region => {
+          region.style.cursor = "pointer";
+          region.addEventListener("click", () => {
+            regions.forEach(r => r.classList.remove("selected"));
+            region.classList.add("selected");
+            alert("Επέλεξες: " + region.getAttribute("data-name"));
+          });
+        });
+      });
+    });
+  });
+
+  // ➤ ΝΕΟΣ ΚΩΔΙΚΑΣ ΓΙΑ POPUP AI
+  let conversationHistory = [];
+
+  function openPopup() {
+    const input = document.getElementById("aiInput").value;
+    if (!input.trim()) return;
+
+    conversationHistory = [{ role: "user", content: input }];
+    document.getElementById("aiPopup").style.display = "block";
+    document.getElementById("popupInput").value = "";
+
+    sendToAI(conversationHistory);
+  }
+
+  function closePopup() {
+    document.getElementById("aiPopup").style.display = "none";
+    document.getElementById("aiResponse").innerHTML = "";
+    conversationHistory = [];
+  }
+
+  function continueChat() {
+    const newInput = document.getElementById("popupInput").value;
+    if (!newInput.trim()) return;
+
+    conversationHistory.push({ role: "user", content: newInput });
+    document.getElementById("popupInput").value = "";
+    sendToAI(conversationHistory);
+  }
+
+  async function sendToAI(messages) {
+    const responseBox = document.getElementById("aiResponse");
+    responseBox.innerHTML = "⏳ Παρακαλώ περιμένετε...";
+
+    try {
+      const res = await fetch("/.netlify/functions/ask-ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages })
+      });
+
+      const data = await res.json();
+      const reply = data.choices?.[0]?.message?.content || "⚠️ Δεν υπήρξε απάντηση.";
+      conversationHistory.push({ role: "assistant", content: reply });
+      responseBox.innerHTML = reply;
+    } catch (err) {
+      responseBox.innerHTML = "❌ Κάτι πήγε στραβά.";
+    }
+  }
+</script>
+</body>
+</html>
+</script>
 </body>
 </html>
