@@ -1,18 +1,15 @@
-export default async (req, res) => {
+export async function handler(event, context) {
   try {
-    const body = await req.json(); // Netlify-style parsing
+    const body = JSON.parse(event.body);
     const messages = body.messages;
 
     const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) {
-      return res.status(500).json({ error: "API key not set in environment variables." });
-    }
 
-    const aiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
+        Authorization: `Bearer ${apiKey}`
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
@@ -20,24 +17,16 @@ export default async (req, res) => {
       })
     });
 
-    const data = await aiResponse.json();
-
-    if (!data.choices || !data.choices[0]?.message?.content) {
-      return res.status(500).json({ error: "Η απάντηση της OpenAI ήταν άδεια." });
-    }
-
-    return res.status(200).json({
-      choices: [
-        {
-          message: {
-            content: data.choices[0].message.content
-          }
-        }
-      ]
-    });
-
+    const data = await response.json();
+    return {
+      statusCode: 200,
+      body: JSON.stringify(data)
+    };
   } catch (error) {
-    console.error("Σφάλμα AI function:", error);
-    return res.status(500).json({ error: "Σφάλμα OpenAI ή δικτύου." });
+    console.error("AI error:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Κάτι πήγε στραβά στον server." })
+    };
   }
-};
+}
