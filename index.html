@@ -289,7 +289,7 @@
 
       const data = await res.json();
 
-      const reply = data?.choices?.[0]?.message?.content || "⚠️ Δεν υπήρξε απάντηση.";
+      const reply = data?.reply || "⚠️ Δεν υπήρξε απάντηση.";
       conversationHistory.push({ role: "assistant", content: reply });
       responseBox.innerHTML = reply;
 
