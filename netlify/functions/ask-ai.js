@@ -1,10 +1,11 @@
-export default async (req, res) => {
-  const input = req.body.input;
+const fetch = require("node-fetch");
 
-  const apiKey = process.env.OPENAI_API_KEY;
-
+exports.handler = async function (event, context) {
   try {
-    const aiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
+    const { messages } = JSON.parse(event.body);
+    const apiKey = process.env.OPENAI_API_KEY;
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -12,16 +13,22 @@ export default async (req, res) => {
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: input }]
+        messages: messages
       })
     });
 
-    const data = await aiResponse.json();
-    const result = data.choices?.[0]?.message?.content || "Δεν βρέθηκε απάντηση.";
+    const data = await response.json();
+    const reply = data.choices?.[0]?.message?.content || "⚠️ Δεν υπήρξε απάντηση.";
 
-    return res.status(200).json({ reply: result });
-
-  } catch (error) {
-    return res.status(500).json({ reply: "❌ Παρουσιάστηκε σφάλμα." });
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ choices: [{ message: { content: reply } }] })
+    };
+  } catch (err) {
+    console.error("AI ERROR:", err);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "AI server error" })
+    };
   }
 };
