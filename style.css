@@ -235,46 +235,27 @@ body {
 
 .carousel h2 {
   margin-bottom: 10px;
+  text-align: left;
+  color: #7d8053;
 }
 
+/* Ο σταθερός container χωρίς scroll */
 .carousel-track {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 20px;
-  overflow-x: auto;
-  max-width: 100%;
+  width: 100%;
   box-sizing: border-box;
-  scroll-behavior: smooth;
+  overflow: hidden;
 }
 
+/* Ενιαίο στυλ για όλα τα carousel items */
 .carousel-item {
-  min-width: 200px;
+  width: 32%;
+  max-width: 300px;
   background-color: #dedbd4;
   padding: 20px;
-  border-radius: 8px;
-  flex-shrink: 0;
-  text-align: center;
-}
-
-.carousel-item img {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 6px;
-  margin-bottom: 10px;
-}
-
-.carousel-row {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  margin-top: 40px;
-}
-
-.carousel-item {
-  min-width: 250px;
-  padding: 30px;
-  font-size: 18px;
-  background-color: #dedbd4;
   border-radius: 8px;
   flex-shrink: 0;
   text-align: center;
@@ -282,23 +263,33 @@ body {
   color: inherit;
   text-decoration: none;
   transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
-.carousel:last-of-type .carousel-item img {
-  height: 180px;
-}
-
-.carousel-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  height: 100%;
+.carousel-item img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
 }
 
 .carousel-item:hover {
   transform: scale(1.02);
-  transition: transform 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive – 1 ή 2 κουτιά σε μικρές οθόνες */
+@media (max-width: 1024px) {
+  .carousel-item {
+    width: 48%;
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel-item {
+    width: 100%;
+  }
 }
 
 /* ===================== */
