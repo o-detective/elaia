@@ -108,8 +108,7 @@
 </head>
 <body>
 
-  <h2>Αποτελέσματα Αναζήτησης</h2>
-  <div class="highlight-title" id="dynamicTitle">Αναζήτηση...</div>
+  <h2 class="highlight-title" id="dynamicTitle">Αναζήτηση...</h2>
 
   <div id="adCarousel" class="carousel"></div>
 
@@ -180,6 +179,12 @@
           `;
         });
     }
+
+    // Δυναμικός τίτλος
+const dynamicTitle = document.getElementById("dynamicTitle");
+if (region && event && type) {
+  dynamicTitle.innerText = `${type} για ${event.toLowerCase()} στην ${region}`;
+}
   </script>
 
 </body>
