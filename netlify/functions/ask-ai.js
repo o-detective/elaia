@@ -3,36 +3,31 @@ export async function handler(event, context) {
     const body = JSON.parse(event.body);
     const messages = body.messages;
 
-    const apiKey = process.env.OPENAI_API_KEY;
+    const groqKey = process.env.GROQ_API_KEY;
 
-    console.log("👉 Ερώτηση που λάβαμε:", JSON.stringify(messages));
-    console.log("👉 Έχουμε API Key;", !!apiKey);
-
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`
+        Authorization: `Bearer ${groqKey}`
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: messages
+        model: "llama3-70b-8192",
+        messages: messages,
+        temperature: 0.7
       })
     });
 
     const data = await response.json();
-
-    console.log("✅ Απάντηση από OpenAI:", JSON.stringify(data));
-
     return {
       statusCode: 200,
       body: JSON.stringify(data)
     };
   } catch (error) {
-    console.error("❌ AI error:", error);
+    console.error("Groq error:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Κάτι πήγε στραβά στον server." })
+      body: JSON.stringify({ error: "Σφάλμα σύνδεσης με Groq API." })
     };
   }
 }
