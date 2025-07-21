@@ -235,43 +235,42 @@ body {
 
 .carousel h2 {
   margin-bottom: 10px;
-  text-align: left;
-  color: #7d8053;
 }
 
-/* Ο σταθερός container χωρίς scroll */
 .carousel-track {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 20px;
-  width: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
+  justify-content: center;
 }
 
-/* Ενιαίο στυλ για όλα τα carousel items */
 .carousel-item {
-  width: 32%;
-  max-width: 300px;
   background-color: #dedbd4;
   padding: 20px;
   border-radius: 8px;
-  flex-shrink: 0;
   text-align: center;
   cursor: pointer;
   color: inherit;
   text-decoration: none;
   transition: all 0.3s ease;
+  flex: 0 0 30%; /* Τρεις ανά σειρά */
+  max-width: 30%;
   box-sizing: border-box;
 }
 
 .carousel-item img {
   width: 100%;
-  height: 160px;
+  height: 140px;
   object-fit: cover;
   border-radius: 6px;
   margin-bottom: 10px;
+}
+
+.carousel-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
 }
 
 .carousel-item:hover {
@@ -279,16 +278,19 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Responsive – 1 ή 2 κουτιά σε μικρές οθόνες */
+/* Responsive: για tablet */
 @media (max-width: 1024px) {
   .carousel-item {
-    width: 48%;
+    flex: 0 0 45%;
+    max-width: 45%;
   }
 }
 
+/* Responsive: για κινητά */
 @media (max-width: 600px) {
   .carousel-item {
-    width: 100%;
+    flex: 0 0 90%;
+    max-width: 90%;
   }
 }
 
