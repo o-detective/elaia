@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Αποτελέσματα Αναζήτησης</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #fefcf9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .results-container {
+      border: 4px solid #7d8053;
+      background-color: #fdfdf6;
+      padding: 20px;
+      border-radius: 16px;
+    }
+
+    .client-card {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      padding: 12px 0;
+    }
+
+    .client-card img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+
+    .client-info {
+      flex-grow: 1;
+    }
+
+    .ad-badge {
+      background-color: gold;
+      color: #333;
+      padding: 2px 6px;
+      font-size: 12px;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+
+    .view-profile {
+      background-color: #7d8053;
+      color: white;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .view-profile:hover {
+      background-color: #656c45;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Αποτελέσματα Αναζήτησης</h2>
+
+  <div class="results-container" id="resultsBox">
+    <!-- Τα αποτελέσματα θα μπουν εδώ -->
+  </div>
+
+  <script>
+    // Mock δεδομένα πελατών
+    const clients = [
+      { name: "Κτήμα Ελιά", region: "Κερκυρας", event: "Γαμος", type: "Χώρος/Κτήμα", image: "https://via.placeholder.com/60", ad: true },
+      { name: "Κτήμα Άλσος", region: "Κερκυρας", event: "Γαμος", type: "Χώρος/Κτήμα", image: "https://via.placeholder.com/60", ad: false },
+      { name: "Κτήμα Μελίντα", region: "Αττικης", event: "Γαμος", type: "Χώρος/Κτήμα", image: "https://via.placeholder.com/60", ad: true }
+    ];
+
+    // Διαβάζουμε τα φίλτρα από το URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const region = urlParams.get("region");
+    const event = urlParams.get("event");
+    const type = urlParams.get("type");
+
+    const filtered = clients.filter(c =>
+      c.region === region &&
+      c.event === event &&
+      c.type === type
+    );
+
+    const resultsBox = document.getElementById("resultsBox");
+
+    if (filtered.length === 0) {
+      resultsBox.innerHTML = "<p>Δεν βρέθηκαν αποτελέσματα για τα επιλεγμένα φίλτρα.</p>";
+    } else {
+      // Οι διαφημιζόμενοι πρώτοι
+      filtered
+        .sort((a, b) => (b.ad ? 1 : 0) - (a.ad ? 1 : 0))
+        .forEach(c => {
+          resultsBox.innerHTML += `
+            <div class="client-card">
+              <img src="${c.image}" alt="Πελάτης">
+              <div class="client-info">
+                <strong>${c.name}</strong>
+                ${c.ad ? '<span class="ad-badge">Διαφημιζόμενος</span>' : ''}
+              </div>
+              <button class="view-profile" onclick="alert('Μεταφορά στο προφίλ του ${c.name}')">Προβολή</button>
+            </div>
+          `;
+        });
+    }
+  </script>
+
+</body>
+</html>
