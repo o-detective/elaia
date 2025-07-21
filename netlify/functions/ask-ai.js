@@ -2,7 +2,6 @@ export async function handler(event, context) {
   try {
     const body = JSON.parse(event.body);
     const messages = body.messages;
-
     const apiKey = process.env.OPENAI_API_KEY;
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -18,12 +17,12 @@ export async function handler(event, context) {
     });
 
     const data = await response.json();
+    const reply = data.choices?.[0]?.message?.content;
+
     return {
-  statusCode: 200,
-  body: JSON.stringify({
-    reply: data.choices?.[0]?.message?.content || "⚠️ Δεν υπήρξε απάντηση."
-  })
-};
+      statusCode: 200,
+      body: JSON.stringify({ reply }) // Εδώ, επιστρέφουμε ΜΟΝΟ το reply
+    };
   } catch (error) {
     console.error("AI error:", error);
     return {
