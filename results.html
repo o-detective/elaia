@@ -7,12 +7,22 @@
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
-      background-color: #fdfdf6;
+      background-color: #fefaf4;
       margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .border-container {
+      border: 16px solid #7d8053;
       padding: 40px;
-      border: 14px solid #7d8053; /* πιο παχιά λαδί μπορντούρα */
+      max-width: 1100px;
+      width: 100%;
+      background-color: #fffdf9;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.08);
       box-sizing: border-box;
-      min-height: 100vh;
     }
 
     h2 {
@@ -107,17 +117,17 @@
   </style>
 </head>
 <body>
+  <div class="border-container">
+    <h2 class="highlight-title" id="dynamicTitle">Αναζήτηση...</h2>
 
-  <h2 class="highlight-title" id="dynamicTitle">Αναζήτηση...</h2>
+    <div id="adCarousel" class="carousel"></div>
 
-  <div id="adCarousel" class="carousel"></div>
-
-  <div class="results-container" id="resultsBox">
-    <!-- Τα αποτελέσματα θα μπουν εδώ -->
+    <div class="results-container" id="resultsBox">
+      <!-- Τα αποτελέσματα θα μπουν εδώ -->
+    </div>
   </div>
 
   <script>
-    // Mock δεδομένα πελατών
     const clients = [
       { name: "Κτήμα Ελιά", region: "Κερκυρας", event: "Γαμος", type: "Χώρος/Κτήμα", image: "https://via.placeholder.com/60", ad: true },
       { name: "Κτήμα Άλσος", region: "Κερκυρας", event: "Γαμος", type: "Χώρος/Κτήμα", image: "https://via.placeholder.com/60", ad: false },
@@ -125,26 +135,22 @@
       { name: "The Bridal Touch", region: "Κερκυρας", event: "Γαμος", type: "Make up artists", image: "https://via.placeholder.com/60", ad: true }
     ];
 
-    // Διαβάζουμε τα φίλτρα από το URL
     const urlParams = new URLSearchParams(window.location.search);
     const region = urlParams.get("region");
     const event = urlParams.get("event");
     const type = urlParams.get("type");
 
-    // Δυναμικός τίτλος
     const titleBox = document.getElementById("dynamicTitle");
     titleBox.textContent = `${type || 'Επαγγελματίες'} για ${event || 'εκδηλώσεις'} στην ${region || 'Ελλάδα'}`;
 
     const resultsBox = document.getElementById("resultsBox");
 
-    // Φιλτράρισμα
     const filtered = clients.filter(c =>
       c.region === region &&
       c.event === event &&
       c.type === type
     );
 
-    // Καρουζέλ διαφημιζόμενων (αν υπάρχουν)
     const ads = filtered.filter(c => c.ad);
     const carousel = document.getElementById("adCarousel");
 
@@ -160,7 +166,6 @@
       });
     }
 
-    // Εμφάνιση αποτελεσμάτων
     if (filtered.length === 0) {
       resultsBox.innerHTML = `<p class="no-results">Δεν βρέθηκαν αποτελέσματα για τα επιλεγμένα φίλτρα.</p>`;
     } else {
@@ -180,12 +185,11 @@
         });
     }
 
-    // Δυναμικός τίτλος
-const dynamicTitle = document.getElementById("dynamicTitle");
-if (region && event && type) {
-  dynamicTitle.innerText = `${type} για ${event.toLowerCase()} στην ${region}`;
-}
+    // Τίτλος fallback
+    const dynamicTitle = document.getElementById("dynamicTitle");
+    if (region && event && type) {
+      dynamicTitle.innerText = `${type} για ${event.toLowerCase()} στην ${region}`;
+    }
   </script>
-
 </body>
 </html>
