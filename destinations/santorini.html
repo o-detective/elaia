@@ -11,15 +11,18 @@
       margin: 0;
       padding: 0;
     }
+
     .frame {
       border: 8px solid #7d8053;
       margin: 30px;
       padding: 20px;
     }
+
     h1 {
       text-align: center;
       color: #7d8053;
     }
+
     .gallery {
       display: flex;
       flex-wrap: wrap;
@@ -27,12 +30,20 @@
       justify-content: center;
       margin-top: 20px;
     }
+
     .gallery img {
       width: 300px;
       height: auto;
       border-radius: 8px;
       box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.2s;
     }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+
     .description {
       max-width: 900px;
       margin: 20px auto;
@@ -41,20 +52,70 @@
       color: #333;
       padding: 10px;
     }
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .popup-overlay img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 0 20px black;
+    }
+
+    .button-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .button-container a {
+      background-color: #7d8053;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-family: 'Georgia', serif;
+    }
+
+    .button-container a:hover {
+      background-color: #656c45;
+    }
   </style>
 </head>
 <body>
   <div class="frame">
     <h1>Σαντορίνη</h1>
+    
     <div class="description" id="description">
       <!-- Περιγραφή θα φορτωθεί από JSON -->
     </div>
+    
     <div class="gallery" id="gallery">
       <!-- Φωτογραφίες θα φορτωθούν από JSON -->
     </div>
+
+    <div class="button-container">
+      <a href="../destinations/santorini-partners.html">Δείτε συνεργάτες μας στη Σαντορίνη</a>
+    </div>
+  </div>
+
+  <!-- Popup μεγέθυνσης -->
+  <div class="popup-overlay" id="popup">
+    <img id="popup-img" src="" alt="Μεγέθυνση">
   </div>
 
   <script>
+    // Φόρτωση περιγραφής & εικόνων
     fetch('../json/santorini.json')
       .then(response => response.json())
       .then(data => {
@@ -67,6 +128,21 @@
           gallery.appendChild(image);
         });
       });
+
+    // Popup μεγέθυνσης εικόνας
+    const popup = document.getElementById("popup");
+    const popupImg = document.getElementById("popup-img");
+
+    document.getElementById('gallery').addEventListener('click', function(e) {
+      if (e.target.tagName === 'IMG') {
+        popupImg.src = e.target.src;
+        popup.style.display = 'flex';
+      }
+    });
+
+    popup.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
   </script>
 </body>
 </html>
