@@ -5,6 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Elaia - Εκδηλώσεις</title>
   <link rel="stylesheet" href="style.css"/>
+  <style>
+  .ai-bar textarea,
+  #popupInput,
+  #aiResponse {
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    color: #fffbe0;
+    background-color: #5e6542;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .ai-bar button,
+  #aiPopup button {
+    font-size: 16px;
+    font-family: 'Georgia', serif;
+    background-color: #a8b864;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  #aiResponse {
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+  }
+</style>
 </head>
 <body>
   <div class="top-bar">
@@ -56,14 +87,17 @@
   transform: translate(-50%, -50%);
   background: #7d8053;
   color: gold;
-  padding: 20px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 400px;
+  padding: 30px;
+  border-radius: 16px;
+  width: 95%;
+  max-width: 700px;
+  min-height: 300px;
+  font-size: 18px;
+  font-family: 'Georgia', serif;
   z-index: 9999;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
 ">
-  <div id="aiResponse" style="min-height: 100px;"></div>
+  <div id="aiResponse" style="min-height: 120px;"></div>
   <textarea id="popupInput" placeholder="Συνέχισε τη συζήτηση..." style="width: 100%; margin-top: 10px;"></textarea>
   <div style="margin-top: 10px; text-align: right;">
     <button onclick="continueChat()">Αποστολή</button>
