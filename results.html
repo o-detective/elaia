@@ -6,20 +6,57 @@
   <title>Αποτελέσματα Αναζήτησης</title>
   <style>
     body {
-  font-family: "Segoe UI", sans-serif;
-  background-color: #fdfdf6;
-  margin: 0;
-  padding: 0;
-  border: 10px solid #7d8053; /* παχιά λαδί μπορντούρα */
-  box-sizing: border-box;
-  height: 100vh;
-}
+      font-family: "Segoe UI", sans-serif;
+      background-color: #fdfdf6;
+      margin: 0;
+      padding: 40px;
+      border: 14px solid #7d8053; /* πιο παχιά λαδί μπορντούρα */
+      box-sizing: border-box;
+      min-height: 100vh;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .highlight-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: #7d8053;
+      margin-bottom: 30px;
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+
+    .carousel-item {
+      min-width: 200px;
+      background-color: #fff;
+      border: 2px solid gold;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .carousel-item img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
 
     .results-container {
-      border: 4px solid #7d8053;
       background-color: #fdfdf6;
-      padding: 20px;
-      border-radius: 16px;
+      padding: 10px;
+      border-radius: 10px;
     }
 
     .client-card {
@@ -61,11 +98,20 @@
     .view-profile:hover {
       background-color: #656c45;
     }
+
+    .no-results {
+      text-align: center;
+      color: #999;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
 
   <h2>Αποτελέσματα Αναζήτησης</h2>
+  <div class="highlight-title" id="dynamicTitle">Αναζήτηση...</div>
+
+  <div id="adCarousel" class="carousel"></div>
 
   <div class="results-container" id="resultsBox">
     <!-- Τα αποτελέσματα θα μπουν εδώ -->
@@ -76,7 +122,8 @@
     const clients = [
       { name: "Κτήμα Ελιά", region: "Κερκυρας", event: "Γαμος", type: "Χώρος/Κτήμα", image: "https://via.placeholder.com/60", ad: true },
       { name: "Κτήμα Άλσος", region: "Κερκυρας", event: "Γαμος", type: "Χώρος/Κτήμα", image: "https://via.placeholder.com/60", ad: false },
-      { name: "Κτήμα Μελίντα", region: "Αττικης", event: "Γαμος", type: "Χώρος/Κτήμα", image: "https://via.placeholder.com/60", ad: true }
+      { name: "Κτήμα Μελίντα", region: "Αττικης", event: "Γαμος", type: "Χώρος/Κτήμα", image: "https://via.placeholder.com/60", ad: true },
+      { name: "The Bridal Touch", region: "Κερκυρας", event: "Γαμος", type: "Make up artists", image: "https://via.placeholder.com/60", ad: true }
     ];
 
     // Διαβάζουμε τα φίλτρα από το URL
@@ -85,18 +132,39 @@
     const event = urlParams.get("event");
     const type = urlParams.get("type");
 
+    // Δυναμικός τίτλος
+    const titleBox = document.getElementById("dynamicTitle");
+    titleBox.textContent = `${type || 'Επαγγελματίες'} για ${event || 'εκδηλώσεις'} στην ${region || 'Ελλάδα'}`;
+
+    const resultsBox = document.getElementById("resultsBox");
+
+    // Φιλτράρισμα
     const filtered = clients.filter(c =>
       c.region === region &&
       c.event === event &&
       c.type === type
     );
 
-    const resultsBox = document.getElementById("resultsBox");
+    // Καρουζέλ διαφημιζόμενων (αν υπάρχουν)
+    const ads = filtered.filter(c => c.ad);
+    const carousel = document.getElementById("adCarousel");
 
+    if (ads.length > 0) {
+      ads.slice(0, 3).forEach(c => {
+        carousel.innerHTML += `
+          <div class="carousel-item">
+            <img src="${c.image}" alt="${c.name}">
+            <div><strong>${c.name}</strong></div>
+            <small>${c.type}</small>
+          </div>
+        `;
+      });
+    }
+
+    // Εμφάνιση αποτελεσμάτων
     if (filtered.length === 0) {
-      resultsBox.innerHTML = "<p>Δεν βρέθηκαν αποτελέσματα για τα επιλεγμένα φίλτρα.</p>";
+      resultsBox.innerHTML = `<p class="no-results">Δεν βρέθηκαν αποτελέσματα για τα επιλεγμένα φίλτρα.</p>`;
     } else {
-      // Οι διαφημιζόμενοι πρώτοι
       filtered
         .sort((a, b) => (b.ad ? 1 : 0) - (a.ad ? 1 : 0))
         .forEach(c => {
