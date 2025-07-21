@@ -35,6 +35,28 @@
     margin-bottom: 10px;
     white-space: pre-wrap;
   }
+
+  /* 👇 Εδώ προσθέτεις το σωστό popup στυλ */
+  #aiPopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #7d8053;
+    color: gold;
+    padding: 30px;
+    border-radius: 16px;
+    width: 95%;
+    max-width: 700px;
+    min-height: 300px;
+    font-size: 18px;
+    font-family: 'Georgia', serif;
+    z-index: 9999;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    overflow-y: auto;
+    max-height: 90vh;
+  }
 </style>
 </head>
 <body>
