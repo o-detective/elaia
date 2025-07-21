@@ -277,25 +277,44 @@
   }
 
   async function sendToAI(messages) {
-    const responseBox = document.getElementById("aiResponse");
-    responseBox.innerHTML = "⏳ Παρακαλώ περιμένετε...";
+  const responseBox = document.getElementById("aiResponse");
 
-    try {
-      const res = await fetch("/.netlify/functions/ask-ai", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages })
-      });
-
-      const data = await res.json();
-
-      const reply = data?.choices?.[0]?.message?.content || "⚠️ Δεν υπήρξε απάντηση.";
-      conversationHistory.push({ role: "assistant", content: reply });
-      responseBox.innerHTML = reply;
-
-    } catch (err) {
-      console.error("AI error:", err);
-      responseBox.innerHTML = "❌ Κάτι πήγε στραβά.";
-    }
+  // Αν είναι η πρώτη ερώτηση, πρόσθεσε system prompt
+  if (!messages.find(m => m.role === "system")) {
+    messages.unshift({
+      role: "system",
+      content: "Απάντα πάντα με φυσική, ζεστή και ανθρώπινη ελληνική γλώσσα, σαν να είσαι σύμβουλος που βοηθάει ζευγάρια να οργανώσουν την τέλεια εκδήλωση στην Ελλάδα. Απόφυγε αγγλικές λέξεις και απάντα απλά και κατανοητά."
+    });
   }
+
+  // Δείξε τι έγραψε ο χρήστης
+  const lastUserMessage = messages[messages.length - 1].content;
+  responseBox.innerHTML += `<div><strong>Εσύ:</strong> ${lastUserMessage}</div>`;
+
+  // Δείξε ένδειξη αναμονής
+  responseBox.innerHTML += `<div><em>Η Elaia σκέφτεται... ⏳</em></div>`;
+
+  try {
+    const res = await fetch("/.netlify/functions/ask-ai", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages })
+    });
+
+    const data = await res.json();
+    const reply = data?.reply || data?.choices?.[0]?.message?.content || "⚠️ Δεν υπήρξε απάντηση.";
+
+    conversationHistory.push({ role: "assistant", content: reply });
+
+    // Καθαρισμός ένδειξης αναμονής
+    const tempWait = responseBox.querySelector("em");
+    if (tempWait) tempWait.remove();
+
+    // Εμφάνιση απάντησης
+    responseBox.innerHTML += `<div><strong>Elaia:</strong> ${reply}</div>`;
+  } catch (err) {
+    console.error("AI error:", err);
+    responseBox.innerHTML += `<div><strong>Σφάλμα:</strong> ❌ Κάτι πήγε στραβά.</div>`;
+  }
+}
 </script>
