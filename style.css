@@ -276,11 +276,17 @@ body {
   color: inherit;
 }
 
-/* Τελικό καρουζέλ μεγαλύτερο */
-.carousel:last-of-type .carousel-item {
+.carousel-item {
   min-width: 250px;
   padding: 30px;
   font-size: 18px;
+  background-color: #dedbd4;
+  border-radius: 8px;
+  flex-shrink: 0;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .carousel:last-of-type .carousel-item img {
