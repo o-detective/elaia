@@ -16,6 +16,7 @@
       border: 8px solid #7d8053;
       margin: 30px;
       padding: 20px;
+      border-radius: 20px;
     }
 
     h1 {
@@ -32,16 +33,16 @@
     }
 
     .gallery img {
-      width: 300px;
+      width: 280px;
       height: auto;
       border-radius: 8px;
       box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.2s ease;
     }
 
     .gallery img:hover {
-      transform: scale(1.03);
+      transform: scale(1.05);
     }
 
     .description {
@@ -53,23 +54,32 @@
       padding: 10px;
     }
 
-    .popup-overlay {
-      display: none;
+    .popup {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
       z-index: 9999;
+      display: none;
+      border-radius: 10px;
     }
 
-    .popup-overlay img {
+    .popup img {
       max-width: 90vw;
-      max-height: 90vh;
-      border-radius: 10px;
-      box-shadow: 0 0 20px black;
+      max-height: 80vh;
+    }
+
+    .popup-close {
+      margin-top: 10px;
+      background: #7d8053;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
     }
 
     .button-container {
@@ -78,71 +88,57 @@
     }
 
     .button-container a {
+      text-decoration: none;
       background-color: #7d8053;
       color: white;
-      padding: 12px 24px;
+      padding: 12px 20px;
       border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      font-family: 'Georgia', serif;
-    }
-
-    .button-container a:hover {
-      background-color: #656c45;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
   <div class="frame">
     <h1>Σαντορίνη</h1>
-    
     <div class="description" id="description">
-      <!-- Περιγραφή θα φορτωθεί από JSON -->
+      Η Σαντορίνη είναι ένα μαγευτικό νησί των Κυκλάδων, γνωστό για τα ειδυλλιακά της τοπία, τους εντυπωσιακούς τρούλους, την αρχιτεκτονική και τα μοναδικά ηλιοβασιλέματα. Αποτελεί έναν από τους πιο ρομαντικούς προορισμούς γάμου στον κόσμο.
     </div>
-    
     <div class="gallery" id="gallery">
-      <!-- Φωτογραφίες θα φορτωθούν από JSON -->
+      <!-- Εικόνες -->
+      <img src="../images/Santorini1.JPG" alt="Santorini 1">
+      <img src="../images/santorini2.jpg" alt="Santorini 2">
+      <img src="../images/santorini3.jpg" alt="Santorini 3">
+      <img src="../images/santorini4.jpg" alt="Santorini 4">
+      <img src="../images/santorini5.jpg" alt="Santorini 5">
     </div>
 
     <div class="button-container">
-      <a href="../destinations/santorini-partners.html">Δείτε συνεργάτες μας στη Σαντορίνη</a>
+      <a href="../results.html?destination=santorini">Δείτε συνεργάτες μας στη Σαντορίνη</a>
     </div>
   </div>
 
-  <!-- Popup μεγέθυνσης -->
-  <div class="popup-overlay" id="popup">
-    <img id="popup-img" src="" alt="Μεγέθυνση">
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <img id="popupImage" src="" alt="Μεγέθυνση εικόνας">
+    <br />
+    <button class="popup-close" onclick="closePopup()">Κλείσιμο</button>
   </div>
 
   <script>
-    // Φόρτωση περιγραφής & εικόνων
-    fetch('../json/santorini.json')
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('description').innerText = data.description;
-        const gallery = document.getElementById('gallery');
-        data.images.forEach(img => {
-          const image = document.createElement('img');
-          image.src = `../images/${img}`;
-          image.alt = "Φωτογραφία από Σαντορίνη";
-          gallery.appendChild(image);
-        });
+    const images = document.querySelectorAll('.gallery img');
+    const popup = document.getElementById('popup');
+    const popupImage = document.getElementById('popupImage');
+
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        popupImage.src = img.src;
+        popup.style.display = 'block';
       });
-
-    // Popup μεγέθυνσης εικόνας
-    const popup = document.getElementById("popup");
-    const popupImg = document.getElementById("popup-img");
-
-    document.getElementById('gallery').addEventListener('click', function(e) {
-      if (e.target.tagName === 'IMG') {
-        popupImg.src = e.target.src;
-        popup.style.display = 'flex';
-      }
     });
 
-    popup.addEventListener('click', () => {
+    function closePopup() {
       popup.style.display = 'none';
-    });
+    }
   </script>
 </body>
 </html>
