@@ -198,6 +198,9 @@ body {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
+  color: #7d8053; /* Λαδί */
+  font-weight: bold;
+  font-family: 'Georgia', serif;
 }
 
 /* ===================== */
