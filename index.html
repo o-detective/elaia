@@ -223,6 +223,18 @@
   </div>
 </div>
 
+      <div style="text-align: center; margin-top: 20px;">
+  <button onclick="searchResults()" style="
+    background-color: #7d8053;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  ">Αναζήτηση</button>
+</div>
+
 <!-- Καρουζέλ τοπ χώροι + τοπ συνεργάτες -->
 <section class="carousel-row">
   <!-- Πρώτο καρουζέλ -->
@@ -351,4 +363,20 @@
     responseBox.innerHTML += `<div><strong>Σφάλμα:</strong> ❌ Κάτι πήγε στραβά.</div>`;
   }
 }
+</script>
+
+  <script>
+  function searchResults() {
+    const region = document.getElementById("region").value;
+    const event = document.getElementById("venue-type").value;
+    const type = document.getElementById("pro-type").value;
+
+    if (!region || !event || !type) {
+      alert("Παρακαλώ συμπληρώστε όλα τα φίλτρα.");
+      return;
+    }
+
+    const url = `results.html?region=${encodeURIComponent(region)}&event=${encodeURIComponent(event)}&type=${encodeURIComponent(type)}`;
+    window.location.href = url;
+  }
 </script>
