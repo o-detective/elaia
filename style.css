@@ -265,9 +265,15 @@ body {
 
 .carousel-row {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  flex-direction: column;
+  gap: 40px;
   margin-top: 40px;
+}
+
+.carousel-item {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 /* Τελικό καρουζέλ μεγαλύτερο */
