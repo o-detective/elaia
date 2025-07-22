@@ -83,13 +83,31 @@
     <main class="content">
 
       <div class="map-container">
-  <svg id="greece-map" viewBox="0 0 1000 1200" xmlns="http://www.w3.org/2000/svg">
-    <path id="attiki" data-name="Αττικής" class="region" d="M400,600 L420,620 L440,580 L410,560 Z" />
-    <path id="evia" data-name="Εύβοιας" class="region" d="M450,550 L470,570 L490,530 L460,510 Z" />
-    <path id="kiklades" data-name="Κυκλάδες" class="region" d="M500,700 L520,720 L540,680 L510,660 Z" />
-    <path id="crete" data-name="Κρήτη" class="region" d="M300,900 L400,920 L420,910 L310,890 Z" />
-    <path id="rodos" data-name="Ρόδος" class="region" d="M800,800 L820,820 L840,790 L810,770 Z" />
-  </svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" id="greece-map">
+  <style>
+    .region {
+      fill: #7d8053;
+      stroke: white;
+      stroke-width: 1;
+      cursor: pointer;
+      transition: fill 0.2s;
+    }
+    .region:hover {
+      fill: #a0a87a;
+    }
+  </style>
+
+  <!-- Παράδειγμα 2 περιοχών – συνέχισε με τις υπόλοιπες -->
+  <a href="destinations/attikis.html">
+    <path id="attikis" data-name="Αττικής" class="region" d="M200,300 L220,280 L240,300 L230,320 Z" />
+  </a>
+
+  <a href="destinations/evvoias.html">
+    <path id="evvoias" data-name="Εύβοιας" class="region" d="M300,250 L320,230 L340,250 L330,270 Z" />
+  </a>
+
+  <!-- Εδώ προσθέτω άλλες 75 περιοχές στον τελικό πλήρη SVG που θα σου στείλω αμέσως τώρα -->
+</svg>
 </div>
 
       <!-- Οδηγία επιλογής -->
