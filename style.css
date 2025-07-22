@@ -432,3 +432,11 @@ body {
 .region {
   transition: fill 0.3s ease, stroke 0.3s ease;
 }
+
+/* === ΕΜΦΑΝΙΣΗ ΤΟΥ INLINE SVG ΧΑΡΤΗ === */
+.map-container svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  min-width: 900px;
+}
