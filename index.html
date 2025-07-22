@@ -82,304 +82,13 @@
     <!-- Main Content -->
     <main class="content">
 
-     <!-- Χάρτης Ελλάδας (Μέρος 1 - ρεαλιστικό SVG) -->
+      <!-- Χάρτης Ελλάδας -->
 <div class="map-container">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1400" id="greece-map">
-    <style>
-      .region {
-        fill: #7d8053;
-        stroke: #ffffff;
-        stroke-width: 1.5;
-        cursor: pointer;
-        transition: fill 0.3s;
-      }
-      .region:hover {
-        fill: #a5a77d;
-      }
-    </style>
-
-    <a xlink:href="destinations/Αττικης.html">
-      <path id="attikis" data-name="Αττικης" class="region" d="M632,500 L642,510 L650,508 L655,498 L648,490 L638,490 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Ευβοιας.html">
-      <path id="evvoias" data-name="Ευβοιας" class="region" d="M680,420 L690,430 L700,435 L705,425 L700,415 L690,410 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Βοιωτιας.html">
-      <path id="voiotias" data-name="Βοιωτιας" class="region" d="M620,480 L630,490 L635,480 L630,470 L620,470 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Φθιωτιδας.html">
-      <path id="fthiotidas" data-name="Φθιωτιδας" class="region" d="M640,540 L650,550 L660,540 L650,530 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Φωκιδας.html">
-      <path id="fokidas" data-name="Φωκιδας" class="region" d="M600,510 L610,520 L615,510 L610,500 Z"/>
-    </a>
-
-        <a xlink:href="destinations/Αιτωλοακαρνανιας.html">
-      <path id="aitoloakarnanias" data-name="Αιτωλοακαρνανιας" class="region" d="M570,520 L580,530 L590,530 L595,520 L590,510 L580,510 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Αρκαδιας.html">
-      <path id="arkadias" data-name="Αρκαδιας" class="region" d="M580,600 L590,610 L600,610 L605,600 L600,590 L590,590 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Αργολιδας.html">
-      <path id="argolidas" data-name="Αργολιδας" class="region" d="M630,580 L640,590 L650,590 L655,580 L650,570 L640,570 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Κορινθιας.html">
-      <path id="korinthias" data-name="Κορινθιας" class="region" d="M620,560 L630,570 L635,560 L630,550 L620,550 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Λακωνιας.html">
-      <path id="lakonias" data-name="Λακωνιας" class="region" d="M600,630 L610,640 L620,640 L625,630 L620,620 L610,620 Z"/>
-    </a>
-
-        <a xlink:href="destinations/Μεσσηνιας.html">
-      <path id="messinias" data-name="Μεσσηνιας" class="region" d="M560,630 L570,640 L580,640 L585,630 L580,620 L570,620 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Αχαιας.html">
-      <path id="achaias" data-name="Αχαιας" class="region" d="M580,550 L590,560 L600,560 L605,550 L600,540 L590,540 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Ηλειας.html">
-      <path id="ileias" data-name="Ηλειας" class="region" d="M560,580 L570,590 L580,590 L585,580 L580,570 L570,570 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Ευρυτανιας.html">
-      <path id="evrytanias" data-name="Ευρυτανιας" class="region" d="M610,460 L620,470 L625,460 L620,450 L610,450 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Ιωαννινων.html">
-      <path id="ioanninon" data-name="Ιωαννινων" class="region" d="M530,470 L540,480 L550,480 L555,470 L550,460 L540,460 Z"/>
-    </a>
-
-        <a xlink:href="destinations/Αρτας.html">
-      <path id="artas" data-name="Αρτας" class="region" d="M540,500 L550,510 L560,510 L565,500 L560,490 L550,490 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Πρεβεζας.html">
-      <path id="prevezas" data-name="Πρεβεζας" class="region" d="M530,510 L540,520 L550,520 L555,510 L550,500 L540,500 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Θεσπρωτιας.html">
-      <path id="thesprotias" data-name="Θεσπρωτιας" class="region" d="M510,490 L520,500 L530,500 L535,490 L530,480 L520,480 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Κερκυρας.html">
-      <path id="kerkyras" data-name="Κερκυρας" class="region" d="M480,470 L490,475 L495,470 L490,460 L480,460 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Λευκαδας.html">
-      <path id="lefkadas" data-name="Λευκαδας" class="region" d="M510,520 L515,525 L520,520 L515,515 Z"/>
-    </a>
-
-        <a xlink:href="destinations/Ηπειρου.html">
-      <path id="ipeirou" data-name="Ηπειρου" class="region" d="M540,480 L550,490 L560,490 L565,480 L560,470 L550,470 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Ιωαννινων.html">
-      <path id="ioanninon" data-name="Ιωαννινων" class="region" d="M520,460 L530,470 L540,470 L545,460 L540,450 L530,450 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Γρεβενων.html">
-      <path id="grevenon" data-name="Γρεβενων" class="region" d="M580,460 L590,470 L600,470 L605,460 L600,450 L590,450 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Καστοριας.html">
-      <path id="kastorias" data-name="Καστοριας" class="region" d="M610,440 L620,450 L630,450 L635,440 L630,430 L620,430 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Φλωρινας.html">
-      <path id="florinas" data-name="Φλωρινας" class="region" d="M640,420 L650,430 L660,430 L665,420 L660,410 L650,410 Z"/>
-    </a>
-
-        <a xlink:href="destinations/Κοζανης.html">
-      <path id="kozanis" data-name="Κοζανης" class="region" d="M670,440 L680,450 L690,450 L695,440 L690,430 L680,430 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Ημαθιας.html">
-      <path id="imathias" data-name="Ημαθιας" class="region" d="M700,450 L710,460 L720,460 L725,450 L720,440 L710,440 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Πελλας.html">
-      <path id="pellas" data-name="Πελλας" class="region" d="M730,430 L740,440 L750,440 L755,430 L750,420 L740,420 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Κιλκις.html">
-      <path id="kilkis" data-name="Κιλκις" class="region" d="M760,410 L770,420 L780,420 L785,410 L780,400 L770,400 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Θεσσαλονικης.html">
-      <path id="thessalonikis" data-name="Θεσσαλονικης" class="region" d="M750,450 L760,460 L770,460 L775,450 L770,440 L760,440 Z"/>
-    </a>
-
-        <a xlink:href="destinations/Χαλκιδικης.html">
-      <path id="chalkidikis" data-name="Χαλκιδικης" class="region" d="M780,470 L790,480 L800,480 L805,470 L800,460 L790,460 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Σερρων.html">
-      <path id="serron" data-name="Σερρων" class="region" d="M790,440 L800,450 L810,450 L815,440 L810,430 L800,430 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Δραμας.html">
-      <path id="dramas" data-name="Δραμας" class="region" d="M820,420 L830,430 L840,430 L845,420 L840,410 L830,410 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Καβαλας.html">
-      <path id="kavalas" data-name="Καβαλας" class="region" d="M850,440 L860,450 L870,450 L875,440 L870,430 L860,430 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Θασος.html">
-      <path id="thasos" data-name="Θασος" class="region" d="M880,410 L885,415 L890,410 L885,405 Z"/>
-    </a>
-
-        <a xlink:href="destinations/Ξανθης.html">
-      <path id="xanthis" data-name="Ξανθης" class="region" d="M880,460 L890,470 L900,470 L905,460 L900,450 L890,450 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Ροδοπης.html">
-      <path id="rodopis" data-name="Ροδοπης" class="region" d="M910,460 L920,470 L930,470 L935,460 L930,450 L920,450 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Εβρου.html">
-      <path id="evrou" data-name="Εβρου" class="region" d="M940,460 L950,470 L960,470 L965,460 L960,450 L950,450 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Σαμοθρακη.html">
-      <path id="samothraki" data-name="Σαμοθρακη" class="region" d="M960,420 L965,425 L970,420 L965,415 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Λημνος.html">
-      <path id="limnos" data-name="Λημνος" class="region" d="M880,380 L885,385 L890,380 L885,375 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Λεσβου.html">
-      <path id="lesvou" data-name="Λεσβου" class="region" d="M870,360 L875,365 L880,360 L875,355 Z"/>
-    </a>
-
-        <a xlink:href="destinations/Χιου.html">
-      <path id="chiou" data-name="Χιου" class="region" d="M850,350 L855,355 L860,350 L855,345 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Σαμου.html">
-      <path id="samou" data-name="Σαμου" class="region" d="M890,330 L895,335 L900,330 L895,325 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Ικαρια.html">
-      <path id="ikarias" data-name="Ικαρια" class="region" d="M860,310 L865,315 L870,310 L865,305 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Κω.html">
-      <path id="kos" data-name="Κως" class="region" d="M940,370 L945,375 L950,370 L945,365 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Ροδου.html">
-      <path id="rodou" data-name="Ροδος" class="region" d="M960,390 L965,395 L970,390 L965,385 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Καρπαθου.html">
-      <path id="karpathou" data-name="Καρπαθος" class="region" d="M950,410 L955,415 L960,410 L955,405 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Αστυπαλαια.html">
-      <path id="astypalaia" data-name="Αστυπαλαια" class="region" d="M910,390 L915,395 L920,390 L915,385 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Καστελλοριζο.html">
-      <path id="kastellorizo" data-name="Καστελλοριζο" class="region" d="M980,420 L985,425 L990,420 L985,415 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Λοιπα-νησια-Δωδεκανησων.html">
-      <path id="loipa-dodekanisa" data-name="Λοιπα νησια Δωδεκανησων" class="region" d="M930,400 L935,405 L940,400 L935,395 Z"/>
-    </a>
-
-        <a xlink:href="destinations/Συρος.html">
-      <path id="syros" data-name="Συρος" class="region" d="M800,500 L805,505 L810,500 L805,495 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Τηνος.html">
-      <path id="tinos" data-name="Τηνος" class="region" d="M790,490 L795,495 L800,490 L795,485 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Παρος.html">
-      <path id="paros" data-name="Παρος" class="region" d="M780,510 L785,515 L790,510 L785,505 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Ναξος.html">
-      <path id="naxos" data-name="Ναξος" class="region" d="M770,520 L775,525 L780,520 L775,515 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Μυκονος.html">
-      <path id="mykonos" data-name="Μυκονος" class="region" d="M760,500 L765,505 L770,500 L765,495 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Ανδρος.html">
-      <path id="andros" data-name="Ανδρος" class="region" d="M750,490 L755,495 L760,490 L755,485 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Σαντορινη.html">
-      <path id="santorini" data-name="Σαντορινη" class="region" d="M740,530 L745,535 L750,530 L745,525 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Μηλος.html">
-      <path id="milos" data-name="Μηλος" class="region" d="M730,520 L735,525 L740,520 L735,515 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Λοιπα-νησια-Κυκλαδων.html">
-      <path id="loipa-nisia-kykladon" data-name="Λοιπα νησια Κυκλαδων" class="region" d="M720,500 L725,505 L730,500 L725,495 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Σκιαθος.html">
-      <path id="skiathos" data-name="Σκιαθος" class="region" d="M690,470 L695,475 L700,470 L695,465 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Σκοπελος.html">
-      <path id="skopelos" data-name="Σκοπελος" class="region" d="M680,460 L685,465 L690,460 L685,455 Z"/>
-    </a>
-
-        <a xlink:href="destinations/Αλοννησος.html">
-      <path id="alonissos" data-name="Αλοννησος" class="region" d="M670,450 L675,455 L680,450 L675,445 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Σκυρος.html">
-      <path id="skyros" data-name="Σκυρος" class="region" d="M660,440 L665,445 L670,440 L665,435 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Λοιπα-νησια-Αιγαιου.html">
-      <path id="loipa-nisia-aigaiou" data-name="Λοιπα νησια Αιγαιου" class="region" d="M650,430 L655,435 L660,430 L655,425 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Χανιων.html">
-      <path id="chanion" data-name="Χανιων" class="region" d="M200,900 L250,920 L300,900 L250,880 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Ρεθυμνης.html">
-      <path id="rethymnis" data-name="Ρεθυμνης" class="region" d="M310,900 L360,920 L410,900 L360,880 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Ηρακλειου.html">
-      <path id="irakleiou" data-name="Ηρακλειου" class="region" d="M420,900 L470,920 L520,900 L470,880 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Λασιθιου.html">
-      <path id="lasithiou" data-name="Λασιθιου" class="region" d="M530,900 L580,920 L630,900 L580,880 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Λοιπα-νησια-Κυκλαδων.html">
-      <path id="loipa-nisia-kykladon-2" data-name="Λοιπα νησια Κυκλαδων" class="region" d="M720,540 L725,545 L730,540 L725,535 Z"/>
-    </a>
-
-    <a xlink:href="destinations/Λοιπα-Ιονια-νησια.html">
-      <path id="loipa-ionia-nisia" data-name="Λοιπα ιονια νησια" class="region" d="M140,300 L145,305 L150,300 L145,295 Z"/>
-    </a>
-  </svg>
+  <object type="image/svg+xml" data="greece.svg" class="map-svg">
+    Ο χάρτης δεν φορτώθηκε. Παρακαλούμε ελέγξτε τη σύνδεσή σας ή χρησιμοποιήστε ένα σύγχρονο πρόγραμμα περιήγησης.
+  </object>
 </div>
-      
+
       <!-- Οδηγία επιλογής -->
       <div style="text-align: center; margin-top: 20px; font-weight: bold;">
         Επιλέξτε απ’ τον χάρτη
@@ -607,37 +316,26 @@
 
 <!-- JavaScript -->
 <script>
-// SVG επιλογή περιοχής (inline version)
-document.addEventListener("DOMContentLoaded", function () {
-  const regions = document.querySelectorAll("svg .region");
+  document.addEventListener("DOMContentLoaded", function () {
+    // SVG λειτουργίες
+    const svgObjects = document.querySelectorAll('.map-container object');
+    svgObjects.forEach(obj => {
+      obj.addEventListener("load", () => {
+        const svgDoc = obj.contentDocument;
+        if (!svgDoc) return;
 
-  // Συνάρτηση αφαίρεσης τόνων από ελληνικά
-  function removeAccents(str) {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  }
-
-  regions.forEach(region => {
-    region.style.cursor = "pointer";
-
-    region.addEventListener("click", () => {
-      // αφαίρεσε τυχόν προηγούμενη επιλογή
-      regions.forEach(r => r.classList.remove("selected"));
-
-      // πρόσθεσε κλάση selected στην επιλεγμένη
-      region.classList.add("selected");
-
-      // απόκτησε το όνομα της περιοχής
-      const name = region.getAttribute("data-name");
-
-      // φτιάξε το όνομα αρχείου (π.χ. destinations/attikis.html)
-      const filename = `destinations/${removeAccents(name.toLowerCase().replace(/ /g, "-"))}.html`;
-
-      // κάνε redirect
-      window.location.href = filename;
+        const regions = svgDoc.querySelectorAll("[data-name]");
+        regions.forEach(region => {
+          region.style.cursor = "pointer";
+          region.addEventListener("click", () => {
+            regions.forEach(r => r.classList.remove("selected"));
+            region.classList.add("selected");
+            alert("Επέλεξες: " + region.getAttribute("data-name"));
+          });
+        });
+      });
     });
   });
-});
-</script>
 
   // AI popup λειτουργία
   let conversationHistory = [];
