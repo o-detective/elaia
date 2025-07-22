@@ -12,8 +12,8 @@
     }
   </style>
 
-  <!-- Αττική (δοκιμαστικά) -->
-  <a xlink:href="destinations/Αττικης.html">
+  <!-- Αττική -->
+  <a href="destinations/Αττικης.html">
     <path class="region" d="M50,50 h40 v40 h-40 z" />
   </a>
 </svg>
