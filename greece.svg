@@ -1,19 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="auto">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
   <style>
     .region {
-      fill: #e8ebdc;
-      stroke: #7d8053;
-      stroke-width: 0.6;
+      fill: #7d8053;
+      stroke: white;
+      stroke-width: 1;
       cursor: pointer;
-      transition: fill 0.3s ease;
+      transition: fill 0.3s;
     }
     .region:hover {
-      fill: #d1d7bb;
+      fill: #a6aa7a;
+    }
+    .region:active {
+      fill: #c9cd98;
     }
   </style>
 
-  <!-- Αττική -->
   <a href="destinations/Αττικης.html">
-    <path class="region" d="M50,50 h40 v40 h-40 z" />
+    <path class="region" d="M300,300 L320,300 L320,320 L300,320 Z" id="attiki" />
+  </a>
+
+  <a href="destinations/Ευβοιας.html">
+    <path class="region" d="M340,280 L360,280 L360,300 L340,300 Z" id="evia" />
+  </a>
+
+  <a href="destinations/Καστελλοριζο.html">
+    <path class="region" d="M700,500 L710,500 L710,510 L700,510 Z" id="kastellorizo" />
   </a>
 </svg>
