@@ -82,32 +82,124 @@
     <!-- Main Content -->
     <main class="content">
 
-      <div class="map-container">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" id="greece-map">
-  <style>
-    .region {
-      fill: #7d8053;
-      stroke: white;
-      stroke-width: 1;
-      cursor: pointer;
-      transition: fill 0.2s;
-    }
-    .region:hover {
-      fill: #a0a87a;
-    }
-  </style>
+     <!-- Χάρτης Ελλάδας (77 περιοχές - inline SVG) -->
+<div class="map-container">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1400" id="greece-map">
+    <style>
+      .region {
+        fill: #7d8053;
+        stroke: #fff;
+        stroke-width: 2;
+        cursor: pointer;
+        transition: fill 0.3s;
+      }
+      .region:hover {
+        fill: #a5a77d;
+      }
+      .region.selected {
+        fill: #444;
+      }
+    </style>
 
-  <!-- Παράδειγμα 2 περιοχών – συνέχισε με τις υπόλοιπες -->
-  <a href="destinations/attikis.html">
-    <path id="attikis" data-name="Αττικής" class="region" d="M200,300 L220,280 L240,300 L230,320 Z" />
-  </a>
+    <!-- Κάθε περιοχή σε τετράγωνο grid layout -->
+    <!-- Εδώ είναι ΟΛΕΣ οι 77 περιοχές (σε απλό placeholder grid) -->
+    <!-- Μπορείς να αλλάξεις το viewBox/θέσεις αργότερα αν θέλεις κανονικούς χάρτες -->
 
-  <a href="destinations/evvoias.html">
-    <path id="evvoias" data-name="Εύβοιας" class="region" d="M300,250 L320,230 L340,250 L330,270 Z" />
-  </a>
+    <!-- Στήλες: 11 περιοχές ανά γραμμή, 7 σειρές -->
+    <!-- 70 περιοχές + 7 επιπλέον κάτω για 77 συνολικά -->
 
-  <!-- Εδώ προσθέτω άλλες 75 περιοχές στον τελικό πλήρη SVG που θα σου στείλω αμέσως τώρα -->
-</svg>
+    <!-- Γραμμή 1 -->
+    <path id="attikis" data-name="Αττικης" class="region" d="M0,0 h80 v80 h-80 Z" />
+    <path id="evvoias" data-name="Ευβοιας" class="region" d="M90,0 h80 v80 h-80 Z" />
+    <path id="evrytanias" data-name="Ευρυτανιας" class="region" d="M180,0 h80 v80 h-80 Z" />
+    <path id="fokidas" data-name="Φωκιδας" class="region" d="M270,0 h80 v80 h-80 Z" />
+    <path id="fthiotidas" data-name="Φθιωτιδας" class="region" d="M360,0 h80 v80 h-80 Z" />
+    <path id="voiotias" data-name="Βοιωτιας" class="region" d="M450,0 h80 v80 h-80 Z" />
+    <path id="chalkidikis" data-name="Χαλκιδικης" class="region" d="M540,0 h80 v80 h-80 Z" />
+    <path id="imathias" data-name="Ημαθιας" class="region" d="M630,0 h80 v80 h-80 Z" />
+    <path id="kilkis" data-name="Κιλκις" class="region" d="M720,0 h80 v80 h-80 Z" />
+    <path id="pellas" data-name="Πελλας" class="region" d="M810,0 h80 v80 h-80 Z" />
+    <path id="pierias" data-name="Πιεριας" class="region" d="M900,0 h80 v80 h-80 Z" />
+
+    <!-- Γραμμή 2 -->
+    <path id="serron" data-name="Σερρων" class="region" d="M0,90 h80 v80 h-80 Z" />
+    <path id="thessalonikis" data-name="Θεσσαλονικης" class="region" d="M90,90 h80 v80 h-80 Z" />
+    <path id="chanion" data-name="Χανιων" class="region" d="M180,90 h80 v80 h-80 Z" />
+    <path id="irakleiou" data-name="Ηρακλειου" class="region" d="M270,90 h80 v80 h-80 Z" />
+    <path id="lasithiou" data-name="Λασιθιου" class="region" d="M360,90 h80 v80 h-80 Z" />
+    <path id="rethymnis" data-name="Ρεθυμνης" class="region" d="M450,90 h80 v80 h-80 Z" />
+    <path id="dramas" data-name="Δραμας" class="region" d="M540,90 h80 v80 h-80 Z" />
+    <path id="evrou" data-name="Εβρου" class="region" d="M630,90 h80 v80 h-80 Z" />
+    <path id="kavalas" data-name="Καβαλας" class="region" d="M720,90 h80 v80 h-80 Z" />
+    <path id="rodopis" data-name="Ροδοπης" class="region" d="M810,90 h80 v80 h-80 Z" />
+    <path id="xanthis" data-name="Ξανθης" class="region" d="M900,90 h80 v80 h-80 Z" />
+
+    <!-- Γραμμή 3 -->
+    <path id="artas" data-name="Αρτας" class="region" d="M0,180 h80 v80 h-80 Z" />
+    <path id="ioanninon" data-name="Ιωαννινων" class="region" d="M90,180 h80 v80 h-80 Z" />
+    <path id="prevezas" data-name="Πρεβεζας" class="region" d="M180,180 h80 v80 h-80 Z" />
+    <path id="thesprotias" data-name="Θεσπρωτιας" class="region" d="M270,180 h80 v80 h-80 Z" />
+    <path id="kerkyras" data-name="Κερκυρας" class="region" d="M360,180 h80 v80 h-80 Z" />
+    <path id="paxoi" data-name="Παξοι" class="region" d="M450,180 h80 v80 h-80 Z" />
+    <path id="kythira" data-name="Κυθηρα" class="region" d="M540,180 h80 v80 h-80 Z" />
+    <path id="kefallinias" data-name="Κεφαλληνιας" class="region" d="M630,180 h80 v80 h-80 Z" />
+    <path id="lefkadas" data-name="Λευκαδας" class="region" d="M720,180 h80 v80 h-80 Z" />
+    <path id="zakynthou" data-name="Ζακυνθου" class="region" d="M810,180 h80 v80 h-80 Z" />
+    <path id="ithakis" data-name="Ιθακης" class="region" d="M900,180 h80 v80 h-80 Z" />
+
+    <!-- Γραμμή 4 -->
+    <path id="loipa-ionia" data-name="Λοιπα ιονια νησια" class="region" d="M0,270 h80 v80 h-80 Z" />
+    <path id="ikarias" data-name="Ικαρια" class="region" d="M90,270 h80 v80 h-80 Z" />
+    <path id="limnos" data-name="Λημνος" class="region" d="M180,270 h80 v80 h-80 Z" />
+    <path id="chiou" data-name="Χιου" class="region" d="M270,270 h80 v80 h-80 Z" />
+    <path id="lesvou" data-name="Λεσβου" class="region" d="M360,270 h80 v80 h-80 Z" />
+    <path id="samou" data-name="Σαμου" class="region" d="M450,270 h80 v80 h-80 Z" />
+    <path id="arkadias" data-name="Αρκαδιας" class="region" d="M540,270 h80 v80 h-80 Z" />
+    <path id="argolidas" data-name="Αργολιδας" class="region" d="M630,270 h80 v80 h-80 Z" />
+    <path id="korinthias" data-name="Κορινθιας" class="region" d="M720,270 h80 v80 h-80 Z" />
+    <path id="lakonias" data-name="Λακωνιας" class="region" d="M810,270 h80 v80 h-80 Z" />
+    <path id="messinias" data-name="Μεσσηνιας" class="region" d="M900,270 h80 v80 h-80 Z" />
+
+    <!-- Γραμμή 5 -->
+    <path id="loipa-kyklades" data-name="Λοιπα νηςια Κυκλαδων" class="region" d="M0,360 h80 v80 h-80 Z" />
+    <path id="andros" data-name="Ανδρος" class="region" d="M90,360 h80 v80 h-80 Z" />
+    <path id="santorini" data-name="Σαντορινη" class="region" d="M180,360 h80 v80 h-80 Z" />
+    <path id="milos" data-name="Μηλος" class="region" d="M270,360 h80 v80 h-80 Z" />
+    <path id="mykonos" data-name="Μυκονος" class="region" d="M360,360 h80 v80 h-80 Z" />
+    <path id="naxos" data-name="Ναξος" class="region" d="M450,360 h80 v80 h-80 Z" />
+    <path id="paros" data-name="Παρος" class="region" d="M540,360 h80 v80 h-80 Z" />
+    <path id="tinos" data-name="Τηνος" class="region" d="M630,360 h80 v80 h-80 Z" />
+    <path id="syros" data-name="Συρος" class="region" d="M720,360 h80 v80 h-80 Z" />
+    <path id="loipa-dodekanisa" data-name="Λοιπα νησια Δωδεκανησων" class="region" d="M810,360 h80 v80 h-80 Z" />
+    <path id="rodou" data-name="Ροδος" class="region" d="M900,360 h80 v80 h-80 Z" />
+
+    <!-- Γραμμή 6 -->
+    <path id="karpathou" data-name="Καρπαθος" class="region" d="M0,450 h80 v80 h-80 Z" />
+    <path id="kos" data-name="Κως" class="region" d="M90,450 h80 v80 h-80 Z" />
+    <path id="astypalaia" data-name="Αστυπαλαια" class="region" d="M180,450 h80 v80 h-80 Z" />
+    <path id="patmos" data-name="Πατμος" class="region" d="M270,450 h80 v80 h-80 Z" />
+    <path id="kastellorizo" data-name="Καστελλοριζο" class="region" d="M360,450 h80 v80 h-80 Z" />
+    <path id="karditsas" data-name="Καρδιτσας" class="region" d="M450,450 h80 v80 h-80 Z" />
+    <path id="larisis" data-name="Λαρισης" class="region" d="M540,450 h80 v80 h-80 Z" />
+    <path id="magnisias" data-name="Μαγνησιας" class="region" d="M630,450 h80 v80 h-80 Z" />
+    <path id="trikalon" data-name="Τρικαλων" class="region" d="M720,450 h80 v80 h-80 Z" />
+    <path id="achaias" data-name="Αχαιας" class="region" d="M810,450 h80 v80 h-80 Z" />
+    <path id="aitoloakarnanias" data-name="Αιτωλοακαρνανιας" class="region" d="M900,450 h80 v80 h-80 Z" />
+
+    <!-- Γραμμή 7 -->
+    <path id="ileias" data-name="Ηλειας" class="region" d="M0,540 h80 v80 h-80 Z" />
+    <path id="florinas" data-name="Φλωρινας" class="region" d="M90,540 h80 v80 h-80 Z" />
+    <path id="grevenon" data-name="Γρεβενων" class="region" d="M180,540 h80 v80 h-80 Z" />
+    <path id="kastorias" data-name="Καστοριας" class="region" d="M270,540 h80 v80 h-80 Z" />
+    <path id="kozanh" data-name="Κοζανης" class="region" d="M360,540 h80 v80 h-80 Z" />
+    <path id="thasos" data-name="Θασος" class="region" d="M450,540 h80 v80 h-80 Z" />
+    <path id="samothraki" data-name="Σαμοθρακη" class="region" d="M540,540 h80 v80 h-80 Z" />
+    <path id="skiathos" data-name="Σκιαθος" class="region" d="M630,540 h80 v80 h-80 Z" />
+    <path id="skopelos" data-name="Σκοπελος" class="region" d="M720,540 h80 v80 h-80 Z" />
+    <path id="alonissos" data-name="Αλοννησος" class="region" d="M810,540 h80 v80 h-80 Z" />
+    <path id="skyros" data-name="Σκυρος" class="region" d="M900,540 h80 v80 h-80 Z" />
+
+  </svg>
 </div>
 
       <!-- Οδηγία επιλογής -->
