@@ -1,20 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="auto">
   <style>
     .region {
-      fill: #cfd8c0;
+      fill: #e8ebdc;
       stroke: #7d8053;
-      stroke-width: 0.8;
+      stroke-width: 0.6;
       cursor: pointer;
       transition: fill 0.3s ease;
     }
     .region:hover {
-      fill: #aab493;
+      fill: #d1d7bb;
     }
   </style>
 
-  <!-- Παράδειγμα: Αττική -->
+  <!-- Αττική (δοκιμαστικά) -->
   <a xlink:href="destinations/Αττικης.html">
-    <rect class="region" x="40" y="50" width="30" height="30" />
+    <path class="region" d="M50,50 h40 v40 h-40 z" />
   </a>
-
 </svg>
