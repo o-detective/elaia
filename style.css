@@ -414,3 +414,21 @@ body {
     min-width: 500px;
   }
 }
+
+/* ===================== */
+/* Χάρτης - Hover και Επιλογή Περιοχής */
+/* ===================== */
+
+.map-container svg .region:hover {
+  fill: #b19777 !important;
+}
+
+.region.selected {
+  fill: #7c7f59 !important;
+  stroke: #555;
+  stroke-width: 1;
+}
+
+.region {
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
