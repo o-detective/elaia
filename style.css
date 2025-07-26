@@ -445,3 +445,43 @@ body {
     min-width: 600px;
   }
 }
+
+/* Sidebar για κινητά - πάντα αριστερά */
+@media (max-width: 768px) {
+  body {
+    display: flex;
+    flex-direction: row;
+    overflow-x: hidden;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 120px; /* ή όσο χρειάζεται */
+    z-index: 999;
+    background-color: #7d8053;
+  }
+
+  main,
+  .main-content,
+  .content {
+    margin-left: 120px; /* ίδιο με το width του sidebar */
+    width: calc(100% - 120px);
+    padding: 10px;
+  }
+
+  .map-container object {
+    width: 100%;
+  }
+
+  .ai-bar,
+  .filters,
+  .carousel,
+  .results,
+  #aiPopup {
+    width: 100%;
+    max-width: 100%;
+  }
+}
