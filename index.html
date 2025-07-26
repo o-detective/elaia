@@ -66,16 +66,17 @@
   <button class="top-btn launch">Launch</button>
 </div>
   <div class="container">
-    <!-- Sidebar -->
-    <aside class="sidebar">
+    
+<!-- Sidebar -->
+<aside class="sidebar">
   <div class="logo-container">
     <img src="https://raw.githubusercontent.com/o-detective/elaia/main/2ECB64C0-85F0-4F73-96D8-C34E7E91208F.png" alt="Logo" class="logo-img" />
   </div>
   <ul class="menu">
     <li><button class="menu-btn" data-value="Γάμος">Γάμος</button></li>
     <li><button class="menu-btn" data-value="Βάφτιση">Βάφτιση</button></li>
-    <li><button class="menu-btn" data-value="Event">Πάρτι</button></li>
-    <li><button class="menu-btn" data-value="Συνέδριο">Συνέδρια</button></li>
+    <li><button class="menu-btn" data-value="Εκδήλωση">Πάρτι</button></li>
+    <li><button class="menu-btn" data-value="Συνέδριο">Συνέδριο</button></li>
   </ul>
 </aside>
 
@@ -212,16 +213,16 @@
     </select>
   </div>
 
-  <div class="filter-group">
-    <label for="venue-type">Είδος:</label>
-    <select id="venue-type">
-      <option selected disabled>Επιλέξτε είδος</option>
-      <option>Γαμος</option>
-      <option>Βαφτιση</option>
-      <option>Παρτι</option>
-      <option>Συνεδρια</option>
-    </select>
-  </div>
+<div class="filter-group">
+  <label for="venue-type">Είδος:</label>
+  <select id="venue-type">
+    <option selected disabled value="">Επιλέξτε είδος</option>
+    <option value="Γάμος">Γάμος</option>
+    <option value="Βάφτιση">Βάφτιση</option>
+    <option value="Εκδήλωση">Πάρτι</option>
+    <option value="Συνέδριο">Συνέδριο</option>
+  </select>
+</div>
 
   <div class="filter-group">
     <label for="pro-type">Είδος επαγγελματία:</label>
@@ -318,6 +319,19 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     // SVG λειτουργίες
+    // Sidebar buttons → venue-type συμπλήρωση
+const buttons = document.querySelectorAll(".menu-btn");
+const typeSelect = document.getElementById("venue-type");
+
+buttons.forEach((btn) => {
+  btn.addEventListener("click", function () {
+    const value = this.dataset.value;
+    if (typeSelect) {
+      typeSelect.value = value;
+    }
+  });
+});
+    
     const svgObjects = document.querySelectorAll('.map-container object');
     svgObjects.forEach(obj => {
       obj.addEventListener("load", () => {
@@ -424,18 +438,4 @@
     window.location.href = url;
   }
 
-    <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const buttons = document.querySelectorAll(".menu-btn");
-    const typeSelect = document.getElementById("venue-type");
-
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", function () {
-        const value = this.dataset.value;
-        if (typeSelect) {
-          typeSelect.value = value;
-        }
-      });
-    });
-  });
 </script>
