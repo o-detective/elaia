@@ -56,11 +56,10 @@ body {
 /* ===================== */
 .container {
   display: flex;
-  width: 100%;
-  max-width: 1400px;
   min-height: 100vh;
-  flex-direction: row;
-  align-items: flex-start;
+  width: 100%;
+  padding-left: 240px; /* κάνει χώρο για το fixed sidebar */
+  box-sizing: border-box;
 }
 
 .sidebar {
@@ -338,33 +337,6 @@ body {
 /* ===================== */
 /* RESPONSIVE BREAKPOINTS */
 /* ===================== */
-@media (max-width: 1024px) {
-  .container {
-    flex-direction: column;
-    padding: 0;
-  }
-
-  .sidebar {
-    width: 100%;
-    order: 1;
-    padding: 20px;
-  }
-
-  .content {
-    order: 2;
-    padding: 20px;
-  }
-
-  .carousel-row {
-    flex-direction: column;
-  }
-
-  .top-bar {
-    flex-direction: column;
-    top: 10px;
-    right: 10px;
-  }
-}
 
 @media (max-width: 768px) {
   .menu-btn {
@@ -416,7 +388,6 @@ body {
     min-width: 500px;
   }
 }
-
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
@@ -440,5 +411,37 @@ body {
 
   .logo-container {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .container {
+    padding-left: 200px;
+  }
+
+  .menu-btn {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .logo-img {
+    width: 140px;
+  }
+
+  .search-filters {
+    flex-direction: column;
+  }
+
+  .filter-group {
+    min-width: 100%;
+  }
+
+  .map-container svg,
+  .map-container object {
+    min-width: 600px;
   }
 }
