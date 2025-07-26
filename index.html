@@ -68,16 +68,16 @@
   <div class="container">
     <!-- Sidebar -->
     <aside class="sidebar">
-      <div class="logo-container">
-        <img src="https://raw.githubusercontent.com/o-detective/elaia/main/2ECB64C0-85F0-4F73-96D8-C34E7E91208F.png" alt="Logo" class="logo-img" />
-      </div>
-      <ul class="menu">
-        <li><button class="menu-btn">Γάμος</button></li>
-        <li><button class="menu-btn">Βάφτιση</button></li>
-        <li><button class="menu-btn">Πάρτι</button></li>
-        <li><button class="menu-btn">Συνέδρια</button></li>
-      </ul>
-    </aside>
+  <div class="logo-container">
+    <img src="https://raw.githubusercontent.com/o-detective/elaia/main/2ECB64C0-85F0-4F73-96D8-C34E7E91208F.png" alt="Logo" class="logo-img" />
+  </div>
+  <ul class="menu">
+    <li><button class="menu-btn" data-value="Γάμος">Γάμος</button></li>
+    <li><button class="menu-btn" data-value="Βάφτιση">Βάφτιση</button></li>
+    <li><button class="menu-btn" data-value="Event">Πάρτι</button></li>
+    <li><button class="menu-btn" data-value="Συνέδριο">Συνέδρια</button></li>
+  </ul>
+</aside>
 
     <!-- Main Content -->
     <main class="content">
@@ -423,4 +423,19 @@
     const url = `results.html?region=${encodeURIComponent(region)}&event=${encodeURIComponent(event)}&type=${encodeURIComponent(type)}`;
     window.location.href = url;
   }
+
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".menu-btn");
+    const typeSelect = document.getElementById("venue-type");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const value = this.dataset.value;
+        if (typeSelect) {
+          typeSelect.value = value;
+        }
+      });
+    });
+  });
 </script>
