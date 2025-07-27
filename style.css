@@ -487,35 +487,37 @@ body {
   }
 }
 
-footer {
+#main-footer {
+  position: fixed;
+  bottom: 0;
+  left: 250px; /* ίδιο πλάτος με το sidebar */
+  right: 0;
   background-color: #7d8053;
   color: white;
-  padding: 20px 40px 10px 40px;
+  padding: 10px 30px;
   font-size: 14px;
-  position: relative;
-  bottom: 0;
-  width: calc(100% - 250px); /* το sidebar είναι 250px */
-  margin-left: 250px;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  z-index: 999;
 }
 
-footer a {
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.footer-links a {
   color: white;
-  text-decoration: none;
   margin-right: 15px;
+  text-decoration: none;
   font-size: 13px;
 }
 
-footer a:hover {
+.footer-links a:hover {
   text-decoration: underline;
 }
 
 .footer-bottom {
-  margin-top: 8px;
   font-size: 12px;
-  border-top: 1px solid rgba(255,255,255,0.3);
-  padding-top: 8px;
+  opacity: 0.8;
 }
