@@ -19,12 +19,13 @@ body {
 /* TOP BAR */
 /* ===================== */
 .top-bar {
-  position: fixed;
+  position: absolute;
   top: 20px;
   right: 20px;
   display: flex;
   gap: 10px;
   z-index: 1000;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .top-btn {
