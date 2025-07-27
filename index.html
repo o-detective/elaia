@@ -315,6 +315,26 @@
   </div>
 </section>
 
+      <footer class="elaia-footer">
+  <div class="footer-container">
+    <div class="footer-left">
+      <h3>Elaia</h3>
+      <p>Η πρώτη εφαρμογή στην Ελλάδα αφιερωμένη σε event planners & χώρους εκδηλώσεων.</p>
+    </div>
+    <div class="footer-right">
+      <ul>
+        <li><a href="#">Σχετικά με εμάς</a></li>
+        <li><a href="#">Επικοινωνία</a></li>
+        <li><a href="#">Όροι Χρήσης</a></li>
+        <li><a href="#">Πολιτική Απορρήτου</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Elaia. Με αγάπη για την ελληνική φιλοξενία.</p>
+  </div>
+</footer>
+
 <!-- JavaScript -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -439,3 +459,22 @@ buttons.forEach((btn) => {
   }
 
 </script>
+
+      <script>
+  const topBar = document.querySelector('.top-bar');
+
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      topBar.style.opacity = '0';
+      topBar.style.visibility = 'hidden';
+    } else {
+      topBar.style.opacity = '1';
+      topBar.style.visibility = 'visible';
+    }
+  });
+</script>
+
+    </body>
+    </html>
