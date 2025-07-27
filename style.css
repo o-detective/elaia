@@ -487,69 +487,31 @@ body {
   }
 }
 
-/* === FOOTER === */
 .elaia-footer {
   background-color: #7d8053;
   color: white;
-  padding: 30px 40px 20px 40px;
-  position: relative;
-  margin-top: 60px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  overflow-x: hidden;
-}
-
-.footer-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: calc(100% - 250px); /* Sidebar width */
-  margin-left: 250px;
-  box-sizing: border-box;
-}
-
-.footer-left h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.footer-left p {
+  padding: 20px 40px 10px 40px;
   font-size: 14px;
-  max-width: 400px;
-  margin: 0;
+  box-sizing: border-box;
+  width: calc(100% - 250px); /* 250px είναι το sidebar */
+  margin-left: 250px;
+  margin-top: 60px;
 }
 
-.footer-right ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-right ul li {
-  margin-bottom: 8px;
-}
-
-.footer-right ul li a {
+.elaia-footer a {
   color: white;
   text-decoration: none;
-  font-size: 14px;
+  margin-right: 15px;
+  font-size: 13px;
 }
 
-.footer-right ul li a:hover {
+.elaia-footer a:hover {
   text-decoration: underline;
 }
 
 .footer-bottom {
-  text-align: center;
-  margin-top: 30px;
+  margin-top: 10px;
   font-size: 12px;
   border-top: 1px solid rgba(255,255,255,0.2);
   padding-top: 10px;
-  width: 100%;
 }
