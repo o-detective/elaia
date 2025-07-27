@@ -492,7 +492,8 @@ body {
   background-color: #7d8053;
   color: white;
   padding: 40px 30px 20px 30px;
-  width: 100%;
+  width: calc(100% - 250px); /* αφαιρεί πλάτος sidebar */
+  margin-left: 250px; /* ώστε να ξεκινά εκεί που τελειώνει το sidebar */
   box-sizing: border-box;
   margin-top: 50px;
 }
@@ -501,9 +502,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 100%;
-  margin: 0;
   padding: 0 30px;
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -544,4 +544,3 @@ body {
   border-top: 1px solid rgba(255,255,255,0.2);
   padding-top: 15px;
 }
-
