@@ -486,3 +486,60 @@ body {
     max-width: 100%;
   }
 }
+
+.elaia-footer {
+  background-color: #7d8053;
+  color: white;
+  padding: 40px 20px 20px;
+  font-family: 'Georgia', serif;
+  margin-top: 50px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-left h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #f3e9d2;
+}
+
+.footer-left p {
+  font-size: 15px;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.footer-right ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-right li {
+  margin-bottom: 8px;
+}
+
+.footer-right a {
+  color: #f3e9d2;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.footer-right a:hover {
+  color: #ffe5a5;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #a3a773;
+  padding-top: 15px;
+  font-size: 14px;
+  color: #f3e9d2;
+}
