@@ -490,14 +490,22 @@ body {
 #main-footer {
   position: fixed;
   bottom: 0;
-  left: 250px; /* ίδιο πλάτος με το sidebar */
-  right: 0;
+  left: 0;
+  width: 100%;
   background-color: #7d8053;
   color: white;
   padding: 10px 30px;
   font-size: 14px;
   box-sizing: border-box;
   z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.container {
+  padding-bottom: 80px; /* για να μη κρύβει περιεχόμενο το fixed footer */
 }
 
 .footer-content {
@@ -520,4 +528,12 @@ body {
 .footer-bottom {
   font-size: 12px;
   opacity: 0.8;
+}
+
+@media (min-width: 769px) {
+  .carousel,
+  .ai-bar,
+  .search-filters {
+    margin-left: 240px; /* ίδιο με το sidebar */
+  }
 }
