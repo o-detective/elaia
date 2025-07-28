@@ -488,20 +488,15 @@ body {
 }
 
 #main-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  position: relative;         /* Όχι fixed */
+  width: calc(100% - 250px);  /* για να μην μπαίνει στο sidebar */
+  margin-left: 250px;         /* να ακουμπά στο sidebar */
   background-color: #7d8053;
   color: white;
-  padding: 10px 30px;
+  padding: 20px 30px;
   font-size: 14px;
   box-sizing: border-box;
-  z-index: 999;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+  margin-top: 60px;
 }
 
 .container {
@@ -536,4 +531,19 @@ body {
   .search-filters {
     margin-left: 240px; /* ίδιο με το sidebar */
   }
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#page-container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#content-wrap {
+  flex: 1;
 }
