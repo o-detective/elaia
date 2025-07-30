@@ -150,7 +150,7 @@ body {
 .map-container iframe {
   width: 100%;
   height: auto;
-  min-width: 900px;
+  min-width: 100px;
   display: block;
 }
 
@@ -245,22 +245,24 @@ body {
 }
 
 .carousel-item {
-  background-color: #dedbd4;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  cursor: pointer;
-  color: inherit;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  flex: 0 0 30%; /* Τρεις ανά σειρά */
+  aspect-ratio: 1 / 1; /* Τετράγωνο */
+  flex: 1 1 30%;
   max-width: 30%;
+  background-color: #dedbd4;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
 }
 
 .carousel-item img {
   width: 100%;
-  height: 140px;
+  height: auto;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 6px;
   margin-bottom: 10px;
@@ -276,6 +278,13 @@ body {
 .carousel-item:hover {
   transform: scale(1.02);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 1200px) {
+  .carousel-item {
+    flex: 1 1 25%;
+    max-width: 25%;
+  }
 }
 
 /* Responsive: για tablet */
@@ -347,11 +356,6 @@ body {
     font-size: 20px;
   }
 
-  .carousel-item {
-    min-width: 160px;
-    font-size: 14px;
-  }
-
   .carousel:last-of-type .carousel-item {
     min-width: 200px;
     padding: 20px;
@@ -364,11 +368,6 @@ body {
 
   .filter-group {
     min-width: 100%;
-  }
-
-  .map-container svg,
-  .map-container object {
-    min-width: 600px;
   }
 
   .logo-img {
@@ -387,63 +386,7 @@ body {
     min-width: 500px;
   }
 }
-@media (max-width: 768px) {
-  .sidebar {
-    position: fixed;
-    width: 100%;
-    height: auto;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 10px;
-    z-index: 1000;
-  }
 
-  .sidebar .menu-btn {
-    width: auto;
-    margin: 0 5px;
-    font-size: 14px;
-    padding: 10px 14px;
-  }
-
-  .logo-container {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-    width: 200px;
-  }
-
-  .container {
-    padding-left: 200px;
-  }
-
-  .menu-btn {
-    font-size: 14px;
-    padding: 10px 14px;
-  }
-
-  .logo-img {
-    width: 140px;
-  }
-
-  .search-filters {
-    flex-direction: column;
-  }
-
-  .filter-group {
-    min-width: 100%;
-  }
-
-  .map-container svg,
-  .map-container object {
-    min-width: 600px;
-  }
-}
 
 /* Sidebar για κινητά - πάντα αριστερά */
 @media (max-width: 768px) {
@@ -472,8 +415,10 @@ body {
   }
 
   .map-container object {
-    width: 100%;
-  }
+  width: 100%;
+  max-width: 100%;
+  min-width: unset;
+}
 
   .ai-bar,
   .filters,
@@ -491,13 +436,15 @@ body {
   padding: 20px 30px;
   font-size: 14px;
   box-sizing: border-box;
-  margin-top: 60px;
   border: 2px solid #b9b5a6;
   border-left: none;
   border-right: none;
   border-bottom: none;
-  margin-left: 0;
+  flex-shrink: 0;
   width: 100%;
+  margin-top: auto;
+  text-align: center;
+  font-family: 'Georgia', serif;
 }
 
 .footer-content {
@@ -535,12 +482,14 @@ body {
 html, body {
   height: 100%;
   margin: 0;
+  padding: 0;
   overflow-x: hidden;
 }
 
 #page-container {
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 #content-wrap {
