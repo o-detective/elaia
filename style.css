@@ -229,27 +229,26 @@ body {
 /* ===================== */
 /* CAROUSELS */
 /* ===================== */
+/* Το εξωτερικό wrapper για όλα τα καρουζέλ */
 .carousel {
-  margin-bottom: 40px;
+  margin: 60px 0;
+  overflow-x: auto;
+  padding: 10px 0;
 }
 
-.carousel h2 {
-  margin-bottom: 10px;
-}
-
+/* Η λωρίδα με τα items */
 .carousel-track {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  padding: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 10px;
 }
 
+/* Κάθε κουτί καρουζέλ */
 .carousel-item {
   flex: 0 0 280px;
-  aspect-ratio: 1 / 1;
-  max-width: 100%;
+  scroll-snap-align: start;
   background-color: #dedbd4;
   border-radius: 12px;
   padding: 15px;
@@ -261,6 +260,7 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Εικόνες */
 .carousel-item img {
   width: 100%;
   height: auto;
@@ -270,6 +270,7 @@ body {
   margin-bottom: 10px;
 }
 
+/* Link εμφάνιση */
 .carousel-link {
   text-decoration: none;
   color: inherit;
@@ -277,21 +278,10 @@ body {
   height: 100%;
 }
 
+/* Hover εφέ */
 .carousel-item:hover {
   transform: scale(1.02);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-section.carousel {
-  margin-top: 40px;
-  margin-bottom: 100px;
-}
-
-@media (min-width: 1200px) {
-  .carousel-item {
-    flex: 1 1 25%;
-    max-width: 25%;
-  }
 }
 
 /* Responsive: για tablet */
@@ -507,4 +497,8 @@ html, body {
     margin-left: 0;
     width: 100%;
   }
+}
+
+footer {
+  margin-top: 80px;
 }
