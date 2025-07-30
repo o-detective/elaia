@@ -495,3 +495,53 @@ footer {
     flex: 1 1 100%;
   }
 }
+
+/* === ΕΠΙΔΙΟΡΘΩΣΗ: Περιθώριο στο περιεχόμενο ώστε να μην κολλάει στο sidebar === */
+.carousel,
+.ai-bar,
+.search-filters {
+  margin-left: 240px;
+}
+
+/* === ΕΠΙΔΙΟΡΘΩΣΗ: Carousel εμφάνιση σε 3 σειρές οριζόντια χωρίς scroll === */
+.carousel-track {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow-x: visible; /* όχι scroll */
+  justify-content: space-between;
+}
+
+.carousel-item {
+  flex: 1 1 calc(33.33% - 20px); /* Τρία ανά σειρά */
+  max-width: calc(33.33% - 20px);
+  box-sizing: border-box;
+}
+
+/* === Responsive: για tablet === */
+@media (max-width: 1024px) {
+  .carousel-item {
+    flex: 1 1 45%;
+    max-width: 45%;
+  }
+
+  .carousel,
+  .ai-bar,
+  .search-filters {
+    margin-left: 120px; /* Προσαρμόζεται αν μικρύνει το sidebar */
+  }
+}
+
+/* === Responsive: για κινητά === */
+@media (max-width: 600px) {
+  .carousel-item {
+    flex: 1 1 90%;
+    max-width: 90%;
+  }
+
+  .carousel,
+  .ai-bar,
+  .search-filters {
+    margin-left: 0;
+  }
+}
