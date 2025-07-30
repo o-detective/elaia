@@ -239,18 +239,20 @@ body {
 
 .carousel-track {
   display: flex;
-  flex-wrap: wrap;
   gap: 20px;
+  overflow-x: auto;
+  padding: 20px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .carousel-item {
-  aspect-ratio: 1 / 1; /* Τετράγωνο */
-  flex: 1 1 30%;
-  max-width: 30%;
+  flex: 0 0 280px;
+  aspect-ratio: 1 / 1;
+  max-width: 100%;
   background-color: #dedbd4;
-  border-radius: 8px;
-  padding: 10px;
+  border-radius: 12px;
+  padding: 15px;
   text-align: center;
   box-sizing: border-box;
   display: flex;
@@ -278,6 +280,11 @@ body {
 .carousel-item:hover {
   transform: scale(1.02);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+section.carousel {
+  margin-top: 40px;
+  margin-bottom: 100px;
 }
 
 @media (min-width: 1200px) {
