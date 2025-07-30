@@ -488,30 +488,30 @@ body {
 }
 
 #main-footer {
-  position: relative;         /* Όχι fixed */
-  width: calc(100% - 250px);  /* για να μην μπαίνει στο sidebar */
-  margin-left: 250px;         /* να ακουμπά στο sidebar */
+  width: 100%;
   background-color: #7d8053;
   color: white;
   padding: 20px 30px;
   font-size: 14px;
   box-sizing: border-box;
   margin-top: 60px;
-}
-
-.container {
-  padding-bottom: 80px; /* για να μη κρύβει περιεχόμενο το fixed footer */
+  border: 2px solid #b9b5a6; /* καδράκι */
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
 }
 
 .footer-content {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
 }
 
 .footer-links a {
   color: white;
-  margin-right: 15px;
+  margin: 0 10px;
   text-decoration: none;
   font-size: 13px;
 }
@@ -546,4 +546,11 @@ html, body {
 
 #content-wrap {
   flex: 1;
+}
+
+@media (max-width: 768px) {
+  #main-footer {
+    margin-left: 0;
+    width: 100%;
+  }
 }
