@@ -353,26 +353,34 @@ body {
     font-size: 20px;
   }
 
-.carousel-track {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: nowrap;
-}
+  .carousel-track {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
 
-.carousel-item {
-  flex: 1 1 calc(33.33% - 13.33px);
-  max-width: calc(33.33% - 13.33px);
-  background-color: #dedbd4;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: all 0.3s ease;
-}  
+  .carousel-item {
+    flex: 1 1 calc(50% - 20px); /* ✅ όχι 33% στο κινητό */
+    background-color: #dedbd4;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
 
   .carousel:last-of-type .carousel-item {
     min-width: 200px;
@@ -396,18 +404,7 @@ body {
     padding: 6px 10px;
     font-size: 0.9rem;
   }
-}
 
-@media (max-width: 480px) {
-  .map-container svg,
-  .map-container object {
-    min-width: 500px;
-  }
-}
-
-
-/* Sidebar για κινητά - πάντα αριστερά */
-@media (max-width: 768px) {
   body {
     display: flex;
     flex-direction: row;
@@ -419,23 +416,25 @@ body {
     left: 0;
     top: 0;
     bottom: 0;
-    width: 120px; /* ή όσο χρειάζεται */
+    width: 120px;
     z-index: 999;
     background-color: #7d8053;
   }
 
   main.content {
-  margin-left: 240px;
-  max-width: calc(100% - 240px);
-  padding: 40px;
-  box-sizing: border-box;
-}
+    margin-left: 120px;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
 
   .map-container object {
-  width: 100%;
-  max-width: 100%;
-  min-width: unset;
-}
+    width: 100%;
+    max-width: 100%;
+    min-width: unset;
+  }
 
   .ai-bar,
   .filters,
@@ -444,6 +443,17 @@ body {
   #aiPopup {
     width: 100%;
     max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-item {
+    flex: 1 1 100%;
+  }
+
+  .map-container svg,
+  .map-container object {
+    min-width: 500px;
   }
 }
 
