@@ -488,7 +488,8 @@ body {
 }
 
 #main-footer {
-  width: 100%;
+  width: calc(100% + 240px);   /* επεκτείνεται κάτω από το sidebar */
+  margin-left: -240px;         /* μετατοπίζεται ώστε να ακουμπά αριστερά */
   background-color: #7d8053;
   color: white;
   padding: 20px 30px;
@@ -536,6 +537,7 @@ body {
 html, body {
   height: 100%;
   margin: 0;
+  overflow-x: hidden;
 }
 
 #page-container {
