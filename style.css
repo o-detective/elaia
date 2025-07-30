@@ -353,6 +353,27 @@ body {
     font-size: 20px;
   }
 
+.carousel-track {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+
+.carousel-item {
+  flex: 1 1 calc(33.33% - 13.33px);
+  max-width: calc(33.33% - 13.33px);
+  background-color: #dedbd4;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}  
+
   .carousel:last-of-type .carousel-item {
     min-width: 200px;
     padding: 20px;
@@ -403,13 +424,12 @@ body {
     background-color: #7d8053;
   }
 
-  main,
-  .main-content,
-  .content {
-    margin-left: 120px; /* ίδιο με το width του sidebar */
-    width: calc(100% - 120px);
-    padding: 10px;
-  }
+  main.content {
+  margin-left: 240px;
+  max-width: calc(100% - 240px);
+  padding: 40px;
+  box-sizing: border-box;
+}
 
   .map-container object {
   width: 100%;
