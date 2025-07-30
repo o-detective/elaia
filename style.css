@@ -114,15 +114,6 @@ body {
   color: #333;
 }
 
-.content {
-  flex: 1;
-  padding: 40px;
-  background-color: #f9f4f1;
-  color: #333;
-  min-width: 0;
-  box-sizing: border-box;
-}
-
 /* ===================== */
 /* MAP SECTION */
 /* ===================== */
@@ -239,28 +230,14 @@ body {
   padding: 10px 0;
 }
 
-/* Η λωρίδα με τα items */
 .carousel-track {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 10px;
+  overflow-x: visible;
+  scroll-snap-type: none;
+  flex-wrap: wrap;
 }
-
-/* Κάθε κουτί καρουζέλ */
 .carousel-item {
-  flex: 0 0 280px;
-  scroll-snap-align: start;
-  background-color: #dedbd4;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: all 0.3s ease;
+  flex: 1 1 calc(33.33% - 20px);
+  max-width: calc(33.33% - 20px);
 }
 
 /* Εικόνες */
@@ -502,14 +479,6 @@ body {
   opacity: 0.8;
 }
 
-@media (min-width: 769px) {
-  .carousel,
-  .ai-bar,
-  .search-filters {
-    margin-left: 240px; /* ίδιο με το sidebar */
-  }
-}
-
 html, body {
   height: 100%;
   margin: 0;
@@ -535,19 +504,6 @@ html, body {
 
 footer {
   margin-top: 80px;
-}
-
-@media (max-width: 768px) {
-  .carousel-track {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
-  }
-
-  .carousel-item {
-    flex: 1 1 calc(50% - 20px);
-  }
 }
 
 @media (max-width: 480px) {
