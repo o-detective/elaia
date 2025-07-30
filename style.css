@@ -172,9 +172,16 @@ body {
 /* ===================== */
 .search-filters {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   flex-wrap: nowrap;
-  align-items: center;
   gap: 20px;
+  width: 100%;
+}
+
+.search-filters .filter-group {
+  flex: 1;
+  min-width: 0;
 }
 
 .filter-group,
@@ -350,24 +357,25 @@ body {
   }
 
   .carousel-track {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
 
-  .carousel-item {
-    flex: 1 1 calc(50% - 20px); /* ✅ όχι 33% στο κινητό */
-    background-color: #dedbd4;
-    border-radius: 12px;
-    padding: 15px;
-    text-align: center;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.3s ease;
-  }
+.carousel-item {
+  flex: 1 1 calc(33.33% - 20px);
+  max-width: calc(33.33% - 20px);
+  background-color: #dedbd4;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
 
   .carousel-item img {
     width: 100%;
@@ -417,9 +425,8 @@ body {
     background-color: #7d8053;
   }
 
-main.content {
-  margin-left: 240px;
-  width: calc(100% - 240px);
+  main.content {
+  margin-left: 120px; /* ίδιο με το πλάτος του sidebar */
   padding: 30px 40px;
   box-sizing: border-box;
   display: flex;
