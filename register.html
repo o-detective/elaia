@@ -92,6 +92,67 @@
       background-color: #6b7049;
     }
   </style>
+
+<!-- Firebase SDK -->
+<script type="module">
+  // Import Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyA01bUzHHoJre5KgdHpx-jsyosIULx7-ko",
+    authDomain: "elaiaapp86.firebaseapp.com",
+    projectId: "elaiaapp86",
+    storageBucket: "elaiaapp86.firebasestorage.app",
+    messagingSenderId: "458987445654",
+    appId: "1:458987445654:web:4df5d7522ef451a600d1b7",
+    measurementId: "G-VWJQQTCG1N"
+  };
+
+  // Init Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // Συνάρτηση εγγραφής
+  document.getElementById("registration-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+    const phone = document.getElementById("phone").value;
+    const region = document.getElementById("region").value;
+    const type = document.getElementById("venue-type").value;
+
+    if (password !== confirmPassword) {
+      alert("Οι κωδικοί δεν ταιριάζουν!");
+      return;
+    }
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Αποθήκευση επιπλέον στοιχείων στο Firestore
+      await setDoc(doc(db, "professionals", user.uid), {
+        email,
+        phone,
+        region,
+        type
+      });
+
+      alert("Η εγγραφή ήταν επιτυχής!");
+      window.location.href = "profile.html"; // θα φτιάξουμε αυτή τη σελίδα μετά
+    } catch (error) {
+      console.error("Σφάλμα κατά την εγγραφή:", error);
+      alert("Κάτι πήγε στραβά: " + error.message);
+    }
+  });
+</script>
+  
 </head>
 <body>
   <div class="form-container">
