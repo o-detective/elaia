@@ -502,13 +502,6 @@ footer {
   }
 }
 
-/* === ΕΠΙΔΙΟΡΘΩΣΗ: Περιθώριο στο περιεχόμενο ώστε να μην κολλάει στο sidebar === */
-.carousel,
-.ai-bar,
-.search-filters {
-  margin-left: 240px;
-}
-
 /* === ΕΠΙΔΙΟΡΘΩΣΗ: Carousel εμφάνιση σε 3 σειρές οριζόντια χωρίς scroll === */
 .carousel-track {
   display: flex;
@@ -530,12 +523,6 @@ footer {
     flex: 1 1 45%;
     max-width: 45%;
   }
-
-  .carousel,
-  .ai-bar,
-  .search-filters {
-    margin-left: 120px; /* Προσαρμόζεται αν μικρύνει το sidebar */
-  }
 }
 
 /* === Responsive: για κινητά === */
@@ -543,11 +530,5 @@ footer {
   .carousel-item {
     flex: 1 1 90%;
     max-width: 90%;
-  }
-
-  .carousel,
-  .ai-bar,
-  .search-filters {
-    margin-left: 0;
   }
 }
