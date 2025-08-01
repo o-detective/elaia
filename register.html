@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Εγγραφή Επαγγελματία</title>
+  <style>
+    body {
+      background-color: #fdf6f2;
+      font-family: "Georgia", serif;
+      color: #4a4a35;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #fffdf7;
+      border: 2px solid #7d8053;
+      border-radius: 10px;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      color: #7d8053;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .price-display {
+      margin: 10px 0;
+      font-weight: bold;
+      color: #7d8053;
+    }
+
+    .form-group.checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    button {
+      background-color: #7d8053;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      width: 100%;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #6b7049;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Εγγραφή Επαγγελματία</h2>
+    <form>
+      <div class="form-group">
+        <label>Ονοματεπώνυμο</label>
+        <input type="text" required />
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" required />
+      </div>
+
+      <div class="form-group">
+        <label>Τηλέφωνο</label>
+        <input type="tel" required />
+      </div>
+
+      <div class="form-group">
+        <label>Περιοχή/Έδρα</label>
+        <select required>
+          <option>-- Επιλέξτε --</option>
+          <option>Αττικης</option>
+          <option>Ευβοιας</option>
+          <option>Ευρυτανιας</option>
+          <option>Φωκιδας</option>
+          <option>Φθιωτιδας</option>
+          <option>Βοιωτιας</option>
+          <option>Χαλκιδικης</option>
+          <option>Ημαθιας</option>
+          <option>Κιλκις</option>
+          <option>Πελλας</option>
+          <option>Πιεριας</option>
+          <option>Σερρων</option>
+          <option>Θεσσαλονικης</option>
+          <option>Χανιων</option>
+          <option>Ηρακλειου</option>
+          <option>Λασιθιου</option>
+          <option>Ρεθυμνης</option>
+          <option>Δραμας</option>
+          <option>Εβρου</option>
+          <option>Καβαλας</option>
+          <option>Ροδοπης</option>
+          <option>Ξανθης</option>
+          <option>Αρτας</option>
+          <option>Ιωαννινων</option>
+          <option>Πρεβεζας</option>
+          <option>Θεσπρωτιας</option>
+          <option>Κερκυρας</option>
+          <option>Παξοι</option>
+          <option>Κυθηρα</option>
+          <option>Κεφαλληνιας</option>
+          <option>Λευκαδας</option>
+          <option>Ζακυνθου</option>
+          <option>Ιθακης</option>
+          <option>Λοιπα ιονια νησια</option>
+          <option>Ικαρια</option>
+          <option>Λημνος</option>
+          <option>Χιου</option>
+          <option>Λεσβου</option>
+          <option>Σαμου</option>
+          <option>Αρκαδιας</option>
+          <option>Αργολιδας</option>
+          <option>Κορινθιας</option>
+          <option>Λακωνιας</option>
+          <option>Μεσσηνιας</option>
+          <option>Λοιπα νηςια Κυκλαδων</option>
+          <option>Ανδρος</option>
+          <option>Σαντορινη</option>
+          <option>Μηλος</option>
+          <option>Μυκονος</option>
+          <option>Ναξος</option>
+          <option>Παρος</option>
+          <option>Τηνος</option>
+          <option>Συρος</option>
+          <option>Λοιπα νησια Δωδεκανησων</option>
+          <option>Ροδος</option>
+          <option>Καρπαθος</option>
+          <option>Κως</option>
+          <option>Αστυπαλαια</option>
+          <option>Πατμος</option>
+          <option>Καστελλοριζο</option>
+          <option>Καρδιτσας</option>
+          <option>Λαρισης</option>
+          <option>Μαγνησιας</option>
+          <option>Τρικαλων</option>
+          <option>Αχαιας</option>
+          <option>Αιτωλοακαρνανιας</option>
+          <option>Ηλειας</option>
+          <option>Φλωρινας</option>
+          <option>Γρεβενων</option>
+          <option>Καστοριας</option>
+          <option>Κοζανης</option>
+          <option>Θασος</option>
+          <option>Σαμοθρακη</option>
+          <option>Σκιαθος</option>
+          <option>Σκοπελος</option>
+          <option>Αλοννησος</option>
+          <option>Σκυρος</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Κατηγορία Επαγγέλματος</label>
+        <select id="profession" onchange="updatePrice()" required>
+          <option value="">-- Επιλέξτε --</option>
+          <option value="500">Χώρος/Κτήμα</option>
+          <option value="320">Κομμωτήρια</option>
+          <option value="300">Make up artists</option>
+          <option value="280">Nail artists</option>
+          <option value="380">Φωτογράφοι</option>
+          <option value="280">DJs</option>
+          <option value="270">Διακοσμητές</option>
+          <option value="350">Catering</option>
+          <option value="380">Βιντεογράφοι</option>
+          <option value="250">Ζαχαροπλαστεία / Τούρτες</option>
+          <option value="240">Ανθοπωλεία / Ανθοστολισμοί</option>
+          <option value="230">Ενδυματολόγοι / Ράφτες</option>
+          <option value="260">Μπαρ</option>
+          <option value="220">Ενοικίαση εξοπλισμού</option>
+        </select>
+      </div>
+
+      <div id="price" class="price-display"></div>
+
+      <div class="form-group">
+        <label>Κωδικός Πρόσβασης</label>
+        <input type="password" required />
+      </div>
+
+      <div class="form-group">
+        <label>Επιβεβαίωση Κωδικού</label>
+        <input type="password" required />
+      </div>
+
+      <div class="form-group checkbox">
+        <input type="checkbox" required />
+        <label>Αποδέχομαι τους όρους χρήσης και την ετήσια συνδρομή.</label>
+      </div>
+
+      <button type="submit">Πληρωμή</button>
+    </form>
+  </div>
+
+  <script>
+    function updatePrice() {
+      const select = document.getElementById("profession");
+      const value = select.value;
+      const priceDiv = document.getElementById("price");
+
+      if (value) {
+        priceDiv.innerText = `Ετήσια Συνδρομή: €${value}`;
+      } else {
+        priceDiv.innerText = "";
+      }
+    }
+  </script>
+</body>
+</html>
