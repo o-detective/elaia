@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Σύνδεση</title>
+  <style>
+    body {
+      background-color: #fdf6f2;
+      font-family: "Georgia", serif;
+      color: #4a4a35;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #fffdf7;
+      border: 2px solid #7d8053;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .form-container img {
+      max-width: 100px;
+      margin-bottom: 20px;
+    }
+
+    .form-container h2 {
+      color: #7d8053;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: #7d8053;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      width: 100%;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background-color: #6b7049;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <!-- Επίσημο λογότυπο -->
+    <img src="images/logo.jpg" alt="Λογότυπο Elaia" />
+
+    <h2>Σύνδεση</h2>
+
+    <form>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" required />
+      </div>
+
+      <div class="form-group">
+        <label>Κωδικός Πρόσβασης</label>
+        <input type="password" required />
+      </div>
+
+      <button type="submit">Σύνδεση</button>
+    </form>
+  </div>
+</body>
+</html>
