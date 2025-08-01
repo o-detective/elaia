@@ -20,6 +20,18 @@
       border-radius: 10px;
     }
 
+    .logo-wrapper {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .logo-wrapper img {
+      max-width: 100px;
+      height: auto;
+      opacity: 0.9;
+      border-radius: 8px;
+    }
+
     .form-container h2 {
       text-align: center;
       color: #7d8053;
@@ -54,6 +66,17 @@
       gap: 10px;
     }
 
+    .terms-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
+      font-size: 14px;
+      line-height: 1.4;
+      flex-wrap: wrap;
+      max-width: 100%;
+    }
+
     button {
       background-color: #7d8053;
       color: white;
@@ -68,42 +91,34 @@
     button:hover {
       background-color: #6b7049;
     }
-
-    .terms-label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 15px;
-  font-size: 14px;
-  line-height: 1.4;
-  flex-wrap: wrap;
-  max-width: 100%;
-}
   </style>
 </head>
 <body>
   <div class="form-container">
+    <div class="logo-wrapper">
+      <img src="2ECB64C0-85F0-4F73-96D8-C34E7E91208F.png" alt="Elaia Logo" />
+    </div>
     <h2>Εγγραφή Επαγγελματία</h2>
     <form>
       <div class="form-group">
-        <label>Ονοματεπώνυμο</label>
-        <input type="text" required />
+        <label for="name">Ονοματεπώνυμο</label>
+        <input type="text" id="name" required />
       </div>
 
       <div class="form-group">
-        <label>Email</label>
-        <input type="email" required />
+        <label for="email">Email</label>
+        <input type="email" id="email" required />
       </div>
 
       <div class="form-group">
-        <label>Τηλέφωνο</label>
-        <input type="tel" required />
+        <label for="phone">Τηλέφωνο</label>
+        <input type="tel" id="phone" required />
       </div>
 
       <div class="form-group">
-        <label>Περιοχή/Έδρα</label>
-        <select required>
-          <option>-- Επιλέξτε --</option>
+        <label for="region">Περιοχή/Έδρα</label>
+        <select id="region" required>
+          <option value="">-- Επιλέξτε Περιοχή --</option>
           <option>Αττικης</option>
           <option>Ευβοιας</option>
           <option>Ευρυτανιας</option>
@@ -185,61 +200,41 @@
       </div>
 
       <div class="form-group">
-        <label>Κατηγορία Επαγγέλματος</label>
-        <select id="profession" onchange="updatePrice()" required>
-          <option value="">-- Επιλέξτε --</option>
-          <option value="500">Χώρος/Κτήμα</option>
-          <option value="320">Κομμωτήρια</option>
-          <option value="300">Make up artists</option>
-          <option value="280">Nail artists</option>
-          <option value="380">Φωτογράφοι</option>
-          <option value="280">DJs</option>
-          <option value="270">Διακοσμητές</option>
-          <option value="350">Catering</option>
-          <option value="380">Βιντεογράφοι</option>
-          <option value="250">Ζαχαροπλαστεία / Τούρτες</option>
-          <option value="240">Ανθοπωλεία / Ανθοστολισμοί</option>
-          <option value="230">Ενδυματολόγοι / Ράφτες</option>
-          <option value="260">Μπαρ</option>
-          <option value="220">Ενοικίαση εξοπλισμού</option>
+        <label for="category">Κατηγορία Επαγγέλματος</label>
+        <select id="category" required>
+          <option value="">-- Επιλέξτε Κατηγορία --</option>
+          <option>Χώρος/Κτήμα</option>
+          <option>Διακόσμηση</option>
+          <option>Φωτογράφος/Βίντεο</option>
+          <option>Makeup/Hair</option>
+          <option>Εκκλησία/Ιερέας</option>
+          <option>Μουσική</option>
+          <option>Catering</option>
+          <option>Προσκλητήρια/Μπομπονιέρες</option>
+          <option>Φορέματα/Ρούχα</option>
+          <option>Άλλο</option>
         </select>
       </div>
 
-      <div id="price" class="price-display"></div>
+      <div class="price-display" id="priceDisplay">Ετήσια Συνδρομή: €500</div>
 
       <div class="form-group">
-        <label>Κωδικός Πρόσβασης</label>
-        <input type="password" required />
+        <label for="password">Κωδικός Πρόσβασης</label>
+        <input type="password" id="password" required />
       </div>
 
       <div class="form-group">
-        <label>Επιβεβαίωση Κωδικού</label>
-        <input type="password" required />
+        <label for="confirm-password">Επιβεβαίωση Κωδικού</label>
+        <input type="password" id="confirm-password" required />
       </div>
 
-      <div class="form-group checkbox">
-        <label class="terms-label">
-  <input type="checkbox" required />
-  <span>Αποδέχομαι τους όρους χρήσης και την ετήσια συνδρομή.</span>
-</label>
-      </div>
+      <label class="terms-label">
+        <input type="checkbox" required />
+        Αποδέχομαι τους όρους χρήσης και την ετήσια συνδρομή.
+      </label>
 
       <button type="submit">Πληρωμή</button>
     </form>
   </div>
-
-  <script>
-    function updatePrice() {
-      const select = document.getElementById("profession");
-      const value = select.value;
-      const priceDiv = document.getElementById("price");
-
-      if (value) {
-        priceDiv.innerText = `Ετήσια Συνδρομή: €${value}`;
-      } else {
-        priceDiv.innerText = "";
-      }
-    }
-  </script>
 </body>
 </html>
