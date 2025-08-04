@@ -31,30 +31,59 @@
     h2 {
       color: #7d8053;
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
-    #calendar {
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .calendar-header button {
+      background-color: #7d8053;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9em;
+    }
+
+    .calendar-header button:hover {
+      background-color: #6b7049;
+    }
+
+    .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 5px;
     }
 
-    .day {
+    .day, .day-name {
       padding: 10px;
       text-align: center;
-      border: 1px solid #ccc;
       border-radius: 6px;
+    }
+
+    .day-name {
+      font-weight: bold;
+      background-color: #f0f0e8;
+    }
+
+    .day {
+      border: 1px solid #ccc;
       cursor: pointer;
+    }
+
+    .available {
+      background-color: #cbe5cb;
     }
 
     .unavailable {
       background-color: #eab6b6;
       color: white;
-    }
-
-    .available {
-      background-color: #cbe5cb;
     }
 
     .legend {
@@ -92,7 +121,15 @@
     <img src="2ECB64C0-85F0-4F73-96D8-C34E7E91208F.png" alt="Elaia Logo" class="logo" />
     <h2>Το Προφίλ Μου</h2>
 
-    <div id="calendar"></div>
+    <div class="calendar-header">
+      <button onclick="changeMonth(-1)">← Προηγούμενος</button>
+      <div id="monthYear"></div>
+      <button onclick="changeMonth(1)">Επόμενος →</button>
+    </div>
+
+    <div class="calendar-grid" id="calendar">
+      <!-- Οι μέρες του μήνα θα μπουν δυναμικά -->
+    </div>
 
     <div class="legend">
       <div><span style="background-color:#cbe5cb;"></span> Διαθέσιμη</div>
@@ -122,34 +159,54 @@
     const db = getFirestore(app);
 
     let unavailableDates = [];
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
 
-    function createCalendar(year, month) {
+    const daysOfWeek = ['Δε', 'Τρ', 'Τε', 'Πε', 'Πα', 'Σα', 'Κυ'];
+
+    function renderCalendar(year, month) {
       const calendar = document.getElementById("calendar");
+      const monthYear = document.getElementById("monthYear");
       calendar.innerHTML = "";
+      monthYear.textContent = new Date(year, month).toLocaleString("el-GR", { month: "long", year: "numeric" });
 
-      const date = new Date(year, month, 1);
+      daysOfWeek.forEach(day => {
+        const dayName = document.createElement("div");
+        dayName.className = "day-name";
+        dayName.textContent = day;
+        calendar.appendChild(dayName);
+      });
+
+      const firstDay = new Date(year, month, 1).getDay(); // 0 (Κυριακή) - 6
+      const start = firstDay === 0 ? 6 : firstDay - 1; // Μετατόπιση για Δευτέρα ως πρώτη ημέρα
+
+      for (let i = 0; i < start; i++) {
+        const empty = document.createElement("div");
+        calendar.appendChild(empty);
+      }
+
       const lastDay = new Date(year, month + 1, 0).getDate();
 
-      for (let i = 1; i <= lastDay; i++) {
-        const currentDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+      for (let day = 1; day <= lastDay; day++) {
+        const date = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         const div = document.createElement("div");
         div.className = "day";
-        div.textContent = i;
+        div.textContent = day;
 
-        if (unavailableDates.includes(currentDate)) {
+        if (unavailableDates.includes(date)) {
           div.classList.add("unavailable");
         } else {
           div.classList.add("available");
         }
 
         div.addEventListener("click", async () => {
-          const index = unavailableDates.indexOf(currentDate);
+          const index = unavailableDates.indexOf(date);
           if (index > -1) {
             unavailableDates.splice(index, 1);
             div.classList.remove("unavailable");
             div.classList.add("available");
           } else {
-            unavailableDates.push(currentDate);
+            unavailableDates.push(date);
             div.classList.remove("available");
             div.classList.add("unavailable");
           }
@@ -157,7 +214,7 @@
           const user = auth.currentUser;
           if (user) {
             await setDoc(doc(db, "users", user.uid), {
-              unavailableDates,
+              unavailableDates
             }, { merge: true });
           }
         });
@@ -165,6 +222,18 @@
         calendar.appendChild(div);
       }
     }
+
+    window.changeMonth = function (direction) {
+      currentMonth += direction;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      } else if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar(currentYear, currentMonth);
+    };
 
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
@@ -180,8 +249,7 @@
         }
       }
 
-      const today = new Date();
-      createCalendar(today.getFullYear(), today.getMonth());
+      renderCalendar(currentYear, currentMonth);
     });
 
     window.logout = function () {
