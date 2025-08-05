@@ -86,6 +86,19 @@
       color: white;
     }
 
+    .calendar-wrapper {
+  width: 280px;
+  float: left;
+  margin-right: 30px;
+}
+#calendar {
+  font-size: 14px;
+  background-color: #f4f1e7;
+  border: 1px solid #7d8053;
+  padding: 15px;
+  border-radius: 8px;
+}
+
     .legend {
       margin-top: 20px;
       display: flex;
@@ -183,15 +196,17 @@
   </div>
 </div>
 
-    <div class="calendar-header">
-      <button onclick="changeMonth(-1)">← Προηγούμενος</button>
-      <div id="monthYear"></div>
-      <button onclick="changeMonth(1)">Επόμενος →</button>
-    </div>
+   <div class="calendar-wrapper"> <!-- Αν θες, μόνο για styling -->
+  <div class="calendar-header">
+    <button onclick="changeMonth(-1)">← Προηγούμενος</button>
+    <div id="monthYear"></div>
+    <button onclick="changeMonth(1)">Επόμενος →</button>
+  </div>
 
-    <div class="calendar-grid" id="calendar">
-      <!-- Οι μέρες του μήνα θα μπουν δυναμικά -->
-    </div>
+  <div class="calendar-grid" id="calendar">
+    <!-- Οι μέρες του μήνα θα μπουν δυναμικά -->
+  </div>
+</div>
 
     <div class="legend">
       <div><span style="background-color:#cbe5cb;"></span> Διαθέσιμη</div>
