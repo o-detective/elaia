@@ -163,7 +163,7 @@
   <div class="profile-container">
     <img src="2ECB64C0-85F0-4F73-96D8-C34E7E91208F.png" alt="Elaia Logo" class="logo" />
     <div class="top-section">
-  <h2>Καλημέρα, Νίκος!</h2>
+  <h2 id="welcome-msg">Καλημέρα!</h2>
   <div class="top-metrics">
     <div class="metric-box">
       <span>📅</span>
@@ -298,21 +298,34 @@
     };
 
     onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        window.location.href = "login.html";
-        return;
-      }
+  if (!user) {
+    window.location.href = "login.html";
+    return;
+  }
 
-      const userDoc = await getDoc(doc(db, "users", user.uid));
-      if (userDoc.exists()) {
-        const data = userDoc.data();
-        if (data.unavailableDates) {
-          unavailableDates = data.unavailableDates;
-        }
-      }
+  const userDoc = await getDoc(doc(db, "users", user.uid));
+  if (userDoc.exists()) {
+    const data = userDoc.data();
 
-      renderCalendar(currentYear, currentMonth);
-    });
+    // Αποθήκευση ημερομηνιών μη διαθεσιμότητας
+    if (data.unavailableDates) {
+      unavailableDates = data.unavailableDates;
+    }
+
+    // Δυναμικό μήνυμα καλωσορίσματος
+    if (data.firstName) {
+      const now = new Date();
+      const hour = now.getHours();
+      let greeting = "Καλημέρα";
+      if (hour >= 18) greeting = "Καλησπέρα";
+      else if (hour >= 12) greeting = "Καλό μεσημέρι";
+
+      document.getElementById("welcome-msg").textContent = `${greeting}, ${data.firstName}!`;
+    }
+  }
+
+  renderCalendar(currentYear, currentMonth);
+});
 
     window.logout = function () {
       signOut(auth).then(() => {
