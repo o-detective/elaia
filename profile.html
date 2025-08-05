@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Το Προφίλ Μου</title>
   <style>
-
 /* === RESET === */
 * {
   margin: 0;
@@ -13,72 +12,67 @@
   box-sizing: border-box;
 }
 
-/* === Βασικά === */
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #7d8053; /* λαδί φόντο σελίδας */
+  background-color: #7d8053; /* λαδί */
   color: #333;
+  overflow-x: hidden;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 20px auto;
-  max-width: 120px;
-}
-
-/* === Κεντρικό πλαίσιο τύπου μοκαπ === */
+/* === Κεντρικό κουτί === */
 .dashboard-box {
   background-color: #f4f1e7; /* παστέλ μπεζ */
   max-width: 900px;
   margin: 40px auto;
   padding: 30px;
   border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
 }
 
-/* === Τίτλος μέσα στο κουτί === */
-.dashboard-box h1 {
+/* === Logo === */
+.logo {
+  display: block;
+  margin: 0 auto 20px auto;
+  max-width: 120px;
+}
+
+/* === Header === */
+.dashboard-box h1,
+.dashboard-box h2 {
   text-align: center;
-  font-size: 2em;
+  color: #7d8053;
+  margin-bottom: 20px;
+}
+
+/* === Τμήμα πάνω === */
+.top-section {
+  text-align: center;
   margin-bottom: 30px;
+}
+
+.top-section h2 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
   color: #4a4a35;
 }
 
-/* === Κουτιά στατιστικών (πάνω) === */
-.stats-container {
+/* === Στατιστικά === */
+.top-metrics {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
+  flex-wrap: wrap;
   gap: 15px;
+  margin-bottom: 20px;
 }
 
-.stat-box {
-  background-color: #f5f5e8;
-  border-radius: 12px;
-  padding: 20px;
-  flex: 1;
-  text-align: center;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-
-.stat-box h2 {
-  font-size: 1em;
-  color: #7d8053;
-  margin-bottom: 8px;
-}
-
-.stat-box p {
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-/* === Μικρά κουτάκια (παλιά .metric-box) === */
 .metric-box {
   background-color: #f5f5e8;
   border-radius: 10px;
   padding: 15px 20px;
+  flex: 1;
   min-width: 150px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  text-align: center;
 }
 
 .metric-box span {
@@ -100,9 +94,20 @@ body {
 
 /* === Ημερολόγιο === */
 .calendar-wrapper {
-  float: left;
-  width: 280px;
-  margin-right: 30px;
+  margin-top: 30px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#monthYear {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #4a4a35;
 }
 
 #calendar {
@@ -117,6 +122,7 @@ body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
+  margin-top: 10px;
 }
 
 .day-name {
@@ -150,6 +156,7 @@ body {
   display: flex;
   gap: 20px;
   font-size: 0.9em;
+  justify-content: center;
 }
 
 .legend span {
@@ -160,30 +167,32 @@ body {
 }
 
 /* === Κουμπί αποσύνδεσης === */
-.logout-button {
+.logout-btn {
   display: inline-block;
-  margin-top: 40px;
+  margin: 30px auto 0 auto;
   background-color: #7d8053;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  text-align: center;
 }
 
-.logout-button:hover {
+.logout-btn:hover {
   background-color: #6b7049;
 }
 
 /* === Responsive === */
 @media (max-width: 768px) {
-  .stats-container {
+  .top-metrics {
     flex-direction: column;
+    gap: 10px;
   }
-  .calendar-wrapper {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 30px;
+
+  .calendar-header {
+    flex-direction: column;
+    gap: 10px;
   }
 }
   </style>
