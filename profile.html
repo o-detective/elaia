@@ -6,36 +6,73 @@
   <title>Το Προφίλ Μου</title>
   <style>
 
+/* === RESET === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === Βασικά === */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #7d8053; /* λαδί φόντο σελίδας */
+  color: #333;
+}
+
 .logo {
   display: block;
   margin: 0 auto 20px auto;
   max-width: 120px;
 }
 
-h2 {
-  color: #7d8053;
-  text-align: center;
-  margin-bottom: 20px;
+/* === Κεντρικό πλαίσιο τύπου μοκαπ === */
+.dashboard-box {
+  background-color: #f4f1e7; /* παστέλ μπεζ */
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.top-section {
+/* === Τίτλος μέσα στο κουτί === */
+.dashboard-box h1 {
   text-align: center;
+  font-size: 2em;
   margin-bottom: 30px;
-}
-
-.top-section h2 {
-  font-size: 1.8em;
-  margin-bottom: 15px;
   color: #4a4a35;
 }
 
-.top-metrics {
+/* === Κουτιά στατιστικών (πάνω) === */
+.stats-container {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  gap: 15px;
 }
 
+.stat-box {
+  background-color: #f5f5e8;
+  border-radius: 12px;
+  padding: 20px;
+  flex: 1;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.stat-box h2 {
+  font-size: 1em;
+  color: #7d8053;
+  margin-bottom: 8px;
+}
+
+.stat-box p {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* === Μικρά κουτάκια (παλιά .metric-box) === */
 .metric-box {
   background-color: #f5f5e8;
   border-radius: 10px;
@@ -59,77 +96,6 @@ h2 {
   margin-top: 5px;
   font-size: 0.9em;
   color: #444;
-}
-
-.legend {
-  margin-top: 20px;
-  display: flex;
-  gap: 20px;
-  font-size: 0.9em;
-}
-
-.legend span {
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-  margin-right: 6px;
-}
-
-/* === RESET === */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #7d8053; /* λαδί */
-  color: #333;
-}
-
-/* === Κεντρικό κουτί === */
-.dashboard-box {
-  background-color: #f4f1e7; /* παστέλ μπεζ */
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 30px;
-  border-radius: 16px;
-}
-
-/* === Header === */
-.dashboard-box h1 {
-  text-align: center;
-  font-size: 2em;
-  margin-bottom: 30px;
-}
-
-/* === Κουτιά στατιστικών === */
-.stats-container {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  gap: 15px;
-}
-
-.stat-box {
-  background-color: #f4f4ec;
-  border-radius: 12px;
-  padding: 20px;
-  flex: 1;
-  text-align: center;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-
-.stat-box h2 {
-  font-size: 1em;
-  color: #7d8053;
-  margin-bottom: 8px;
-}
-
-.stat-box p {
-  font-size: 1.5em;
-  font-weight: bold;
 }
 
 /* === Ημερολόγιο === */
@@ -178,6 +144,21 @@ body {
   color: white;
 }
 
+/* === Υπόμνημα === */
+.legend {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  font-size: 0.9em;
+}
+
+.legend span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 6px;
+}
+
 /* === Κουμπί αποσύνδεσης === */
 .logout-button {
   display: inline-block;
@@ -208,7 +189,7 @@ body {
   </style>
 </head>
 <body>
-  <div class="profile-container">
+ <div class="dashboard-box">
     <img src="2ECB64C0-85F0-4F73-96D8-C34E7E91208F.png" alt="Elaia Logo" class="logo" />
     <div class="top-section">
   <h2 id="welcome-msg">Καλημέρα!</h2>
