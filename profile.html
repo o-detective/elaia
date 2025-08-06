@@ -195,12 +195,90 @@ body {
     gap: 10px;
   }
 }
+
+    .profile-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: -40px;
+  margin-bottom: 10px;
+}
+
+.profile-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #7d8053;
+}
+
+.view-profile-btn {
+  background-color: #7d8053;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+.view-profile-btn:hover {
+  background-color: #6b7049;
+}
+
+.content-management {
+  margin-top: 20px;
+  background-color: #f0f0e8;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.content-management h3 {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.content-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.content-buttons button {
+  background-color: #7d8053;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.content-buttons button:hover {
+  background-color: #6b7049;
+}
   </style>
 </head>
 <body>
  <div class="dashboard-box">
     <img src="2ECB64C0-85F0-4F73-96D8-C34E7E91208F.png" alt="Elaia Logo" class="logo" />
     <div class="top-section">
+      <div class="profile-actions">
+  <div class="profile-header">
+    <img src="images/default-profile.jpg" alt="Profile Photo" class="profile-photo" />
+    <a href="public-profile.html" class="view-profile-btn">Δες το προφίλ σου</a>
+  </div>
+
+  <div class="content-management">
+    <h3>Διαχείριση περιεχομένου</h3>
+    <p>Ανέβασε φωτογραφίες, ενημέρωσε την περιγραφή, κ.α.</p>
+    <div class="content-buttons">
+      <button onclick="uploadPhotos()">📷 Φωτογραφίες</button>
+      <button onclick="uploadVideos()">🎥 Βίντεο</button>
+      <button onclick="editDescription()">✏️ Περιγραφή</button>
+    </div>
+  </div>
+</div>
   <h2 id="welcome-msg">Καλημέρα!</h2>
   <div class="top-metrics">
     <div class="metric-box">
@@ -391,6 +469,18 @@ onAuthStateChanged(auth, async (user) => {
         window.location.href = "login.html";
       });
     };
+
+    function uploadPhotos() {
+  alert("Ανέβασμα φωτογραφιών...");
+}
+
+function uploadVideos() {
+  alert("Ανέβασμα βίντεο...");
+}
+
+function editDescription() {
+  alert("Επεξεργασία περιγραφής...");
+}
   </script>
 </body>
 </html>
