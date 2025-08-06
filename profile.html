@@ -295,6 +295,39 @@ body {
   font-size: 14px;
   margin-bottom: 10px;
 }
+
+    .left-column {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card-box {
+  background-color: #f4f1e6;
+  border: 2px solid #7d8053;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.card-box h3 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.card-box p {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+#calendar {
+  width: 100%;
+  font-size: 14px;
+}
   </style>
 </head>
 <body>
@@ -307,29 +340,6 @@ body {
           <img src="images/default-profile.jpg" alt="Profile Photo" class="profile-photo" />
           <a href="public-profile.html" class="view-profile-btn">Δες το προφίλ σου</a>
         </div>
-
-        <div class="content-management">
-          <div class="content-management-box">
-            <h3>Διαχείριση περιεχομένου</h3>
-            <p>Ανέβασε φωτογραφίες, ενημέρωσε την περιγραφή, κ.α.</p>
-
-            <div class="content-buttons">
-              <button class="content-btn">📷 Φωτογραφίες</button>
-              <button class="content-btn">🎥 Βίντεο</button>
-              <button class="content-btn" onclick="toggleDescriptionOptions()">✏️ Περιγραφή</button>
-            </div>
-
-            <div id="description-options" style="display: none; margin-top: 10px;">
-              <button class="sub-btn" onclick="showTextarea('space')">Περιγραφή χώρου</button>
-              <button class="sub-btn" onclick="showTextarea('menu')">Μενού</button>
-            </div>
-
-            <div id="description-forms" style="margin-top: 10px;">
-              <textarea id="desc-space" class="desc-box" placeholder="Περιγραφή χώρου..." style="display:none;"></textarea>
-              <textarea id="desc-menu" class="desc-box" placeholder="Περιγραφή μενού..." style="display:none;"></textarea>
-            </div>
-          </div> <!-- .content-management-box -->
-        </div>   <!-- .content-management -->
 
       </div> <!-- .profile-actions -->
     </div> <!-- .top-section -->
@@ -354,25 +364,46 @@ body {
   </div>
 </div>
 
-   <div class="calendar-wrapper"> <!-- Αν θες, μόνο για styling -->
-  <div class="calendar-header">
-    <button onclick="changeMonth(-1)">← Προηγούμενος</button>
-    <div id="monthYear"></div>
-    <button onclick="changeMonth(1)">Επόμενος →</button>
-  </div>
-
-  <div class="calendar-grid" id="calendar">
-    <!-- Οι μέρες του μήνα θα μπουν δυναμικά -->
-  </div>
-</div>
-
+   <div class="left-column">
+  <!-- Κουτί 1: Ημερολόγιο -->
+  <div class="card-box">
+    <h3>Διαθεσιμότητα</h3>
+    <div class="calendar-header">
+      <button onclick="changeMonth(-1)">← Προηγούμενος</button>
+      <div id="monthYear"></div>
+      <button onclick="changeMonth(1)">Επόμενος →</button>
+    </div>
+    <div class="calendar-grid" id="calendar">
+      <!-- Οι μέρες του μήνα θα μπουν δυναμικά -->
+    </div>
     <div class="legend">
       <div><span style="background-color:#cbe5cb;"></span> Διαθέσιμη</div>
       <div><span style="background-color:#eab6b6;"></span> Μη διαθέσιμη</div>
     </div>
-
-    <button class="logout-btn" onclick="logout()">Αποσύνδεση</button>
   </div>
+
+  <!-- Κουτί 2: Διαχείριση περιεχομένου -->
+  <div class="card-box">
+    <h3>Διαχείριση περιεχομένου</h3>
+    <p>Ανέβασε φωτογραφίες, ενημέρωσε την περιγραφή, κ.α.</p>
+
+    <div class="content-buttons">
+      <button class="content-btn">📷 Φωτογραφίες</button>
+      <button class="content-btn">🎥 Βίντεο</button>
+      <button class="content-btn" onclick="toggleDescriptionOptions()">✏️ Περιγραφή</button>
+    </div>
+
+    <div id="description-options" style="display: none; margin-top: 10px;">
+      <button class="sub-btn" onclick="showTextarea('space')">Περιγραφή χώρου</button>
+      <button class="sub-btn" onclick="showTextarea('menu')">Μενού</button>
+    </div>
+
+    <div id="description-forms" style="margin-top: 10px;">
+      <textarea id="desc-space" class="desc-box" placeholder="Περιγραφή χώρου..." style="display:none;"></textarea>
+      <textarea id="desc-menu" class="desc-box" placeholder="Περιγραφή μενού..." style="display:none;"></textarea>
+    </div>
+  </div>
+</div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
