@@ -376,6 +376,55 @@ body {
   flex-direction: column;
   gap: 20px;
 }
+
+    .right-column {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Κουτί Μηνυμάτων */
+.message-box {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid #ccc;
+}
+
+.message-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.accept-btn, .reject-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.accept-btn {
+  background-color: #7d8053;
+  color: white;
+}
+
+.reject-btn {
+  background-color: #ddd;
+  color: #333;
+}
+
+.accept-btn:hover {
+  background-color: #6a7042;
+}
+
+.reject-btn:hover {
+  background-color: #bbb;
+}
   </style>
 </head>
 <body>
@@ -456,8 +505,33 @@ body {
 
       <!-- Δεξιά στήλη (placeholder για μελλοντικές ενότητες) -->
       <div class="right-column">
-        <!-- Εδώ θα μπουν κρατήσεις, μηνύματα, προτάσεις AI κλπ -->
+  <!-- Νέα Μηνύματα -->
+  <div class="card-box">
+    <h3>Νέα μηνύματα</h3>
+    <div class="message-box">
+      <p><strong>Τράπεζα πρόεση</strong></p>
+      <p>Giàms, Maria – 12 Ιουλίου 2024</p>
+      <div class="message-actions">
+        <button class="reject-btn">Απόρριψη</button>
+        <button class="accept-btn">Αποδοχή</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Κριτικές Πελατών -->
+  <div class="card-box">
+    <h3>Κριτικές πελατών</h3>
+    <p>Δες και απάντησε στις κριτικές των πελατών.</p>
+    <button class="content-btn">Διαχείριση κριτικών</button>
+  </div>
+
+  <!-- Προτάσεις AI -->
+  <div class="card-box">
+    <h3>Προτάσεις AI</h3>
+    <p>Ανέβασε νέες φωτογραφίες, για να προσελκύσεις περισσότερους πελάτες.</p>
+    <button class="content-btn">Δες προτάσεις</button>
+  </div>
+</div>
     </div>
   </div>
 </body>
