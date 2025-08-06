@@ -353,6 +353,29 @@ body {
 .calendar-grid button:hover {
   background-color: #a0c9a0;
 } 
+
+    .main-content {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.left-column {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-column {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
   </style>
 </head>
 <body>
@@ -388,49 +411,55 @@ body {
       </div>
     </div>
 
-    <!-- Εδώ μπαίνει σωστά η αριστερή στήλη -->
-    <div class="left-column">
-      <!-- Κουτί 1: Ημερολόγιο -->
-      <div class="card-box">
-        <h3>Διαθεσιμότητα</h3>
-        <div class="calendar-header">
-          <button onclick="changeMonth(-1)">← Προηγούμενος</button>
-          <div id="monthYear"></div>
-          <button onclick="changeMonth(1)">Επόμενος →</button>
+    <div class="main-content">
+      <!-- Αριστερή στήλη -->
+      <div class="left-column">
+        <!-- Κουτί 1: Ημερολόγιο -->
+        <div class="card-box">
+          <h3>Διαθεσιμότητα</h3>
+          <div class="calendar-header">
+            <button onclick="changeMonth(-1)">← Προηγούμενος</button>
+            <div id="monthYear"></div>
+            <button onclick="changeMonth(1)">Επόμενος →</button>
+          </div>
+          <div class="calendar-grid" id="calendar">
+            <!-- Οι μέρες του μήνα θα μπουν δυναμικά -->
+          </div>
+          <div class="legend">
+            <div><span style="background-color:#cbe5cb;"></span> Διαθέσιμη</div>
+            <div><span style="background-color:#eab6b6;"></span> Μη διαθέσιμη</div>
+          </div>
         </div>
-        <div class="calendar-grid" id="calendar">
-          <!-- Οι μέρες του μήνα θα μπουν δυναμικά -->
-        </div>
-        <div class="legend">
-          <div><span style="background-color:#cbe5cb;"></span> Διαθέσιμη</div>
-          <div><span style="background-color:#eab6b6;"></span> Μη διαθέσιμη</div>
+
+        <!-- Κουτί 2: Διαχείριση περιεχομένου -->
+        <div class="card-box">
+          <h3>Διαχείριση περιεχομένου</h3>
+          <p>Ανέβασε φωτογραφίες, ενημέρωσε την περιγραφή, κ.α.</p>
+
+          <div class="content-buttons">
+            <button class="content-btn">📷 Φωτογραφίες</button>
+            <button class="content-btn">🎥 Βίντεο</button>
+            <button class="content-btn" onclick="toggleDescriptionOptions()">✏️ Περιγραφή</button>
+          </div>
+
+          <div id="description-options" style="display: none; margin-top: 10px;">
+            <button class="sub-btn" onclick="showTextarea('space')">Περιγραφή χώρου</button>
+            <button class="sub-btn" onclick="showTextarea('menu')">Μενού</button>
+          </div>
+
+          <div id="description-forms" style="margin-top: 10px;">
+            <textarea id="desc-space" class="desc-box" placeholder="Περιγραφή χώρου..." style="display:none;"></textarea>
+            <textarea id="desc-menu" class="desc-box" placeholder="Περιγραφή μενού..." style="display:none;"></textarea>
+          </div>
         </div>
       </div>
 
-      <!-- Κουτί 2: Διαχείριση περιεχομένου -->
-      <div class="card-box">
-        <h3>Διαχείριση περιεχομένου</h3>
-        <p>Ανέβασε φωτογραφίες, ενημέρωσε την περιγραφή, κ.α.</p>
-
-        <div class="content-buttons">
-          <button class="content-btn">📷 Φωτογραφίες</button>
-          <button class="content-btn">🎥 Βίντεο</button>
-          <button class="content-btn" onclick="toggleDescriptionOptions()">✏️ Περιγραφή</button>
-        </div>
-
-        <div id="description-options" style="display: none; margin-top: 10px;">
-          <button class="sub-btn" onclick="showTextarea('space')">Περιγραφή χώρου</button>
-          <button class="sub-btn" onclick="showTextarea('menu')">Μενού</button>
-        </div>
-
-        <div id="description-forms" style="margin-top: 10px;">
-          <textarea id="desc-space" class="desc-box" placeholder="Περιγραφή χώρου..." style="display:none;"></textarea>
-          <textarea id="desc-menu" class="desc-box" placeholder="Περιγραφή μενού..." style="display:none;"></textarea>
-        </div>
+      <!-- Δεξιά στήλη (placeholder για μελλοντικές ενότητες) -->
+      <div class="right-column">
+        <!-- Εδώ θα μπουν κρατήσεις, μηνύματα, προτάσεις AI κλπ -->
       </div>
     </div>
-    <!-- Τέλος της αριστερής στήλης -->
-  </div> <!-- Τέλος dashboard-box -->
+  </div>
 </body>
 
   <script type="module">
