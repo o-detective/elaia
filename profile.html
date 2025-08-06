@@ -525,16 +525,15 @@ onAuthStateChanged(auth, async (user) => {
       });
     };
 
-    <script>
-  function toggleDescriptionOptions() {
-    const options = document.getElementById("description-options");
-    options.style.display = options.style.display === "none" ? "block" : "none";
-  }
+        window.toggleDescriptionOptions = function () {
+      const options = document.getElementById("description-options");
+      options.style.display = options.style.display === "none" ? "block" : "none";
+    };
 
-  function showTextarea(type) {
-    document.getElementById("desc-space").style.display = type === "space" ? "block" : "none";
-    document.getElementById("desc-menu").style.display = type === "menu" ? "block" : "none";
-  }
-  </script>
+    window.showTextarea = function (type) {
+      document.getElementById("desc-space").style.display = type === "space" ? "block" : "none";
+      document.getElementById("desc-menu").style.display = type === "menu" ? "block" : "none";
+    };
+    
 </body>
 </html>
