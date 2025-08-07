@@ -536,192 +536,145 @@ body {
   </div>
 </body>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyA01bUzHHoJre5KgdHpx-jsyosIULx7-ko",
-      authDomain: "elaiaapp86.firebaseapp.com",
-      projectId: "elaiaapp86",
-      storageBucket: "elaiaapp86.firebasestorage.app",
-      messagingSenderId: "458987445654",
-      appId: "1:458987445654:web:4df5d7522ef451a600d1b7",
-      measurementId: "G-VWJQQTCG1N"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    const daysOfWeek = ["Δε", "Τρ", "Τε", "Πε", "Πα", "Σα", "Κυ"];
-let today = new Date();
-let currentMonth = today.getMonth();
-let currentYear = today.getFullYear();
-let unavailableDates = [];
-
-function renderCalendar(year, month) {
-  const calendar = document.getElementById("calendar");
-  const monthYear = document.getElementById("monthYear");
-  calendar.innerHTML = "";
-  monthYear.textContent = new Date(year, month).toLocaleString("el-GR", { month: "long", year: "numeric" });
-
-  daysOfWeek.forEach(day => {
-    const dayName = document.createElement("div");
-    dayName.className = "day-name";
-    dayName.textContent = day;
-    calendar.appendChild(dayName);
-  });
-
-  const firstDay = new Date(year, month, 1).getDay();
-  const start = firstDay === 0 ? 6 : firstDay - 1;
-
-  for (let i = 0; i < start; i++) {
-    const empty = document.createElement("div");
-    calendar.appendChild(empty);
-  }
-
-  const lastDay = new Date(year, month + 1, 0).getDate();
-
-  for (let day = 1; day <= lastDay; day++) {
-    const date = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    const div = document.createElement("div");
-    div.className = "day";
-    div.textContent = day;
-
-    if (unavailableDates.includes(date)) {
-      div.classList.add("unavailable");
-    } else {
-      div.classList.add("available");
-    }
-
-    div.addEventListener("click", async () => {
-      const index = unavailableDates.indexOf(date);
-      if (index > -1) {
-        unavailableDates.splice(index, 1);
-        div.classList.remove("unavailable");
-        div.classList.add("available");
-      } else {
-        unavailableDates.push(date);
-        div.classList.remove("available");
-        div.classList.add("unavailable");
-      }
-
-      const user = auth.currentUser;
-      if (user) {
-        await setDoc(doc(db, "users", user.uid), {
-          unavailableDates
-        }, { merge: true });
-      }
-    });
-
-    calendar.appendChild(div);
-  }
-}
-
-// ✅ Φόρτωσε ημερολόγιο όταν φορτωθεί η σελίδα
-window.addEventListener("DOMContentLoaded", () => {
-  renderCalendar(currentYear, currentMonth);
-});
-
-// ✅ Αν έχεις σύνδεση με Firebase, προτίμησε αυτό:
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    const docRef = doc(db, "users", user.uid);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      unavailableDates = docSnap.data().unavailableDates || [];
-    }
-    renderCalendar(currentYear, currentMonth);
-  } else {
-    window.location.href = "login.html";
-  }
-});
-
-    window.changeMonth = function (direction) {
-      currentMonth += direction;
-      if (currentMonth < 0) {
-        currentMonth = 11;
-        currentYear--;
-      } else if (currentMonth > 11) {
-        currentMonth = 0;
-        currentYear++;
-      }
-      renderCalendar(currentYear, currentMonth);
-    };
-
-    onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = "login.html";
-    return;
-  }
-
-  const userDoc = await getDoc(doc(db, "users", user.uid));
-  if (userDoc.exists()) {
-    const data = userDoc.data();
-
-    // Αποθήκευση ημερομηνιών μη διαθεσιμότητας
-    if (data.unavailableDates) {
-      unavailableDates = data.unavailableDates;
-    }
-
-    // Δυναμικό μήνυμα καλωσορίσματος
-    if (data.firstName) {
-      const now = new Date();
-      const hour = now.getHours();
-      let greeting = "Καλημέρα";
-      if (hour >= 18) greeting = "Καλησπέρα";
-      else if (hour >= 12) greeting = "Καλό μεσημέρι";
-
-      document.getElementById("welcome-msg").textContent = `${greeting}, ${data.firstName}!`;
-    }
-  }
-
-  renderCalendar(currentYear, currentMonth);
-});
-
-    window.logout = function () {
-      signOut(auth).then(() => {
-        window.location.href = "login.html";
-      });
-    };
-
-        window.toggleDescriptionOptions = function () {
-      const options = document.getElementById("description-options");
-      options.style.display = options.style.display === "none" ? "block" : "none";
-    };
-
-    window.showTextarea = function (type) {
-      document.getElementById("desc-space").style.display = type === "space" ? "block" : "none";
-      document.getElementById("desc-menu").style.display = type === "menu" ? "block" : "none";
-    };
-
-    <script type="module">
+<script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
+    apiKey: "AIzaSyA01bUzHHoJre5KgdHpx-jsyosIULx7-ko",
     authDomain: "elaiaapp86.firebaseapp.com",
     projectId: "elaiaapp86",
-    storageBucket: "elaiaapp86.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    storageBucket: "elaiaapp86.firebasestorage.app",
+    messagingSenderId: "458987445654",
+    appId: "1:458987445654:web:4df5d7522ef451a600d1b7",
+    measurementId: "G-VWJQQTCG1N"
   };
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const db = getFirestore(app);
 
-  onAuthStateChanged(auth, (user) => {
+  const daysOfWeek = ["Δε", "Τρ", "Τε", "Πε", "Πα", "Σα", "Κυ"];
+  let today = new Date();
+  let currentMonth = today.getMonth();
+  let currentYear = today.getFullYear();
+  let unavailableDates = [];
+
+  function renderCalendar(year, month) {
+    const calendar = document.getElementById("calendar");
+    const monthYear = document.getElementById("monthYear");
+    calendar.innerHTML = "";
+    monthYear.textContent = new Date(year, month).toLocaleString("el-GR", { month: "long", year: "numeric" });
+
+    daysOfWeek.forEach(day => {
+      const dayName = document.createElement("div");
+      dayName.className = "day-name";
+      dayName.textContent = day;
+      calendar.appendChild(dayName);
+    });
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const start = firstDay === 0 ? 6 : firstDay - 1;
+
+    for (let i = 0; i < start; i++) {
+      const empty = document.createElement("div");
+      calendar.appendChild(empty);
+    }
+
+    const lastDay = new Date(year, month + 1, 0).getDate();
+
+    for (let day = 1; day <= lastDay; day++) {
+      const date = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+      const div = document.createElement("div");
+      div.className = "day";
+      div.textContent = day;
+
+      if (unavailableDates.includes(date)) {
+        div.classList.add("unavailable");
+      } else {
+        div.classList.add("available");
+      }
+
+      div.addEventListener("click", async () => {
+        const index = unavailableDates.indexOf(date);
+        if (index > -1) {
+          unavailableDates.splice(index, 1);
+          div.classList.remove("unavailable");
+          div.classList.add("available");
+        } else {
+          unavailableDates.push(date);
+          div.classList.remove("available");
+          div.classList.add("unavailable");
+        }
+
+        const user = auth.currentUser;
+        if (user) {
+          await setDoc(doc(db, "users", user.uid), {
+            unavailableDates
+          }, { merge: true });
+        }
+      });
+
+      calendar.appendChild(div);
+    }
+  }
+
+  // ➤ Φόρτωσε ημερολόγιο και δεδομένα όταν ο χρήστης είναι συνδεδεμένος
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
-      // Αν έχει email, δημιουργούμε το όνομα σελίδας από αυτό
-      const email = user.email; // π.χ. test@elaia.gr
-      const username = email.split("@")[0]; // παίρνουμε "test"
-      document.getElementById('viewProfileBtn').href = `profile/${username}.html`;
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        unavailableDates = data.unavailableDates || [];
+
+        // ➤ Δυναμικό μήνυμα καλωσορίσματος
+        if (data.firstName) {
+          const now = new Date();
+          const hour = now.getHours();
+          let greeting = "Καλημέρα";
+          if (hour >= 18) greeting = "Καλησπέρα";
+          else if (hour >= 12) greeting = "Καλό μεσημέρι";
+          document.getElementById("welcome-msg").textContent = `${greeting}, ${data.firstName}!`;
+        }
+      }
+      renderCalendar(currentYear, currentMonth);
+    } else {
+      window.location.href = "login.html";
     }
   });
 
-</script>    
+  // ➤ Αλλαγή μήνα
+  window.changeMonth = function (direction) {
+    currentMonth += direction;
+    if (currentMonth < 0) {
+      currentMonth = 11;
+      currentYear--;
+    } else if (currentMonth > 11) {
+      currentMonth = 0;
+      currentYear++;
+    }
+    renderCalendar(currentYear, currentMonth);
+  };
+
+  // ➤ Logout button
+  window.logout = function () {
+    signOut(auth).then(() => {
+      window.location.href = "login.html";
+    });
+  };
+
+  // ➤ Εναλλαγή περιγραφών
+  window.toggleDescriptionOptions = function () {
+    const options = document.getElementById("description-options");
+    options.style.display = options.style.display === "none" ? "block" : "none";
+  };
+
+  window.showTextarea = function (type) {
+    document.getElementById("desc-space").style.display = type === "space" ? "block" : "none";
+    document.getElementById("desc-menu").style.display = type === "menu" ? "block" : "none";
+  };
+</script>      
 </body>
 </html>
