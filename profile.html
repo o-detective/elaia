@@ -435,7 +435,7 @@ body {
       <div class="profile-actions">
         <div class="profile-header">
           <img src="images/default-profile.jpg" alt="Profile Photo" class="profile-photo" />
-         <a id="viewProfileBtn" class="view-profile-btn" href="#">Προβολή Προφίλ</a>
+         <a id="viewProfileBtn" class="view-profile-btn" href="public-profile.html">Προβολή Προφίλ</a>
         </div>
       </div>
     </div>
@@ -621,29 +621,32 @@ body {
   }
 
   // ➤ Φόρτωσε ημερολόγιο και δεδομένα όταν ο χρήστης είναι συνδεδεμένος
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        unavailableDates = data.unavailableDates || [];
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
 
-        // ➤ Δυναμικό μήνυμα καλωσορίσματος
-        if (data.firstName) {
-          const now = new Date();
-          const hour = now.getHours();
-          let greeting = "Καλημέρα";
-          if (hour >= 18) greeting = "Καλησπέρα";
-          else if (hour >= 12) greeting = "Καλό μεσημέρι";
-          document.getElementById("welcome-msg").textContent = `${greeting}, ${data.firstName}!`;
-        }
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      unavailableDates = data.unavailableDates || [];
+
+      // Δυναμικό μήνυμα καλωσορίσματος
+      if (data.firstName) {
+        const now = new Date();
+        const hour = now.getHours();
+        let greeting = "Καλημέρα";
+        if (hour >= 18) greeting = "Καλησπέρα";
+        else if (hour >= 12) greeting = "Καλό μεσημέρι";
+        document.getElementById("welcome-msg").textContent = `${greeting}, ${data.firstName}!`;
       }
-      renderCalendar(currentYear, currentMonth);
-    } else {
-      window.location.href = "login.html";
     }
-  });
+
+    // Φόρτωσε το ημερολόγιο είτε υπάρχουν δεδομένα είτε όχι
+    renderCalendar(currentYear, currentMonth);
+  } else {
+    window.location.href = "login.html";
+  }
+});
 
   // ➤ Αλλαγή μήνα
   window.changeMonth = function (direction) {
