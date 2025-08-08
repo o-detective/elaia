@@ -444,10 +444,10 @@ body {
 
     <div class="top-metrics">
       <div class="metric-box">
-        <span>📅</span>
-        <strong>Κρατήσεις αυτόν τον μήνα</strong>
-        <div>12</div>
-      </div>
+  <span>📅</span>
+  <strong>Κρατήσεις αυτόν τον μήνα</strong>
+  <div id="bookings-count">0</div>
+</div>
       <div class="metric-box">
         <span>⭐</span>
         <strong>4,9</strong>
@@ -536,10 +536,10 @@ body {
   </div>
 </body>
 
-<script type="module">
+ <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-  import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { getFirestore, doc, getDoc, setDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyA01bUzHHoJre5KgdHpx-jsyosIULx7-ko",
@@ -621,33 +621,49 @@ body {
   }
 
   // ➤ Φόρτωσε ημερολόγιο και δεδομένα όταν ο χρήστης είναι συνδεδεμένος
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    const docRef = doc(db, "users", user.uid);
-    const docSnap = await getDoc(docRef);
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-      unavailableDates = data.unavailableDates || [];
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        unavailableDates = data.unavailableDates || [];
 
-      // ➤ Δυναμικό μήνυμα καλωσορίσματος
-      if (data.firstName) {
+        // ➤ Δυναμικό μήνυμα καλωσορίσματος
+        if (data.firstName) {
+          const now = new Date();
+          const hour = now.getHours();
+          let greeting = "Καλημέρα";
+          if (hour >= 18) greeting = "Καλησπέρα";
+          else if (hour >= 12) greeting = "Καλό μεσημέρι";
+          document.getElementById("welcome-msg").textContent = `${greeting}, ${data.firstName}!`;
+        }
+
+        // ➤ Υπολογισμός κρατήσεων μήνα
         const now = new Date();
-        const hour = now.getHours();
-        let greeting = "Καλημέρα";
-        if (hour >= 18) greeting = "Καλησπέρα";
-        else if (hour >= 12) greeting = "Καλό μεσημέρι";
-        document.getElementById("welcome-msg").textContent = `${greeting}, ${data.firstName}!`;
+        const firstDay = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+        const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString();
+
+        const bookingsRef = collection(db, "bookings");
+        const bookingsQuery = query(
+          bookingsRef,
+          where("userId", "==", user.uid),
+          where("date", ">=", firstDay),
+          where("date", "<=", lastDay)
+        );
+
+        const querySnapshot = await getDocs(bookingsQuery);
+        document.getElementById("monthly-bookings").textContent = querySnapshot.size;
       }
+
+      // ➤ Ανεξάρτητα από το αν υπάρχουν δεδομένα, φόρτωσε το ημερολόγιο
+      renderCalendar(currentYear, currentMonth);
+
+    } else {
+      window.location.href = "login.html";
     }
-
-    // ➤ Ανεξάρτητα από το αν υπάρχουν δεδομένα, φόρτωσε το ημερολόγιο
-    renderCalendar(currentYear, currentMonth);
-
-  } else {
-    window.location.href = "login.html";
-  }
-});
+  });
 
   // ➤ Αλλαγή μήνα
   window.changeMonth = function (direction) {
@@ -679,6 +695,6 @@ onAuthStateChanged(auth, async (user) => {
     document.getElementById("desc-space").style.display = type === "space" ? "block" : "none";
     document.getElementById("desc-menu").style.display = type === "menu" ? "block" : "none";
   };
-</script>      
+</script>     
 </body>
 </html>
