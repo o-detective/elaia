@@ -425,6 +425,25 @@ body {
 .reject-btn:hover {
   background-color: #bbb;
 }
+
+    .metric-btn {
+  all: unset;            /* καθάρισε default button styles */
+  display: block;
+  background-color: #f5f5e8;
+  border-radius: 10px;
+  padding: 15px 20px;
+  min-width: 150px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  text-align: center;
+  cursor: pointer;
+}
+.metric-btn:focus-visible {
+  outline: 2px solid #7d8053;
+  outline-offset: 3px;
+}
+.metric-btn:active {
+  transform: scale(0.98);
+}
   </style>
 </head>
 <body>
@@ -443,11 +462,11 @@ body {
     <h2 id="welcome-msg">Καλημέρα!</h2>
 
     <div class="top-metrics">
-      <div class="metric-box">
+      <button class="metric-box metric-btn" id="monthly-bookings-widget" type="button" aria-label="Δες τις κρατήσεις του μήνα">
   <span>📅</span>
   <strong>Κρατήσεις αυτόν τον μήνα</strong>
-  <div id="bookings-count">0</div>
-</div>
+  <div id="monthly-bookings-count">0</div>
+</button>
       <div class="metric-box">
         <span>⭐</span>
         <strong>4,9</strong>
@@ -536,10 +555,13 @@ body {
   </div>
 </body>
 
- <script type="module">
+<script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-  import { getFirestore, doc, getDoc, setDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import {
+    getFirestore, doc, getDoc, setDoc,
+    collection, query, where, getDocs
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyA01bUzHHoJre5KgdHpx-jsyosIULx7-ko",
@@ -610,9 +632,7 @@ body {
 
         const user = auth.currentUser;
         if (user) {
-          await setDoc(doc(db, "users", user.uid), {
-            unavailableDates
-          }, { merge: true });
+          await setDoc(doc(db, "users", user.uid), { unavailableDates }, { merge: true });
         }
       });
 
@@ -620,17 +640,21 @@ body {
     }
   }
 
-  // ➤ Φόρτωσε ημερολόγιο και δεδομένα όταν ο χρήστης είναι συνδεδεμένος
+  // ➤ Φόρτωσε ημερολόγιο & στατιστικά όταν υπάρχει χρήστης
   onAuthStateChanged(auth, async (user) => {
-    if (user) {
+    if (!user) {
+      window.location.href = "login.html";
+      return;
+    }
+
+    // Φόρτωσε user data (προαιρετικό)
+    try {
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
-
       if (docSnap.exists()) {
         const data = docSnap.data();
         unavailableDates = data.unavailableDates || [];
 
-        // ➤ Δυναμικό μήνυμα καλωσορίσματος
         if (data.firstName) {
           const now = new Date();
           const hour = now.getHours();
@@ -639,30 +663,35 @@ body {
           else if (hour >= 12) greeting = "Καλό μεσημέρι";
           document.getElementById("welcome-msg").textContent = `${greeting}, ${data.firstName}!`;
         }
-
-        // ➤ Υπολογισμός κρατήσεων μήνα
-        const now = new Date();
-        const firstDay = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
-        const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString();
-
-        const bookingsRef = collection(db, "bookings");
-        const bookingsQuery = query(
-          bookingsRef,
-          where("userId", "==", user.uid),
-          where("date", ">=", firstDay),
-          where("date", "<=", lastDay)
-        );
-
-        const querySnapshot = await getDocs(bookingsQuery);
-        document.getElementById("monthly-bookings").textContent = querySnapshot.size;
       }
-
-      // ➤ Ανεξάρτητα από το αν υπάρχουν δεδομένα, φόρτωσε το ημερολόγιο
-      renderCalendar(currentYear, currentMonth);
-
-    } else {
-      window.location.href = "login.html";
+    } catch (e) {
+      console.error("user doc error:", e);
     }
+
+    // === Κρατήσεις τρέχοντος μήνα (date ως ISO string) ===
+    try {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+      const next  = new Date(now.getFullYear(), now.getMonth() + 1, 1).toISOString();
+
+      // Αν το πεδίο στο bookings είναι vendorId, άλλαξέ το εδώ
+      const bookingsRef = collection(db, "bookings");
+      const q = query(
+        bookingsRef,
+        where("userId", "==", user.uid),
+        where("date", ">=", start),
+        where("date", "<", next)
+      );
+
+      const snap = await getDocs(q);
+      const el = document.getElementById("monthly-bookings-count");
+      if (el) el.textContent = snap.size;
+    } catch (e) {
+      console.error("Monthly bookings error:", e);
+    }
+
+    // Πάντα φόρτωσε το ημερολόγιο
+    renderCalendar(currentYear, currentMonth);
   });
 
   // ➤ Αλλαγή μήνα
@@ -678,14 +707,14 @@ body {
     renderCalendar(currentYear, currentMonth);
   };
 
-  // ➤ Logout button
+  // ➤ Logout
   window.logout = function () {
     signOut(auth).then(() => {
       window.location.href = "login.html";
     });
   };
 
-  // ➤ Εναλλαγή περιγραφών
+  // ➤ Περιγραφές
   window.toggleDescriptionOptions = function () {
     const options = document.getElementById("description-options");
     options.style.display = options.style.display === "none" ? "block" : "none";
@@ -695,6 +724,14 @@ body {
     document.getElementById("desc-space").style.display = type === "space" ? "block" : "none";
     document.getElementById("desc-menu").style.display = type === "menu" ? "block" : "none";
   };
-</script>     
+
+  // ➤ Click στο widget
+  const monthlyWidget = document.getElementById('monthly-bookings-widget');
+  if (monthlyWidget) {
+    monthlyWidget.addEventListener('click', () => {
+      window.location.href = 'bookings.html?range=current-month';
+    });
+  }
+</script>      
 </body>
 </html>
