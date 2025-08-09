@@ -558,11 +558,12 @@ body {
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-  import {
-    getFirestore, doc, getDoc, setDoc,
-    collection, query, where, getDocs
+  import { 
+    getFirestore, doc, getDoc, setDoc, 
+    collection, query, where, getDocs 
   } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+  // --- Firebase config ---
   const firebaseConfig = {
     apiKey: "AIzaSyA01bUzHHoJre5KgdHpx-jsyosIULx7-ko",
     authDomain: "elaiaapp86.firebaseapp.com",
@@ -573,163 +574,158 @@ body {
     measurementId: "G-VWJQQTCG1N"
   };
 
-  const app = initializeApp(firebaseConfig);
+  const app  = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  const db = getFirestore(app);
+  const db   = getFirestore(app);
 
+  // --- Calendar state ---
   const daysOfWeek = ["Δε", "Τρ", "Τε", "Πε", "Πα", "Σα", "Κυ"];
-  let today = new Date();
-  let currentMonth = today.getMonth();
-  let currentYear = today.getFullYear();
-  let unavailableDates = [];
+  let today         = new Date();
+  let currentMonth  = today.getMonth();
+  let currentYear   = today.getFullYear();
+  let unavailableDates = []; // θα φορτωθεί από Firestore
 
+  // --- Render calendar ---
   function renderCalendar(year, month) {
-    const calendar = document.getElementById("calendar");
+    const calendar  = document.getElementById("calendar");
     const monthYear = document.getElementById("monthYear");
     calendar.innerHTML = "";
     monthYear.textContent = new Date(year, month).toLocaleString("el-GR", { month: "long", year: "numeric" });
 
-    daysOfWeek.forEach(day => {
-      const dayName = document.createElement("div");
-      dayName.className = "day-name";
-      dayName.textContent = day;
-      calendar.appendChild(dayName);
+    // Ονόματα ημερών
+    daysOfWeek.forEach(d => {
+      const el = document.createElement("div");
+      el.className = "day-name";
+      el.textContent = d;
+      calendar.appendChild(el);
     });
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const start = firstDay === 0 ? 6 : firstDay - 1;
-
-    for (let i = 0; i < start; i++) {
-      const empty = document.createElement("div");
-      calendar.appendChild(empty);
-    }
+    // Κενά πριν την 1η
+    const firstDay = new Date(year, month, 1).getDay(); // 0=Κυρ
+    const startPad = firstDay === 0 ? 6 : firstDay - 1;
+    for (let i = 0; i < startPad; i++) calendar.appendChild(document.createElement("div"));
 
     const lastDay = new Date(year, month + 1, 0).getDate();
 
     for (let day = 1; day <= lastDay; day++) {
-      const date = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-      const div = document.createElement("div");
-      div.className = "day";
-      div.textContent = day;
+      const dateStr = `${year}-${String(month + 1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+      const cell = document.createElement("div");
+      cell.className = "day";
+      cell.textContent = day;
 
-      if (unavailableDates.includes(date)) {
-        div.classList.add("unavailable");
-      } else {
-        div.classList.add("available");
-      }
+      if (unavailableDates.includes(dateStr)) cell.classList.add("unavailable");
+      else cell.classList.add("available");
 
-      div.addEventListener("click", async () => {
-        const index = unavailableDates.indexOf(date);
-        if (index > -1) {
-          unavailableDates.splice(index, 1);
-          div.classList.remove("unavailable");
-          div.classList.add("available");
+      cell.addEventListener("click", async () => {
+        // toggle
+        const i = unavailableDates.indexOf(dateStr);
+        if (i > -1) {
+          unavailableDates.splice(i, 1);
+          cell.classList.remove("unavailable"); cell.classList.add("available");
         } else {
-          unavailableDates.push(date);
-          div.classList.remove("available");
-          div.classList.add("unavailable");
+          unavailableDates.push(dateStr);
+          cell.classList.remove("available"); cell.classList.add("unavailable");
         }
 
+        // save to Firestore
         const user = auth.currentUser;
         if (user) {
-          await setDoc(doc(db, "users", user.uid), { unavailableDates }, { merge: true });
+          await setDoc(
+            doc(db, "availability", user.uid),
+            { unavailableDates },
+            { merge: true }
+          );
         }
       });
 
-      calendar.appendChild(div);
+      calendar.appendChild(cell);
     }
   }
 
-  // ➤ Φόρτωσε ημερολόγιο & στατιστικά όταν υπάρχει χρήστης
+  // --- Change month buttons (global) ---
+  window.changeMonth = function(dir) {
+    currentMonth += dir;
+    if (currentMonth < 0)  { currentMonth = 11; currentYear--; }
+    if (currentMonth > 11) { currentMonth = 0;  currentYear++; }
+    renderCalendar(currentYear, currentMonth);
+  };
+
+  // --- Auth & initial load ---
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
       window.location.href = "login.html";
       return;
     }
 
-    // Φόρτωσε user data (προαιρετικό)
+    // Φόρτωσε availability από Firestore: /availability/{uid}
     try {
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        unavailableDates = data.unavailableDates || [];
+      const snap = await getDoc(doc(db, "availability", user.uid));
+      if (snap.exists()) {
+        unavailableDates = snap.data().unavailableDates || [];
+      }
+    } catch (err) {
+      console.error("Error loading availability:", err);
+    }
 
+    // Προσωπικό μήνυμα (αν υπάρχει firstName στο /users/{uid})
+    try {
+      const userSnap = await getDoc(doc(db, "users", user.uid));
+      if (userSnap.exists()) {
+        const data = userSnap.data();
         if (data.firstName) {
-          const now = new Date();
-          const hour = now.getHours();
+          const hour = new Date().getHours();
           let greeting = "Καλημέρα";
           if (hour >= 18) greeting = "Καλησπέρα";
           else if (hour >= 12) greeting = "Καλό μεσημέρι";
           document.getElementById("welcome-msg").textContent = `${greeting}, ${data.firstName}!`;
         }
       }
-    } catch (e) {
-      console.error("user doc error:", e);
-    }
+    } catch (_) {}
 
-    // === Κρατήσεις τρέχοντος μήνα (date ως ISO string) ===
+    // Απόδοση ημερολογίου ΜΟΛΙΣ φορτώσουν τα δεδομένα
+    renderCalendar(currentYear, currentMonth);
+
+    // (Προαιρετικό) Υπολογισμός "Κρατήσεις αυτόν τον μήνα" αν έχεις collection "bookings"
+    // Ξε-σχολίασε αν θες να το ενεργοποιήσεις άμεσα.
+    /*
     try {
-      const now = new Date();
-      const start = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
-      const next  = new Date(now.getFullYear(), now.getMonth() + 1, 1).toISOString();
-
-      // Αν το πεδίο στο bookings είναι vendorId, άλλαξέ το εδώ
-      const bookingsRef = collection(db, "bookings");
+      const start = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString();
+      const next  = new Date(new Date().getFullYear(), new Date().getMonth()+1, 1).toISOString();
       const q = query(
-        bookingsRef,
+        collection(db, "bookings"),
         where("userId", "==", user.uid),
         where("date", ">=", start),
-        where("date", "<", next)
+        where("date", "<",  next)
       );
-
       const snap = await getDocs(q);
-      const el = document.getElementById("monthly-bookings-count");
+      const el = document.getElementById("monthly-bookings");
       if (el) el.textContent = snap.size;
     } catch (e) {
       console.error("Monthly bookings error:", e);
     }
-
-    // Πάντα φόρτωσε το ημερολόγιο
-    renderCalendar(currentYear, currentMonth);
+    */
   });
 
-  // ➤ Αλλαγή μήνα
-  window.changeMonth = function (direction) {
-    currentMonth += direction;
-    if (currentMonth < 0) {
-      currentMonth = 11;
-      currentYear--;
-    } else if (currentMonth > 11) {
-      currentMonth = 0;
-      currentYear++;
-    }
-    renderCalendar(currentYear, currentMonth);
+  // --- Logout ---
+  window.logout = function() {
+    signOut(auth).then(() => (window.location.href = "login.html"));
   };
 
-  // ➤ Logout
-  window.logout = function () {
-    signOut(auth).then(() => {
-      window.location.href = "login.html";
-    });
-  };
-
-  // ➤ Περιγραφές
+  // --- Περιγραφές (UI helpers) ---
   window.toggleDescriptionOptions = function () {
     const options = document.getElementById("description-options");
     options.style.display = options.style.display === "none" ? "block" : "none";
   };
-
   window.showTextarea = function (type) {
     document.getElementById("desc-space").style.display = type === "space" ? "block" : "none";
-    document.getElementById("desc-menu").style.display = type === "menu" ? "block" : "none";
+    document.getElementById("desc-menu").style.display  = type === "menu"  ? "block" : "none";
   };
 
-  // ➤ Click στο widget
-  const monthlyWidget = document.getElementById('monthly-bookings-widget');
+  // --- Widget click (προαιρετικό) ---
+  const monthlyWidget = document.getElementById("monthly-bookings-widget");
   if (monthlyWidget) {
-    monthlyWidget.addEventListener('click', () => {
-      window.location.href = 'bookings.html?range=current-month';
+    monthlyWidget.addEventListener("click", () => {
+      window.location.href = "bookings.html?range=current-month";
     });
   }
 </script>      
