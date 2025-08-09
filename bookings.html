@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Κρατήσεις του μήνα</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto; background:#faf8f1; color:#333; margin:0; padding:20px;}
+    .box{background:#fff; border:2px solid #7d8053; border-radius:12px; padding:20px; max-width:900px; margin:0 auto;}
+    h1{margin:0 0 12px; color:#7d8053;}
+    .sub{margin:0 0 16px; color:#666}
+    table{width:100%; border-collapse:collapse; margin-top:10px;}
+    th,td{padding:10px; border-bottom:1px solid #eee; text-align:left;}
+    th{background:#f5f5e8;}
+    .empty{padding:14px; background:#f5f5e8; border-radius:8px; text-align:center; margin-top:10px;}
+    .toolbar{display:flex; gap:10px; align-items:center; margin-bottom:10px;}
+    button{background:#7d8053; color:#fff; border:0; padding:8px 12px; border-radius:6px; cursor:pointer}
+    button:hover{background:#6a7042;}
+    select{padding:8px; border:1px solid #ccc; border-radius:6px;}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Κρατήσεις του μήνα</h1>
+    <p class="sub" id="rangeLabel"></p>
+
+    <div class="toolbar">
+      <button id="prevMonthBtn">← Προηγούμενος</button>
+      <button id="nextMonthBtn">Επόμενος →</button>
+      <select id="statusFilter">
+        <option value="">Όλες οι καταστάσεις</option>
+        <option value="pending">Σε εκκρεμότητα</option>
+        <option value="confirmed">Επιβεβαιωμένη</option>
+        <option value="cancelled">Ακυρωμένη</option>
+      </select>
+    </div>
+
+    <div id="count">Σύνολο: 0</div>
+
+    <table id="tbl" style="display:none">
+      <thead>
+        <tr>
+          <th>Ημερομηνία</th>
+          <th>Πελάτης</th>
+          <th>Είδος εκδήλωσης</th>
+          <th>Κατάσταση</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+
+    <div id="empty" class="empty" style="display:none">
+      Δεν βρέθηκαν κρατήσεις για το διάστημα.
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA01bUzHHoJre5KgdHpx-jsyosIULx7-ko",
+      authDomain: "elaiaapp86.firebaseapp.com",
+      projectId: "elaiaapp86",
+      storageBucket: "elaiaapp86.firebasestorage.app",
+      messagingSenderId: "458987445654",
+      appId: "1:458987445654:web:4df5d7522ef451a600d1b7",
+      measurementId: "G-VWJQQTCG1N"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // utilities
+    const rangeLabel = document.getElementById('rangeLabel');
+    const rowsEl = document.getElementById('rows');
+    const tbl = document.getElementById('tbl');
+    const empty = document.getElementById('empty');
+    const countEl = document.getElementById('count');
+    const statusFilter = document.getElementById('statusFilter');
+
+    let viewYear, viewMonth; // 0-11
+
+    function startOfMonth(y, m){ return new Date(y, m, 1); }
+    function startOfNextMonth(y, m){ return new Date(y, m+1, 1); }
+
+    function fmtDate(d){
+      const dt = (d instanceof Date) ? d : new Date(d);
+      return dt.toLocaleDateString("el-GR", { day:"2-digit", month:"2-digit", year:"numeric" });
+    }
+
+    function getQueryParam(name){
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+
+    async function loadMonth(user){
+      const from = startOfMonth(viewYear, viewMonth);
+      const to = startOfNextMonth(viewYear, viewMonth);
+      rangeLabel.textContent = `Διάστημα: ${fmtDate(from)} – ${fmtDate(new Date(to.getTime()-1))}`;
+
+      // Αν το πεδίο date είναι ISO string:
+      const fromISO = from.toISOString();
+      const toISO   = to.toISOString();
+
+      const bookingsRef = collection(db, "bookings");
+      let q = query(
+        bookingsRef,
+        where("userId","==", user.uid),
+        where("date", ">=", fromISO),
+        where("date", "<",  toISO)
+      );
+
+      // Εφαρμογή φίλτρου κατάστασης (προαιρετικά)
+      const desiredStatus = statusFilter.value;
+      const snap = await getDocs(q);
+      const data = snap.docs.map(d => ({ id:d.id, ...d.data() }))
+                            .filter(b => desiredStatus ? b.status === desiredStatus : true);
+
+      // render
+      rowsEl.innerHTML = "";
+      if (data.length === 0){
+        tbl.style.display = "none";
+        empty.style.display = "block";
+        countEl.textContent = "Σύνολο: 0";
+        return;
+      }
+      empty.style.display = "none";
+      tbl.style.display = "table";
+      countEl.textContent = `Σύνολο: ${data.length}`;
+
+      data.sort((a,b)=> (a.date > b.date ? 1 : -1));
+
+      for (const b of data){
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${fmtDate(b.date)}</td>
+          <td>${b.clientName || "-"}</td>
+          <td>${b.eventType || "-"}</td>
+          <td>${b.status || "-"}</td>
+        `;
+        rowsEl.appendChild(tr);
+      }
+    }
+
+    // Navigation
+    document.getElementById('prevMonthBtn').addEventListener('click', ()=>{
+      viewMonth--; if (viewMonth < 0){ viewMonth = 11; viewYear--; }
+      const user = auth.currentUser; if (user) loadMonth(user);
+    });
+    document.getElementById('nextMonthBtn').addEventListener('click', ()=>{
+      viewMonth++; if (viewMonth > 11){ viewMonth = 0; viewYear++; }
+      const user = auth.currentUser; if (user) loadMonth(user);
+    });
+    statusFilter.addEventListener('change', ()=>{
+      const user = auth.currentUser; if (user) loadMonth(user);
+    });
+
+    // Init
+    onAuthStateChanged(auth, (user)=>{
+      if (!user){ window.location.href = "login.html"; return; }
+
+      const now = new Date();
+      viewYear = now.getFullYear();
+      viewMonth = now.getMonth();
+
+      // αν έρχεσαι από ?range=current-month, μένουμε στον τρέχοντα μήνα
+      const range = getQueryParam("range");
+      if (range !== "current-month"){
+        // (μελλοντικά μπορείς να διαβάσεις άλλες παραμέτρους)
+      }
+
+      loadMonth(user).catch(console.error);
+    });
+  </script>
+</body>
+</html>
